@@ -459,15 +459,88 @@ by the roster renderer."
           (ibut:label-set name start end)
           (hact 'world-cup-wikipedia-lookup name))))))
 
+;;;; Wikipedia article cache (query -> resolved article title)
+
+(defcustom world-cup-wikipedia-cache-file
+  (expand-file-name "world-cup-wikipedia-cache.eld" world-cup-data-directory)
+  "File persisting resolved Wikipedia article titles keyed by search query."
+  :type 'file :group 'world-cup)
+
+(defvar world-cup--wikipedia-cache nil
+  "Hash table mapping a search query to a resolved Wikipedia article title.
+Nil until first loaded; access via `world-cup--wikipedia-cache-table'.")
+
+(defun world-cup--wikipedia-cache-load ()
+  "Load and return the cache hash table from `world-cup-wikipedia-cache-file'."
+  (let ((table (make-hash-table :test 'equal)))
+    (when (file-readable-p world-cup-wikipedia-cache-file)
+      (ignore-errors
+        (with-temp-buffer
+          (insert-file-contents world-cup-wikipedia-cache-file)
+          (dolist (cell (read (current-buffer)))
+            (puthash (car cell) (cdr cell) table)))))
+    table))
+
+(defun world-cup--wikipedia-cache-table ()
+  "Return the cache hash table, loading it from disk on first use."
+  (or world-cup--wikipedia-cache
+      (setq world-cup--wikipedia-cache (world-cup--wikipedia-cache-load))))
+
+(defun world-cup--wikipedia-cache-save ()
+  "Persist the cache to `world-cup-wikipedia-cache-file'."
+  (let ((alist nil))
+    (maphash (lambda (k v) (push (cons k v) alist))
+             (world-cup--wikipedia-cache-table))
+    (ignore-errors
+      (with-temp-file world-cup-wikipedia-cache-file
+        (let ((print-length nil) (print-level nil))
+          (prin1 (sort alist (lambda (a b) (string< (car a) (car b))))
+                 (current-buffer))
+          (insert "\n"))))))
+
+(defun world-cup--wikipedia-cache-get (query)
+  "Return the cached article title for QUERY, or nil."
+  (gethash query (world-cup--wikipedia-cache-table)))
+
+(defun world-cup--wikipedia-cache-put (query title)
+  "Cache TITLE as the resolved article for QUERY and persist."
+  (puthash query title (world-cup--wikipedia-cache-table))
+  (world-cup--wikipedia-cache-save))
+
+(defun world-cup--wikipedia-cache-remove (query)
+  "Drop the cached article for QUERY and persist."
+  (remhash query (world-cup--wikipedia-cache-table))
+  (world-cup--wikipedia-cache-save))
+
 ;;;###autoload
-(defun world-cup-wikipedia-lookup (&optional query)
-  "Search Wikipedia for QUERY via consult and show a summary with image.
-When called from a Hyperbole button, QUERY is the button label (player name).
-Interactively, prompt for the search string.  The chosen article's summary
-(with image) is shown in a dedicated buffer."
+(defun world-cup-wikipedia-uncache (&optional query)
+  "Remove the cached Wikipedia article for QUERY (e.g. a player name).
+Interactively, choose among the currently cached entries.  The next lookup
+for that query will prompt with a fresh search again."
   (interactive)
-  (let* ((query (or query (read-string "Wikipedia search: ")))
-         (results (world-cup--wikipedia-search query)))
+  (let* ((table (world-cup--wikipedia-cache-table))
+         (cands nil))
+    (maphash (lambda (k v)
+               (push (cons (format "%s  \u2192  %s" k v) k) cands))
+             table)
+    (cond
+     ((and (null query) (null cands))
+      (message "World Cup: Wikipedia cache is empty"))
+     (t
+      (let ((key (or query
+                     (cdr (assoc (completing-read "Bust cache for: "
+                                                  (mapcar #'car cands) nil t)
+                                 cands)))))
+        (if (and key (world-cup--wikipedia-cache-get key))
+            (progn (world-cup--wikipedia-cache-remove key)
+                   (message "World Cup: busted Wikipedia cache for %s" key))
+          (message "World Cup: no cache entry for %s" key)))))))
+
+;;;; Wikipedia lookup
+
+(defun world-cup--wikipedia-lookup-search (query)
+  "Run the interactive Wikipedia search for QUERY, caching the chosen title."
+  (let ((results (world-cup--wikipedia-search query)))
     (unless results
       (user-error "No Wikipedia results for %s" query))
     (let* ((cands (mapcar (lambda (r) (cons (plist-get r :title) r)) results))
@@ -492,8 +565,30 @@ Interactively, prompt for the search string.  The chosen article's summary
                 (completing-read prompt titles nil t))))
            (r (cdr (assoc choice cands))))
       (when r
-        (world-cup--show-summary
-         (world-cup--wikipedia-summary (plist-get r :title)))))))
+        (let ((title (plist-get r :title)))
+          (world-cup--wikipedia-cache-put query title)
+          (world-cup--show-summary (world-cup--wikipedia-summary title)))))))
+
+;;;###autoload
+(defun world-cup-wikipedia-lookup (&optional query)
+  "Show a Wikipedia summary (with image) for QUERY in a dedicated buffer.
+When called from a Hyperbole button, QUERY is the button label (player name);
+interactively, prompt for the search string.
+
+The first lookup for a QUERY runs a consult search and caches the chosen
+article title; subsequent lookups skip the search and go straight to the
+cached article.  Use \[world-cup-wikipedia-uncache] to clear a bad entry."
+  (interactive)
+  (let* ((query (or query (read-string "Wikipedia search: ")))
+         (cached (world-cup--wikipedia-cache-get query)))
+    (if cached
+        (let ((summary (world-cup--wikipedia-summary cached)))
+          (if summary
+              (world-cup--show-summary summary)
+            ;; Stale cache (renamed/deleted article): drop it and re-search.
+            (world-cup--wikipedia-cache-remove query)
+            (world-cup--wikipedia-lookup-search query)))
+      (world-cup--wikipedia-lookup-search query))))
 
 ;;;; YouTube preview (consult search + mpv streaming)
 
@@ -820,6 +915,61 @@ The row is a `world-cup-fixture' Hyperbole implicit button."
 The buffer shows collapsible Fixtures and Squad sections."
   (interactive)
   (world-cup-display-team (world-cup--read-team)))
+
+;;;; Player search
+
+(defun world-cup--player-candidates ()
+  "Return an alist of (DISPLAY . (PLAYER . TEAM)) for every player.
+DISPLAY includes the player's name and country so completion matches on
+either."
+  (let (cands)
+    (dolist (team (world-cup-teams))
+      (let ((tname (world-cup-team-name team)))
+        (dolist (p (world-cup-team-players team))
+          (push (cons (format "%-26s  %s  #%d"
+                              (alist-get 'name p) tname (alist-get 'number p))
+                      (cons p team))
+                cands))))
+    (nreverse cands)))
+
+(defun world-cup--annotate-player (cands)
+  "Return an annotation function for the player candidate alist CANDS."
+  (lambda (cand)
+    (when-let* ((pt (cdr (assoc cand cands)))
+                (p (car pt)))
+      (let ((pos (or (alist-get 'position p) ""))
+            (age (world-cup--age (alist-get 'dob p))))
+        (concat
+         (propertize (format "  %-2s" pos) 'face (world-cup--pos-face pos))
+         (propertize (format "  %s" (world-cup--club-label p))
+                     'face 'font-lock-comment-face)
+         (when age (propertize (format "  age %d" age)
+                               'face 'font-lock-comment-face)))))))
+
+;;;###autoload
+(defun world-cup-consult-player ()
+  "Search all World Cup players (by name or country) and look one up.
+Selecting a player starts a Wikipedia search about them, exactly like the
+implicit button on a roster name."
+  (interactive)
+  (let* ((cands (world-cup--player-candidates))
+         (annotate (world-cup--annotate-player cands))
+         (names (mapcar #'car cands))
+         (choice
+          (if (fboundp 'consult--read)
+              (consult--read names
+                             :prompt "World Cup player: "
+                             :category 'world-cup-player
+                             :require-match t
+                             :sort t
+                             :annotate annotate)
+            (let ((completion-extra-properties
+                   (list :annotation-function annotate)))
+              (completing-read "World Cup player: " names nil t))))
+         (pt (cdr (assoc choice cands)))
+         (player (car pt)))
+    (when player
+      (world-cup-wikipedia-lookup (alist-get 'name player)))))
 
 (provide 'world-cup)
 
