@@ -495,6 +495,124 @@ Interactively, prompt for the search string.  The chosen article's summary
         (world-cup--show-summary
          (world-cup--wikipedia-summary (plist-get r :title)))))))
 
+;;;; YouTube preview (consult search + mpv streaming)
+
+(defcustom world-cup-yt-dlp-program "yt-dlp"
+  "Path to the yt-dlp executable used for YouTube searches."
+  :type 'string :group 'world-cup)
+
+(defcustom world-cup-mpv-program "mpv"
+  "Path to the mpv executable used to stream videos."
+  :type 'string :group 'world-cup)
+
+(defcustom world-cup-mpv-args nil
+  "Extra arguments passed to mpv before the video URL."
+  :type '(repeat string) :group 'world-cup)
+
+(defcustom world-cup-youtube-search-count 15
+  "Number of YouTube results to fetch per search."
+  :type 'integer :group 'world-cup)
+
+(defun world-cup--format-duration (secs)
+  "Format SECS (a number) as M:SS or H:MM:SS."
+  (when (numberp secs)
+    (let* ((s (round secs))
+           (h (/ s 3600))
+           (m (/ (% s 3600) 60))
+           (sec (% s 60)))
+      (if (> h 0)
+          (format "%d:%02d:%02d" h m sec)
+        (format "%d:%02d" m sec)))))
+
+(defun world-cup--youtube-search (query &optional n)
+  "Search YouTube for QUERY via yt-dlp, returning a list of result plists.
+Each plist has :title, :id, :channel, :duration and :views."
+  (unless (executable-find world-cup-yt-dlp-program)
+    (user-error "Cannot find yt-dlp (%s)" world-cup-yt-dlp-program))
+  (with-temp-buffer
+    (let ((status (call-process
+                   world-cup-yt-dlp-program nil t nil
+                   "--flat-playlist" "--dump-json" "--ignore-errors"
+                   (format "ytsearch%d:%s"
+                           (or n world-cup-youtube-search-count) query))))
+      (goto-char (point-min))
+      (let (results)
+        (while (not (eobp))
+          (let ((line (buffer-substring-no-properties
+                       (line-beginning-position) (line-end-position))))
+            (unless (string-empty-p line)
+              (ignore-errors
+                (let ((d (json-parse-string line :object-type 'alist
+                                            :null-object nil :false-object nil)))
+                  (push (list :title (alist-get 'title d)
+                              :id (alist-get 'id d)
+                              :channel (or (alist-get 'channel d)
+                                           (alist-get 'uploader d))
+                              :duration (alist-get 'duration d)
+                              :views (alist-get 'view_count d))
+                        results)))))
+          (forward-line 1))
+        (when (and (null results) (/= status 0))
+          (user-error "yt-dlp search failed (exit %s)" status))
+        (nreverse results)))))
+
+(defun world-cup--mpv-play (url)
+  "Stream URL with mpv in a detached process."
+  (unless (executable-find world-cup-mpv-program)
+    (user-error "Cannot find mpv (%s)" world-cup-mpv-program))
+  (let ((proc (apply #'start-process "world-cup-mpv" nil
+                     world-cup-mpv-program
+                     (append world-cup-mpv-args (list url)))))
+    (set-process-query-on-exit-flag proc nil)
+    (message "mpv: streaming %s" url)
+    proc))
+
+;;;###autoload
+(defun world-cup-youtube-watch (&optional query)
+  "Search YouTube for QUERY via consult and stream the chosen video with mpv.
+When called from a Hyperbole fixture button, QUERY is the match preview string.
+Interactively, prompt for the search string."
+  (interactive)
+  (let* ((query (or query (read-string "YouTube search: ")))
+         (results (world-cup--youtube-search query)))
+    (unless results
+      (user-error "No YouTube results for %s" query))
+    (let* ((cands
+            (mapcar (lambda (r)
+                      (cons (or (plist-get r :title) (plist-get r :id)) r))
+                    results))
+           (titles (mapcar #'car cands))
+           (annotate
+            (lambda (cand)
+              (when-let* ((r (cdr (assoc cand cands))))
+                (let ((dur (world-cup--format-duration (plist-get r :duration)))
+                      (ch (plist-get r :channel))
+                      (views (plist-get r :views)))
+                  (concat
+                   (when dur (propertize (format "  [%s]" dur)
+                                         'face 'font-lock-constant-face))
+                   (when ch (propertize (format "  %s" ch)
+                                        'face 'font-lock-comment-face))
+                   (when (numberp views)
+                     (propertize (format "  %s views" views)
+                                 'face 'font-lock-comment-face)))))))
+           (prompt (format "YouTube (%s): " query))
+           (choice
+            (if (fboundp 'consult--read)
+                (consult--read titles
+                               :prompt prompt
+                               :category 'world-cup-youtube
+                               :require-match t
+                               :sort nil
+                               :annotate annotate)
+              (let ((completion-extra-properties
+                     (list :annotation-function annotate)))
+                (completing-read prompt titles nil t))))
+           (r (cdr (assoc choice cands))))
+      (when r
+        (world-cup--mpv-play
+         (format "https://www.youtube.com/watch?v=%s" (plist-get r :id)))))))
+
 ;;;; Player formatting helpers
 
 (defun world-cup--age (dob)
@@ -582,27 +700,53 @@ HOME-P is non-nil when TEAM is team_a."
         (cons (alist-get 'team_b match) t)
       (cons (alist-get 'team_a match) nil))))
 
+(defib world-cup-fixture ()
+  "Hyperbole implicit button: a fixture row in a roster buffer.
+Activating it searches YouTube for a match preview and streams the
+chosen video with mpv.  The row carries a `world-cup-fixture' text
+property (the search query) placed by the fixtures renderer."
+  (when (derived-mode-p 'world-cup-team-mode)
+    (let ((query (get-text-property (point) 'world-cup-fixture)))
+      (when query
+        (let* ((pos (point))
+               (start (if (and (> pos (point-min))
+                               (get-text-property (1- pos) 'world-cup-fixture))
+                          (previous-single-property-change
+                           pos 'world-cup-fixture)
+                        pos))
+               (end (or (next-single-property-change
+                         pos 'world-cup-fixture)
+                        (point-max))))
+          (ibut:label-set query start end)
+          (hact 'world-cup-youtube-watch query))))))
+
 (defun world-cup--insert-fixture (team match)
-  "Insert one MATCH row for TEAM inside a `magit-section'."
+  "Insert one MATCH row for TEAM inside a `magit-section'.
+The row is a `world-cup-fixture' Hyperbole implicit button."
   (pcase-let* ((`(,opp . ,home-p) (world-cup--opponent team match))
-               (stage (or (alist-get 'group match)
-                          (alist-get 'stage match)))
                (grp (alist-get 'group match))
                (label (if grp (format "Grp %s" grp)
-                        (or (alist-get 'stage match) ""))))
+                        (or (alist-get 'stage match) "")))
+               (query (format "%s vs %s preview"
+                              (world-cup-team-name team) opp))
+               (line (format "  %s %5s  %-7s  %s %-24s  %s"
+                             (alist-get 'date match)
+                             (alist-get 'time_et match)
+                             label
+                             (if home-p "vs" "@ ")
+                             (propertize (world-cup--pad opp 24)
+                                         'face 'world-cup-player-link)
+                             (propertize
+                              (format "%s, %s"
+                                      (alist-get 'venue match)
+                                      (alist-get 'city match))
+                              'face 'font-lock-comment-face))))
     (magit-insert-section (world-cup-match match)
       (magit-insert-heading
-        (format "  %s %5s  %-7s  %s %-24s  %s"
-                (alist-get 'date match)
-                (alist-get 'time_et match)
-                label
-                (if home-p "vs" "@ ")
-                (world-cup--pad opp 24)
-                (propertize
-                 (format "%s, %s"
-                         (alist-get 'venue match)
-                         (alist-get 'city match))
-                 'face 'font-lock-comment-face))))))
+        (propertize line
+                    'world-cup-fixture query
+                    'help-echo (format "Action key: YouTube preview \u2014 %s"
+                                       query))))))
 
 (defun world-cup--insert-fixtures (team)
   "Insert the Fixtures section for TEAM."
