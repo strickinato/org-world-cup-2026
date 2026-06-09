@@ -1,0 +1,354 @@
+#+TITLE: 2026 FIFA World Cup
+#+CATEGORY: Football
+
+#+HEADERS: :var n=-2
+#+begin_src emacs-lisp :results silent
+(save-excursion
+  (goto-char (point-min))
+  (while (re-search-forward "[[<]" nil t)
+    (when (org-at-timestamp-p t)
+      (org-timestamp-change n 'hour))))
+#+end_src
+
+* Group A                                                     :GroupA:
+Mexico, South Africa, Korea Republic, Czechia
+**   1. Mexico                - South Africa          
+    <2026-06-11 15:00> 
+    Estadio Azteca, Mexico City 
+**   2. Korea Republic        - Czechia               
+    <2026-06-11 22:00> 
+    Estadio Akron, Guadalajara 
+**  25. Czechia               - South Africa          
+    <2026-06-18 12:00> 
+    Mercedes-Benz Stadium, Atlanta 
+**  28. Mexico                - Korea Republic        
+    <2026-06-18 21:00> 
+    Estadio Akron, Guadalajara 
+**  53. Czechia               - Mexico                
+    <2026-06-24 21:00> 
+    Estadio Azteca, Mexico City 
+**  54. South Africa          - Korea Republic        
+    <2026-06-24 21:00> 
+    Estadio BBVA, Monterrey 
+* Group B                                                     :GroupB:
+Canada, Bosnia and Herzegovina, Qatar, Switzerland
+**   3. Canada                - Bosnia and Herzegovina
+    <2026-06-12 15:00> 
+    BMO Field, Toronto 
+**   8. Qatar                 - Switzerland           
+    <2026-06-13 15:00> 
+    Levi's Stadium, San Francisco Bay Area 
+**  26. Switzerland           - Bosnia and Herzegovina
+    <2026-06-18 15:00> 
+    SoFi Stadium, Los Angeles 
+**  27. Canada                - Qatar                 
+    <2026-06-18 18:00> 
+    BC Place, Vancouver 
+**  51. Switzerland           - Canada                
+    <2026-06-24 15:00> 
+    BC Place, Vancouver 
+**  52. Bosnia and Herzegovina- Qatar                 
+    <2026-06-24 15:00> 
+    Lumen Field, Seattle 
+* Group C                                                     :GroupC:
+Haiti, Scotland, Brazil, Morocco
+**   5. Haiti                 - Scotland              
+    <2026-06-13 21:00> 
+    Gillette Stadium, Boston 
+**   7. Brazil                - Morocco               
+    <2026-06-13 18:00> 
+    MetLife Stadium, New York/New Jersey 
+**  29. Brazil                - Haiti                 
+    <2026-06-19 21:00> 
+    Lincoln Financial Field, Philadelphia 
+**  30. Scotland              - Morocco               
+    <2026-06-19 18:00> 
+    Gillette Stadium, Boston 
+**  49. Scotland              - Brazil                
+    <2026-06-24 18:00> 
+    Hard Rock Stadium, Miami 
+**  50. Morocco               - Haiti                 
+    <2026-06-24 18:00> 
+    Mercedes-Benz Stadium, Atlanta 
+* Group D                                                     :GroupD:
+United States, Paraguay, Australia, Türkiye
+**   4. United States         - Paraguay              
+    <2026-06-12 21:00> 
+    SoFi Stadium, Los Angeles 
+**   6. Australia             - Türkiye               
+    <2026-06-13 00:00> 
+    BC Place, Vancouver 
+**  31. Türkiye               - Paraguay              
+    <2026-06-19 23:00> 
+    Levi's Stadium, San Francisco Bay Area 
+**  32. United States         - Australia             
+    <2026-06-19 15:00> 
+    Lumen Field, Seattle 
+**  59. Türkiye               - United States         
+    <2026-06-25 22:00> 
+    SoFi Stadium, Los Angeles 
+**  60. Paraguay              - Australia             
+    <2026-06-25 22:00> 
+    Levi's Stadium, San Francisco Bay Area 
+* Group E                                                     :GroupE:
+Côte d’Ivoire, Ecuador, Germany, Curaçao
+**   9. Côte d’Ivoire         - Ecuador               
+    <2026-06-14 19:00> 
+    Lincoln Financial Field, Philadelphia 
+**  10. Germany               - Curaçao               
+    <2026-06-14 13:00> 
+    NRG Stadium, Houston 
+**  33. Germany               - Côte d’Ivoire         
+    <2026-06-20 16:00> 
+    BMO Field, Toronto 
+**  34. Ecuador               - Curaçao               
+    <2026-06-20 20:00> 
+    Arrowhead Stadium, Kansas City 
+**  55. Curaçao               - Côte d’Ivoire         
+    <2026-06-25 16:00> 
+    Lincoln Financial Field, Philadelphia 
+**  56. Ecuador               - Germany               
+    <2026-06-25 16:00> 
+    MetLife Stadium, New York/New Jersey 
+* Group F                                                     :GroupF:
+Netherlands, Japan, Sweden, Tunisia
+**  11. Netherlands           - Japan                 
+    <2026-06-14 16:00> 
+    AT&T Stadium, Dallas 
+**  12. Sweden                - Tunisia               
+    <2026-06-14 22:00> 
+    Estadio BBVA, Monterrey 
+**  35. Netherlands           - Sweden                
+    <2026-06-20 13:00> 
+    NRG Stadium, Houston 
+**  36. Tunisia               - Japan                 
+    <2026-06-20 00:00> 
+    Estadio BBVA, Monterrey 
+**  57. Japan                 - Sweden                
+    <2026-06-25 19:00> 
+    AT&T Stadium, Dallas 
+**  58. Tunisia               - Netherlands           
+    <2026-06-25 19:00> 
+    Arrowhead Stadium, Kansas City 
+* Group G                                                     :GroupG:
+Iran, New Zealand, Belgium, Egypt
+**  15. Iran                  - New Zealand           
+    <2026-06-15 21:00> 
+    SoFi Stadium, Los Angeles 
+**  16. Belgium               - Egypt                 
+    <2026-06-15 15:00> 
+    Lumen Field, Seattle 
+**  39. Belgium               - Iran                  
+    <2026-06-21 15:00> 
+    SoFi Stadium, Los Angeles 
+**  40. New Zealand           - Egypt                 
+    <2026-06-21 21:00> 
+    BC Place, Vancouver 
+**  63. Egypt                 - Iran                  
+    <2026-06-26 23:00> 
+    Lumen Field, Seattle 
+**  64. New Zealand           - Belgium               
+    <2026-06-26 23:00> 
+    BC Place, Vancouver 
+* Group H                                                     :GroupH:
+Saudi Arabia, Uruguay, Spain, Cabo Verde
+**  13. Saudi Arabia          - Uruguay               
+    <2026-06-15 18:00> 
+    Hard Rock Stadium, Miami 
+**  14. Spain                 - Cabo Verde            
+    <2026-06-15 12:00> 
+    Mercedes-Benz Stadium, Atlanta 
+**  37. Uruguay               - Cabo Verde            
+    <2026-06-21 18:00> 
+    Hard Rock Stadium, Miami 
+**  38. Spain                 - Saudi Arabia          
+    <2026-06-21 12:00> 
+    Mercedes-Benz Stadium, Atlanta 
+**  65. Cabo Verde            - Saudi Arabia          
+    <2026-06-26 20:00> 
+    NRG Stadium, Houston 
+**  66. Uruguay               - Spain                 
+    <2026-06-26 20:00> 
+    Estadio Akron, Guadalajara 
+* Group I                                                     :GroupI:
+France, Senegal, Iraq, Norway
+**  17. France                - Senegal               
+    <2026-06-16 15:00> 
+    MetLife Stadium, New York/New Jersey 
+**  18. Iraq                  - Norway                
+    <2026-06-16 18:00> 
+    Gillette Stadium, Boston 
+**  41. Norway                - Senegal               
+    <2026-06-22 20:00> 
+    MetLife Stadium, New York/New Jersey 
+**  42. France                - Iraq                  
+    <2026-06-22 17:00> 
+    Lincoln Financial Field, Philadelphia 
+**  61. Norway                - France                
+    <2026-06-26 15:00> 
+    Gillette Stadium, Boston 
+**  62. Senegal               - Iraq                  
+    <2026-06-26 15:00> 
+    BMO Field, Toronto 
+* Group J                                                     :GroupJ:
+Argentina, Algeria, Austria, Jordan
+**  19. Argentina             - Algeria               
+    <2026-06-16 21:00> 
+    Arrowhead Stadium, Kansas City 
+**  20. Austria               - Jordan                
+    <2026-06-16 00:00> 
+    Levi's Stadium, San Francisco Bay Area 
+**  43. Argentina             - Austria               
+    <2026-06-22 13:00> 
+    AT&T Stadium, Dallas 
+**  44. Jordan                - Algeria               
+    <2026-06-22 23:00> 
+    Levi's Stadium, San Francisco Bay Area 
+**  69. Algeria               - Austria               
+    <2026-06-27 22:00> 
+    Arrowhead Stadium, Kansas City 
+**  70. Jordan                - Argentina             
+    <2026-06-27 22:00> 
+    AT&T Stadium, Dallas 
+* Group K                                                     :GroupK:
+Portugal, Congo DR, Uzbekistan, Colombia
+**  23. Portugal              - Congo DR              
+    <2026-06-17 13:00> 
+    NRG Stadium, Houston 
+**  24. Uzbekistan            - Colombia              
+    <2026-06-17 22:00> 
+    Estadio Azteca, Mexico City 
+**  47. Portugal              - Uzbekistan            
+    <2026-06-23 13:00> 
+    NRG Stadium, Houston 
+**  48. Colombia              - Congo DR              
+    <2026-06-23 22:00> 
+    Estadio Akron, Guadalajara 
+**  71. Colombia              - Portugal              
+    <2026-06-27 19:30> 
+    Hard Rock Stadium, Miami 
+**  72. Congo DR              - Uzbekistan            
+    <2026-06-27 19:30> 
+    Mercedes-Benz Stadium, Atlanta 
+* Group L                                                     :GroupL:
+Ghana, Panama, England, Croatia
+**  21. Ghana                 - Panama                
+    <2026-06-17 19:00> 
+    BMO Field, Toronto 
+**  22. England               - Croatia               
+    <2026-06-17 16:00> 
+    AT&T Stadium, Dallas 
+**  45. England               - Ghana                 
+    <2026-06-23 16:00> 
+    Gillette Stadium, Boston 
+**  46. Panama                - Croatia               
+    <2026-06-23 19:00> 
+    BMO Field, Toronto 
+**  67. Panama                - England               
+    <2026-06-27 17:00> 
+    MetLife Stadium, New York/New Jersey 
+**  68. Croatia               - Ghana                 
+    <2026-06-27 17:00> 
+    Lincoln Financial Field, Philadelphia 
+* Round of 32                                                 :Roundof32:
+**  73. Group A Runner-up     - Group B Runner-up     
+    <2026-06-28 15:00> 
+    SoFi Stadium, Los Angeles 
+**  74. Group E Winner        - Group A/B/C/D/F 3rd Place
+    <2026-06-29 16:30> 
+    Gillette Stadium, Boston 
+**  75. Group F Winner        - Group C Runner-up     
+    <2026-06-29 21:00> 
+    Estadio BBVA, Monterrey 
+**  76. Group C Winner        - Group F Runner-up     
+    <2026-06-29 13:00> 
+    NRG Stadium, Houston 
+**  77. Group I Winner        - Group C/D/F/G/H 3rd Place
+    <2026-06-30 17:00> 
+    MetLife Stadium, New York/New Jersey 
+**  78. Group E Runner-up     - Group I Runner-up     
+    <2026-06-30 13:00> 
+    AT&T Stadium, Dallas 
+**  79. Group A Winner        - Group C/E/F/H/I 3rd Place
+    <2026-06-30 21:00> 
+    Estadio Azteca, Mexico City 
+**  80. Group L Winner        - Group E/H/I/J/K 3rd Place
+    <2026-07-01 12:00> 
+    Mercedes-Benz Stadium, Atlanta 
+**  81. Group D Winner        - Group B/E/F/I/J 3rd Place
+    <2026-07-01 20:00> 
+    Levi's Stadium, San Francisco Bay Area 
+**  82. Group G Winner        - Group A/E/H/I/J 3rd Place
+    <2026-07-01 16:00> 
+    Lumen Field, Seattle 
+**  83. Group K Runner-up     - Group L Runner-up     
+    <2026-07-02 19:00> 
+    BMO Field, Toronto 
+**  84. Group H Winner        - Group J Runner-up     
+    <2026-07-02 15:00> 
+    SoFi Stadium, Los Angeles 
+**  85. Group B Winner        - Group E/F/G/I/J 3rd Place
+    <2026-07-02 23:00> 
+    BC Place, Vancouver 
+**  86. Group J Winner        - Group H Runner-up     
+    <2026-07-03 18:00> 
+    Hard Rock Stadium, Miami 
+**  87. Group K Winner        - Group D/E/I/J/L 3rd Place
+    <2026-07-03 21:30> 
+    Arrowhead Stadium, Kansas City 
+**  88. Group D Runner-up     - Group G Runner-up     
+    <2026-07-03 14:00> 
+    AT&T Stadium, Dallas 
+* Round of 16                                                 :Roundof16:
+**  89. Match 74 Winner       - Match 77 Winner       
+    <2026-07-04 17:00> 
+    Lincoln Financial Field, Philadelphia 
+**  90. Match 73 Winner       - Match 75 Winner       
+    <2026-07-04 13:00> 
+    NRG Stadium, Houston 
+**  91. Match 76 Winner       - Match 78 Winner       
+    <2026-07-05 16:00> 
+    MetLife Stadium, New York/New Jersey 
+**  92. Match 79 Winner       - Match 80 Winner       
+    <2026-07-05 20:00> 
+    Estadio Azteca, Mexico City 
+**  93. Match 83 Winner       - Match 84 Winner       
+    <2026-07-06 15:00> 
+    AT&T Stadium, Dallas 
+**  94. Match 81 Winner       - Match 82 Winner       
+    <2026-07-06 20:00> 
+    Lumen Field, Seattle 
+**  95. Match 86 Winner       - Match 88 Winner       
+    <2026-07-07 12:00> 
+    Mercedes-Benz Stadium, Atlanta 
+**  96. Match 85 Winner       - Match 87 Winner       
+    <2026-07-07 16:00> 
+    BC Place, Vancouver 
+* Quarter-finals                                              :QuarterFinals:
+**  97. Match 89 Winner       - Match 90 Winner       
+    <2026-07-09 16:00> 
+    Gillette Stadium, Boston 
+**  98. Match 93 Winner       - Match 94 Winner       
+    <2026-07-10 15:00> 
+    SoFi Stadium, Los Angeles 
+**  99. Match 91 Winner       - Match 92 Winner       
+    <2026-07-11 17:00> 
+    Hard Rock Stadium, Miami 
+** 100. Match 95 Winner       - Match 96 Winner       
+    <2026-07-11 21:00> 
+    Arrowhead Stadium, Kansas City 
+* Semi-finals                                                 :SemiFinals:
+** 101. Match 97 Winner       - Match 98 Winner       
+    <2026-07-14 15:00> 
+    AT&T Stadium, Dallas 
+** 102. Match 99 Winner       - Match 100 Winner      
+    <2026-07-15 15:00> 
+    Mercedes-Benz Stadium, Atlanta 
+* Third Place                                                 :ThirdPlaceMatch:
+** 103. Match 101 Loser       - Match 102 Loser       
+    <2026-07-18 17:00> 
+    Hard Rock Stadium, Miami 
+* Final                                                       :Final:
+** 104. Match 101 Winner      - Match 102 Winner      
+    <2026-07-19 15:00> 
+    MetLife Stadium, New York/New Jersey 
