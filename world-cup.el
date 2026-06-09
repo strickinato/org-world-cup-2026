@@ -26,6 +26,7 @@
 (require 'subr-x)
 (require 'seq)
 (require 'url)
+(require 'transient)
 (require 'magit-section)
 (require 'hbut)  ; GNU Hyperbole explicit buttons (ebut:program)
 
@@ -357,9 +358,6 @@ Section headings are kept in wiki form (== Heading ==).  Returns nil on error."
 (defvar world-cup-summary-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map special-mode-map)
-    (define-key map (kbd "RET") #'world-cup-summary-browse-url)
-    (define-key map (kbd "TAB") #'world-cup-summary-toggle-detail)
-    (define-key map (kbd "+")   #'world-cup-summary-toggle-detail)
     map)
   "Keymap for `world-cup-summary-mode'.")
 
@@ -441,23 +439,23 @@ Section headings are kept in wiki form (== Heading ==).  Returns nil on error."
 
 (defib world-cup-player ()
   "Hyperbole implicit button: a World Cup player name in a roster.
-Activating it (action key / mouse) looks the player up on Wikipedia.
-The name text carries a `world-cup-player-name' text property placed
-by the roster renderer."
+Activating it (action key / mouse) opens that player's page.
+The name text carries a `world-cup-player' text property (the player
+alist) placed by the roster renderer."
   (when (derived-mode-p 'world-cup-team-mode)
-    (let ((name (get-text-property (point) 'world-cup-player-name)))
-      (when name
+    (let ((player (get-text-property (point) 'world-cup-player)))
+      (when player
         (let* ((pos (point))
                (start (if (and (> pos (point-min))
-                               (get-text-property (1- pos) 'world-cup-player-name))
+                               (get-text-property (1- pos) 'world-cup-player))
                           (previous-single-property-change
-                           pos 'world-cup-player-name)
+                           pos 'world-cup-player)
                         pos))
                (end (or (next-single-property-change
-                         pos 'world-cup-player-name)
+                         pos 'world-cup-player)
                         (point-max))))
-          (ibut:label-set name start end)
-          (hact 'world-cup-wikipedia-lookup name))))))
+          (ibut:label-set (alist-get 'name player) start end)
+          (hact 'world-cup-display-player player world-cup-team))))))
 
 ;;;; Wikipedia article cache (query -> resolved article title)
 
@@ -536,59 +534,68 @@ for that query will prompt with a fresh search again."
                    (message "World Cup: busted Wikipedia cache for %s" key))
           (message "World Cup: no cache entry for %s" key)))))))
 
-;;;; Wikipedia lookup
+;;;; Wikipedia article resolution + lookup
 
-(defun world-cup--wikipedia-lookup-search (query)
-  "Run the interactive Wikipedia search for QUERY, caching the chosen title."
-  (let ((results (world-cup--wikipedia-search query)))
-    (unless results
-      (user-error "No Wikipedia results for %s" query))
-    (let* ((cands (mapcar (lambda (r) (cons (plist-get r :title) r)) results))
-           (titles (mapcar #'car cands))
-           (annotate
-            (lambda (cand)
-              (when-let* ((r (cdr (assoc cand cands)))
-                          (d (plist-get r :desc))
-                          ((not (string-empty-p d))))
-                (concat "  " (propertize d 'face 'font-lock-comment-face)))))
-           (prompt (format "Wikipedia (%s): " query))
-           (choice
-            (if (fboundp 'consult--read)
-                (consult--read titles
-                               :prompt prompt
-                               :category 'world-cup-wikipedia
-                               :require-match t
-                               :sort nil
-                               :annotate annotate)
-              (let ((completion-extra-properties
-                     (list :annotation-function annotate)))
-                (completing-read prompt titles nil t))))
-           (r (cdr (assoc choice cands))))
-      (when r
-        (let ((title (plist-get r :title)))
-          (world-cup--wikipedia-cache-put query title)
-          (world-cup--show-summary (world-cup--wikipedia-summary title)))))))
+(defun world-cup--resolve-article (query)
+  "Resolve QUERY to a Wikipedia article title.
+Use the cache when present; otherwise run a consult search and cache the
+chosen title.  Return a title string, or the symbol `none' if the search
+returned no results."
+  (or (world-cup--wikipedia-cache-get query)
+      (let ((results (world-cup--wikipedia-search query)))
+        (if (null results)
+            'none
+          (let* ((cands (mapcar (lambda (r) (cons (plist-get r :title) r)) results))
+                 (titles (mapcar #'car cands))
+                 (annotate
+                  (lambda (cand)
+                    (when-let* ((r (cdr (assoc cand cands)))
+                                (d (plist-get r :desc))
+                                ((not (string-empty-p d))))
+                      (concat "  " (propertize d 'face 'font-lock-comment-face)))))
+                 (prompt (format "Wikipedia (%s): " query))
+                 (choice
+                  (if (fboundp 'consult--read)
+                      (consult--read titles
+                                     :prompt prompt
+                                     :category 'world-cup-wikipedia
+                                     :require-match t
+                                     :sort nil
+                                     :annotate annotate)
+                    (let ((completion-extra-properties
+                           (list :annotation-function annotate)))
+                      (completing-read prompt titles nil t)))))
+            (world-cup--wikipedia-cache-put query choice)
+            choice)))))
+
+(defun world-cup--lookup-summary (query)
+  "Return (TITLE . SUMMARY) for QUERY; TITLE is `none' if no results.
+A stale cached title (whose summary cannot be fetched) is dropped and the
+query is re-resolved once."
+  (let ((title (world-cup--resolve-article query)))
+    (if (eq title 'none)
+        (cons 'none nil)
+      (let ((summary (world-cup--wikipedia-summary title)))
+        (if summary
+            (cons title summary)
+          (world-cup--wikipedia-cache-remove query)
+          (let ((title2 (world-cup--resolve-article query)))
+            (if (eq title2 'none)
+                (cons 'none nil)
+              (cons title2 (world-cup--wikipedia-summary title2)))))))))
 
 ;;;###autoload
 (defun world-cup-wikipedia-lookup (&optional query)
   "Show a Wikipedia summary (with image) for QUERY in a dedicated buffer.
-When called from a Hyperbole button, QUERY is the button label (player name);
-interactively, prompt for the search string.
-
-The first lookup for a QUERY runs a consult search and caches the chosen
-article title; subsequent lookups skip the search and go straight to the
-cached article.  Use \[world-cup-wikipedia-uncache] to clear a bad entry."
+Interactively, prompt for the search string.  The first lookup for a QUERY
+runs a consult search and caches the chosen article title; subsequent lookups
+skip the search.  Use \[world-cup-wikipedia-uncache] to clear a bad entry."
   (interactive)
   (let* ((query (or query (read-string "Wikipedia search: ")))
-         (cached (world-cup--wikipedia-cache-get query)))
-    (if cached
-        (let ((summary (world-cup--wikipedia-summary cached)))
-          (if summary
-              (world-cup--show-summary summary)
-            ;; Stale cache (renamed/deleted article): drop it and re-search.
-            (world-cup--wikipedia-cache-remove query)
-            (world-cup--wikipedia-lookup-search query)))
-      (world-cup--wikipedia-lookup-search query))))
+         (res (world-cup--lookup-summary query)))
+    (if (or (eq (car res) 'none) (null (cdr res)))
+        (user-error "No Wikipedia results for %s" query)
+      (world-cup--show-summary (cdr res)))))
 
 ;;;; YouTube preview (consult search + mpv streaming)
 
@@ -758,9 +765,9 @@ Interactively, prompt for the search string."
     ;; The name carries a text property recognized by the `world-cup-player'
     ;; Hyperbole implicit button type (see `defib' above).
     (insert (propertize name
-                        'world-cup-player-name name
+                        'world-cup-player player
                         'face 'world-cup-player-link
-                        'help-echo "Action key: look this player up on Wikipedia"))
+                        'help-echo "Action key: open this player's page"))
     (insert (make-string (max 1 (- world-cup--name-col (current-column))) ?\s))
     (insert (format "%-4s%-34s%-5s%-7s%s\n"
                     (propertize pos 'face (world-cup--pos-face pos))
@@ -869,8 +876,6 @@ The row is a `world-cup-fixture' Hyperbole implicit button."
 (defvar world-cup-team-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map magit-section-mode-map)
-    (define-key map (kbd "g") #'world-cup-team-revert)
-    (define-key map (kbd "t") #'world-cup-consult-team)
     map)
   "Keymap for `world-cup-team-mode'.")
 
@@ -915,6 +920,189 @@ The row is a `world-cup-fixture' Hyperbole implicit button."
 The buffer shows collapsible Fixtures and Squad sections."
   (interactive)
   (world-cup-display-team (world-cup--read-team)))
+
+;;;; Player buffer
+
+(defcustom world-cup-web-search-url-format "https://duckduckgo.com/?q=%s"
+  "Format string for web searches; %s is replaced by the URL-encoded query."
+  :type 'string :group 'world-cup)
+
+(defvar world-cup-player-mode-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map special-mode-map)
+    map)
+  "Keymap for `world-cup-player-mode'.")
+
+(define-derived-mode world-cup-player-mode special-mode "WC-Player"
+  "Major mode for a single World Cup player's page.")
+
+(defvar-local world-cup-player--player nil "Player alist for this buffer.")
+(defvar-local world-cup-player--team nil "Team alist for this buffer's player.")
+(defvar-local world-cup-player--query nil "Wikipedia search query (player name).")
+(defvar-local world-cup-player--title nil "Resolved Wikipedia article title.")
+(defvar-local world-cup-player--summary nil "Wikipedia summary alist, or nil.")
+(defvar-local world-cup-player--no-results nil "Non-nil when no article was found.")
+(defvar-local world-cup-player--full nil "Non-nil when showing the full article.")
+(defvar-local world-cup-player--body-cache nil "Cached full-text article extract.")
+(defvar-local world-cup-player--image-cache 'unset "Cached thumbnail image.")
+
+(defun world-cup-player--guard ()
+  (unless (derived-mode-p 'world-cup-player-mode)
+    (user-error "Not in a World Cup player buffer")))
+
+(defun world-cup-player--web-query ()
+  "Return the web-search query string for the buffer's player."
+  (format "%s %s footballer"
+          (alist-get 'name world-cup-player--player)
+          (world-cup-team-name world-cup-player--team)))
+
+(defun world-cup-player--web-url ()
+  (format world-cup-web-search-url-format
+          (url-hexify-string (world-cup-player--web-query))))
+
+(defun world-cup-player--insert-stats ()
+  "Insert the basic stats block for the buffer's player."
+  (let* ((p world-cup-player--player)
+         (team world-cup-player--team)
+         (pos (or (alist-get 'position p) ""))
+         (age (world-cup--age (alist-get 'dob p)))
+         (dob (or (alist-get 'dob p) "?"))
+         (cm (alist-get 'height_cm p))
+         (ht (world-cup--height-imperial cm)))
+    (insert " " (propertize (or (alist-get 'name p) "")
+                            'face 'world-cup-summary-title)
+            "\n\n")
+    (dolist (row (list
+                  (cons "Team" (format "%s [%s]" (world-cup-team-name team)
+                                       (world-cup-team-code team)))
+                  (cons "Position" (concat pos (pcase pos
+                                                 ("GK" "  (Goalkeeper)")
+                                                 ("DF" "  (Defender)")
+                                                 ("MF" "  (Midfielder)")
+                                                 ("FW" "  (Forward)") (_ ""))))
+                  (cons "Squad #" (number-to-string (alist-get 'number p)))
+                  (cons "Club" (world-cup--club-label p))
+                  (cons "Age" (if age (format "%d   (DOB %s)" age dob) dob))
+                  (cons "Height" (if cm (format "%s   (%s cm)" ht cm) "?"))))
+      (insert (format " %-10s %s\n"
+                      (propertize (concat (car row) ":")
+                                  'face 'font-lock-keyword-face)
+                      (cdr row))))))
+
+(defun world-cup-player--insert-help ()
+  (insert (propertize " Press ? for actions" 'face 'font-lock-comment-face) "\n"))
+
+(defun world-cup-player--render ()
+  "Render the player buffer from its buffer-local state."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (world-cup-player--insert-stats)
+    (insert "\n " (propertize "\u2014 Wikipedia \u2014"
+                              'face 'font-lock-comment-face) "\n")
+    (cond
+     (world-cup-player--no-results
+      (insert "\n " (propertize "<no wikipedia results>" 'face 'warning) "\n"))
+     (world-cup-player--summary
+      (when (eq world-cup-player--image-cache 'unset)
+        (setq world-cup-player--image-cache
+              (let ((thumb (alist-get 'thumbnail world-cup-player--summary)))
+                (and thumb (world-cup--fetch-image
+                            (alist-get 'source thumb)
+                            :max-width world-cup-summary-image-max-width
+                            :max-height world-cup-summary-image-max-width)))))
+      (let ((body (if world-cup-player--full
+                      (or world-cup-player--body-cache
+                          (setq world-cup-player--body-cache
+                                (world-cup--wikipedia-extract world-cup-player--title))
+                          (alist-get 'extract world-cup-player--summary))
+                    (alist-get 'extract world-cup-player--summary))))
+        (world-cup--summary-insert world-cup-player--summary body
+                                   world-cup-player--image-cache))
+      (insert "\n " (propertize (if world-cup-player--full
+                                    "[TAB] show summary only"
+                                  "[TAB] load full article")
+                                'face 'font-lock-comment-face) "\n"))
+     (t
+      (insert "\n " (propertize "Looking up Wikipedia\u2026"
+                                'face 'font-lock-comment-face) "\n")))
+    (insert "\n")
+    (world-cup-player--insert-help)
+    (goto-char (point-min))))
+
+(defun world-cup-player--load-wikipedia (buffer)
+  "Resolve and load the Wikipedia article for BUFFER's player, then re-render."
+  (let ((query (with-current-buffer buffer world-cup-player--query)))
+    (let ((res (world-cup--lookup-summary query)))
+      (when (buffer-live-p buffer)
+        (with-current-buffer buffer
+          (if (or (eq (car res) 'none) (null (cdr res)))
+              (setq world-cup-player--no-results t
+                    world-cup-player--summary nil)
+            (setq world-cup-player--no-results nil
+                  world-cup-player--title (car res)
+                  world-cup-player--summary (cdr res)
+                  world-cup-player--full nil
+                  world-cup-player--body-cache nil
+                  world-cup-player--image-cache 'unset))
+          (world-cup-player--render))))))
+
+(defun world-cup-player-youtube-highlights ()
+  "Search YouTube for the player's highlights and stream the choice with mpv."
+  (interactive)
+  (world-cup-player--guard)
+  (world-cup-youtube-watch
+   (format "%s highlights" (alist-get 'name world-cup-player--player))))
+
+(defun world-cup-player-web-xwidget ()
+  "Run a web search for the player in an xwidget-webkit buffer."
+  (interactive)
+  (world-cup-player--guard)
+  (unless (fboundp 'xwidget-webkit-browse-url)
+    (user-error "This Emacs was not built with xwidget support"))
+  (xwidget-webkit-browse-url (world-cup-player--web-url)))
+
+(defun world-cup-player-web-browser ()
+  "Run a web search for the player in the external browser."
+  (interactive)
+  (world-cup-player--guard)
+  (browse-url (world-cup-player--web-url)))
+
+(defun world-cup-player-toggle-detail ()
+  "Toggle between the Wikipedia summary and the full article."
+  (interactive)
+  (world-cup-player--guard)
+  (unless world-cup-player--summary
+    (user-error "No Wikipedia article loaded"))
+  (setq world-cup-player--full (not world-cup-player--full))
+  (world-cup-player--render))
+
+(defun world-cup-player-reload ()
+  "Reload the Wikipedia article for the current player buffer."
+  (interactive)
+  (world-cup-player--guard)
+  (world-cup-player--load-wikipedia (current-buffer)))
+
+;;;###autoload
+(defun world-cup-display-player (player team)
+  "Show a buffer for PLAYER of TEAM: basic stats plus a Wikipedia summary.
+On load, a consult search resolves which Wikipedia article to show (cached
+after the first time); if nothing matches, <no wikipedia results> is shown."
+  (let ((buf (get-buffer-create
+              (format "*World Cup Player: %s*" (alist-get 'name player)))))
+    (with-current-buffer buf
+      (world-cup-player-mode)
+      (setq world-cup-player--player player
+            world-cup-player--team team
+            world-cup-player--query (alist-get 'name player)
+            world-cup-player--title nil
+            world-cup-player--summary nil
+            world-cup-player--no-results nil
+            world-cup-player--full nil
+            world-cup-player--body-cache nil
+            world-cup-player--image-cache 'unset)
+      (world-cup-player--render))
+    (pop-to-buffer buf)
+    (world-cup-player--load-wikipedia buf)))
 
 ;;;; Player search
 
@@ -967,9 +1155,91 @@ implicit button on a roster name."
                    (list :annotation-function annotate)))
               (completing-read "World Cup player: " names nil t))))
          (pt (cdr (assoc choice cands)))
-         (player (car pt)))
+         (player (car pt))
+         (team (cdr pt)))
     (when player
-      (world-cup-wikipedia-lookup (alist-get 'name player)))))
+      (world-cup-display-player player team))))
+
+;;;; Transient menus (press ? in each buffer)
+
+(transient-define-prefix world-cup-player-menu ()
+  "Actions for a World Cup player buffer."
+  [["Search"
+    ("y" "YouTube highlights"     world-cup-player-youtube-highlights)
+    ("x" "Web search (xwidget)"   world-cup-player-web-xwidget)
+    ("b" "Web search (browser)"   world-cup-player-web-browser)]
+   ["Article"
+    ("TAB" "Toggle full article"  world-cup-player-toggle-detail)
+    ("g"   "Reload"               world-cup-player-reload)]
+   ["Buffer"
+    ("q" "Quit" quit-window)]])
+
+(transient-define-prefix world-cup-team-menu ()
+  "Actions for a World Cup team buffer."
+  [["Browse"
+    ("t" "Switch team\u2026"      world-cup-consult-team)
+    ("p" "Find player\u2026"      world-cup-consult-player)
+    ("g" "Reload"                world-cup-team-revert)]
+   ["Buffer"
+    ("q" "Quit" quit-window)]])
+
+(transient-define-prefix world-cup-summary-menu ()
+  "Actions for a Wikipedia summary buffer."
+  [["Article"
+    ("TAB" "Toggle full article" world-cup-summary-toggle-detail)
+    ("RET" "Open in browser"     world-cup-summary-browse-url)]
+   ["Buffer"
+    ("q" "Quit" quit-window)]])
+
+;;;; Keybindings (plain + evil)
+
+(defconst world-cup--player-keys
+  '(("y" . world-cup-player-youtube-highlights)
+    ("x" . world-cup-player-web-xwidget)
+    ("b" . world-cup-player-web-browser)
+    ("TAB" . world-cup-player-toggle-detail)
+    ("g" . world-cup-player-reload)
+    ("?" . world-cup-player-menu)
+    ("q" . quit-window))
+  "Key bindings for `world-cup-player-mode'.")
+
+(defconst world-cup--team-keys
+  '(("g" . world-cup-team-revert)
+    ("t" . world-cup-consult-team)
+    ("p" . world-cup-consult-player)
+    ("?" . world-cup-team-menu)
+    ("q" . quit-window))
+  "Extra key bindings for `world-cup-team-mode'.")
+
+(defconst world-cup--summary-keys
+  '(("TAB" . world-cup-summary-toggle-detail)
+    ("+" . world-cup-summary-toggle-detail)
+    ("RET" . world-cup-summary-browse-url)
+    ("?" . world-cup-summary-menu)
+    ("q" . quit-window))
+  "Key bindings for `world-cup-summary-mode'.")
+
+(defun world-cup--apply-keys (map bindings)
+  "Bind BINDINGS (alist of KEY . COMMAND) into MAP with `define-key'."
+  (dolist (b bindings)
+    (define-key map (kbd (car b)) (cdr b))))
+
+(defun world-cup--evil-bind (map bindings)
+  "Bind BINDINGS in MAP for evil normal and motion states."
+  (when (fboundp 'evil-define-key*)
+    (apply #'evil-define-key* '(normal motion) map
+           (mapcan (lambda (b) (list (kbd (car b)) (cdr b))) bindings))))
+
+;; Apply on every load so re-evaluating the file picks up binding changes
+;; (a `defvar' keymap initializer would not re-run).
+(world-cup--apply-keys world-cup-player-mode-map world-cup--player-keys)
+(world-cup--apply-keys world-cup-team-mode-map world-cup--team-keys)
+(world-cup--apply-keys world-cup-summary-mode-map world-cup--summary-keys)
+
+(with-eval-after-load 'evil
+  (world-cup--evil-bind world-cup-player-mode-map world-cup--player-keys)
+  (world-cup--evil-bind world-cup-team-mode-map world-cup--team-keys)
+  (world-cup--evil-bind world-cup-summary-mode-map world-cup--summary-keys))
 
 (provide 'world-cup)
 
