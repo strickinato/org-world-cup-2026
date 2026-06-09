@@ -26,7 +26,6 @@
 (require 'subr-x)
 (require 'seq)
 (require 'url)
-(require 'eww)
 (require 'magit-section)
 (require 'hbut)  ; GNU Hyperbole explicit buttons (ebut:program)
 
@@ -65,6 +64,9 @@
 (defface world-cup-player-link '((t :inherit link))
   "Face for a clickable player name (Hyperbole implicit button)."
   :group 'world-cup)
+(defface world-cup-summary-title '((t :inherit info-title-3))
+  "Face for the title in a Wikipedia summary overlay." :group 'world-cup)
+
 
 ;;;; Data loading
 
@@ -230,15 +232,212 @@ Return a list of plists with :title, :desc and :url."
                       titles descs urls)))
       (kill-buffer buf))))
 
-(defun world-cup--eww-readable-once ()
-  "Switch the freshly rendered EWW buffer to reader mode, once."
-  (remove-hook 'eww-after-render-hook #'world-cup--eww-readable-once)
-  (ignore-errors (eww-readable)))
+(defcustom world-cup-user-agent
+  "org-world-cup-2026/1.0 (https://github.com/; Emacs)"
+  "User-Agent string sent with Wikipedia API requests.
+The Wikimedia REST API asks clients to identify themselves."
+  :type 'string
+  :group 'world-cup)
 
-(defun world-cup--eww-open-readable (url)
-  "Open URL in EWW and render it in reader mode."
-  (add-hook 'eww-after-render-hook #'world-cup--eww-readable-once)
-  (eww url))
+(defcustom world-cup-summary-image-max-width 240
+  "Maximum width (px) for the thumbnail in a summary overlay."
+  :type 'integer :group 'world-cup)
+
+(defcustom world-cup-summary-fill-column 74
+  "Column at which to wrap the summary text."
+  :type 'integer :group 'world-cup)
+
+(defun world-cup--http-get (url &optional binary)
+  "GET URL synchronously, returning the response body string.
+With BINARY non-nil, return raw bytes (unibyte). Returns nil on failure."
+  (let ((url-request-extra-headers
+         (list (cons "User-Agent" world-cup-user-agent))))
+    (condition-case nil
+        (let ((buf (url-retrieve-synchronously url t t 12)))
+          (when buf
+            (unwind-protect
+                (with-current-buffer buf
+                  (when binary (set-buffer-multibyte nil))
+                  (goto-char (point-min))
+                  (when (re-search-forward "\r?\n\r?\n" nil t)
+                    (buffer-substring-no-properties (point) (point-max))))
+              (kill-buffer buf))))
+      (error nil))))
+
+(defun world-cup--wikipedia-summary (title)
+  "Fetch the Wikipedia REST page summary for TITLE as an alist, or nil."
+  (let* ((endpoint (format "https://%s.wikipedia.org/api/rest_v1/page/summary/%s"
+                          world-cup-wikipedia-language
+                          (url-hexify-string title)))
+         (body (world-cup--http-get endpoint)))
+    (when body
+      (condition-case nil
+          (json-parse-string body :object-type 'alist :array-type 'list
+                             :null-object nil :false-object nil)
+        (error nil)))))
+
+(defun world-cup--fetch-image (url &rest props)
+  "Fetch image at URL and return an image object scaled per PROPS, or nil."
+  (when (and url (display-graphic-p))
+    (let ((data (world-cup--http-get url t)))
+      (when data
+        (condition-case nil
+            (apply #'create-image data nil t props)
+          (error nil))))))
+
+(defun world-cup--wikipedia-extract (title)
+  "Fetch the full plain-text article extract for TITLE via the Action API.
+Section headings are kept in wiki form (== Heading ==).  Returns nil on error."
+  (let* ((endpoint (format "https://%s.wikipedia.org/w/api.php" world-cup-wikipedia-language))
+         (url (format (concat "%s?action=query&format=json&prop=extracts"
+                              "&explaintext=1&exsectionformat=wiki&redirects=1&titles=%s")
+                      endpoint (url-hexify-string title)))
+         (body (world-cup--http-get url)))
+    (when body
+      (condition-case nil
+          (let* ((data (json-parse-string body :object-type 'alist :array-type 'list
+                                          :null-object nil :false-object nil))
+                 (pages (alist-get 'pages (alist-get 'query data)))
+                 (page (cdar pages)))
+            (alist-get 'extract page))
+        (error nil)))))
+
+(defun world-cup--insert-article-body (text)
+  "Insert TEXT as a filled article body, fontifying wiki section headings."
+  (let ((start (point)))
+    (insert text)
+    ;; Convert/fontify headings FIRST and isolate them with blank lines, so the
+    ;; subsequent fill never merges a heading into an adjacent paragraph.
+    (save-excursion
+      (goto-char start)
+      (while (re-search-forward "^ *\\(=\\{2,6\\}\\) *\\(.*?\\) *=\\{2,6\\} *$" nil t)
+        (let* ((level (length (match-string 1)))
+               (head (match-string 2))
+               (face (if (<= level 2) 'world-cup-summary-title 'bold)))
+          (replace-match
+           (concat "\n" (propertize head 'face face 'world-cup-heading t) "\n")
+           t t))))
+    ;; Fill only the non-heading paragraphs.
+    (let ((fill-column world-cup-summary-fill-column)
+          (left-margin 1))
+      (save-excursion
+        (goto-char start)
+        (while (not (eobp))
+          (if (get-text-property (point) 'world-cup-heading)
+              (forward-line 1)
+            (let ((p-start (point)))
+              (forward-paragraph)
+              (fill-region-as-paragraph p-start (point))
+              (forward-line 1))))))))
+
+(defun world-cup--summary-insert (summary body image)
+  "Insert SUMMARY into the current buffer using BODY as text and IMAGE if non-nil."
+  (let* ((title (alist-get 'title summary))
+         (desc (alist-get 'description summary))
+         (url (let ((cu (alist-get 'content_urls summary)))
+                (alist-get 'page (alist-get 'desktop cu)))))
+    (insert "\n")
+    (when title
+      (insert " " (propertize title 'face 'world-cup-summary-title) "\n\n"))
+    (when (and desc (stringp desc) (not (string-empty-p desc)))
+      (insert " " (propertize desc 'face 'font-lock-comment-face) "\n\n"))
+    (when image
+      (insert " ")
+      (insert-image image)
+      (insert "\n\n"))
+    (when (and body (stringp body))
+      (world-cup--insert-article-body body)
+      (insert "\n"))
+    (when url
+      (insert "\n " (propertize url 'face 'link
+                                'world-cup-url url
+                                'help-echo "RET: open full article")
+              "\n"))))
+
+(defvar world-cup-summary-mode-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map special-mode-map)
+    (define-key map (kbd "RET") #'world-cup-summary-browse-url)
+    (define-key map (kbd "TAB") #'world-cup-summary-toggle-detail)
+    (define-key map (kbd "+")   #'world-cup-summary-toggle-detail)
+    map)
+  "Keymap for `world-cup-summary-mode'.")
+
+(define-derived-mode world-cup-summary-mode special-mode "WC-Wiki"
+  "Major mode for a Wikipedia article summary.")
+
+(defvar-local world-cup-summary-url nil
+  "URL of the full article shown in the current summary buffer.")
+(defvar-local world-cup-summary--data nil
+  "Summary alist backing the current buffer.")
+(defvar-local world-cup-summary--full nil
+  "Non-nil when the buffer shows the full article rather than the summary.")
+(defvar-local world-cup-summary--body-cache nil
+  "Cached full-text article extract for this buffer.")
+(defvar-local world-cup-summary--image-cache 'unset
+  "Cached thumbnail image (or nil); `unset' means not yet fetched.")
+
+(defun world-cup-summary-browse-url ()
+  "Open the full Wikipedia article for the current summary buffer."
+  (interactive)
+  (let ((url (or (get-text-property (point) 'world-cup-url)
+                 world-cup-summary-url)))
+    (if url (browse-url url)
+      (user-error "No article URL available"))))
+
+(defun world-cup-summary--render ()
+  "Render the current summary buffer from its buffer-local state."
+  (let* ((inhibit-read-only t)
+         (summary world-cup-summary--data)
+         (body (if world-cup-summary--full
+                   (or world-cup-summary--body-cache
+                       (setq world-cup-summary--body-cache
+                             (world-cup--wikipedia-extract (alist-get 'title summary)))
+                       (alist-get 'extract summary))
+                 (alist-get 'extract summary))))
+    (when (eq world-cup-summary--image-cache 'unset)
+      (setq world-cup-summary--image-cache
+            (let ((thumb (alist-get 'thumbnail summary)))
+              (and thumb (world-cup--fetch-image
+                          (alist-get 'source thumb)
+                          :max-width world-cup-summary-image-max-width
+                          :max-height world-cup-summary-image-max-width)))))
+    (erase-buffer)
+    (world-cup--summary-insert summary body world-cup-summary--image-cache)
+    (insert "\n "
+            (propertize (if world-cup-summary--full
+                            "[TAB] show summary only"
+                          "[TAB] load full article")
+                        'face 'font-lock-comment-face)
+            "\n")
+    (goto-char (point-min))))
+
+(defun world-cup-summary-toggle-detail ()
+  "Toggle between the short summary and the full Wikipedia article."
+  (interactive)
+  (unless (derived-mode-p 'world-cup-summary-mode)
+    (user-error "Not in a World Cup Wikipedia buffer"))
+  (when (and (not world-cup-summary--full) (null world-cup-summary--body-cache))
+    (message "Fetching full article..."))
+  (setq world-cup-summary--full (not world-cup-summary--full))
+  (world-cup-summary--render))
+
+(defun world-cup--show-summary (summary)
+  "Display SUMMARY in the dedicated `world-cup-summary-mode' buffer."
+  (unless summary
+    (user-error "No Wikipedia summary available"))
+  (let ((buf (get-buffer-create "*World Cup: Wikipedia*")))
+    (with-current-buffer buf
+      (world-cup-summary-mode)
+      (setq world-cup-summary--data summary
+            world-cup-summary--full nil
+            world-cup-summary--body-cache nil
+            world-cup-summary--image-cache 'unset
+            world-cup-summary-url
+            (let ((cu (alist-get 'content_urls summary)))
+              (alist-get 'page (alist-get 'desktop cu))))
+      (world-cup-summary--render))
+    (pop-to-buffer buf)))
 
 (defib world-cup-player ()
   "Hyperbole implicit button: a World Cup player name in a roster.
@@ -262,9 +461,10 @@ by the roster renderer."
 
 ;;;###autoload
 (defun world-cup-wikipedia-lookup (&optional query)
-  "Search Wikipedia for QUERY via consult, opening the choice in EWW reader mode.
+  "Search Wikipedia for QUERY via consult and show a summary with image.
 When called from a Hyperbole button, QUERY is the button label (player name).
-Interactively, prompt for the search string."
+Interactively, prompt for the search string.  The chosen article's summary
+(with image) is shown in a dedicated buffer."
   (interactive)
   (let* ((query (or query (read-string "Wikipedia search: ")))
          (results (world-cup--wikipedia-search query)))
@@ -292,7 +492,8 @@ Interactively, prompt for the search string."
                 (completing-read prompt titles nil t))))
            (r (cdr (assoc choice cands))))
       (when r
-        (world-cup--eww-open-readable (plist-get r :url))))))
+        (world-cup--show-summary
+         (world-cup--wikipedia-summary (plist-get r :title)))))))
 
 ;;;; Player formatting helpers
 
