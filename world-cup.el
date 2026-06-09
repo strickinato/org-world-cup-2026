@@ -804,12 +804,11 @@ HOME-P is non-nil when TEAM is team_a."
 
 (defib world-cup-fixture ()
   "Hyperbole implicit button: a fixture row in a roster buffer.
-Activating it searches YouTube for a match preview and streams the
-chosen video with mpv.  The row carries a `world-cup-fixture' text
-property (the search query) placed by the fixtures renderer."
+Activating it opens that game's page.  The row carries a `world-cup-fixture'
+text property (the match alist) placed by the fixtures renderer."
   (when (derived-mode-p 'world-cup-team-mode)
-    (let ((query (get-text-property (point) 'world-cup-fixture)))
-      (when query
+    (let ((match (get-text-property (point) 'world-cup-fixture)))
+      (when match
         (let* ((pos (point))
                (start (if (and (> pos (point-min))
                                (get-text-property (1- pos) 'world-cup-fixture))
@@ -819,18 +818,19 @@ property (the search query) placed by the fixtures renderer."
                (end (or (next-single-property-change
                          pos 'world-cup-fixture)
                         (point-max))))
-          (ibut:label-set query start end)
-          (hact 'world-cup-youtube-watch query))))))
+          (ibut:label-set (format "%s vs %s"
+                                  (alist-get 'team_a match)
+                                  (alist-get 'team_b match))
+                          start end)
+          (hact 'world-cup-display-game match))))))
 
 (defun world-cup--insert-fixture (team match)
   "Insert one MATCH row for TEAM inside a `magit-section'.
-The row is a `world-cup-fixture' Hyperbole implicit button."
+The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
   (pcase-let* ((`(,opp . ,home-p) (world-cup--opponent team match))
                (grp (alist-get 'group match))
                (label (if grp (format "Grp %s" grp)
                         (or (alist-get 'stage match) "")))
-               (query (format "%s vs %s preview"
-                              (world-cup-team-name team) opp))
                (line (format "  %s %5s  %-7s  %s %-24s  %s"
                              (alist-get 'date match)
                              (alist-get 'time_et match)
@@ -846,9 +846,8 @@ The row is a `world-cup-fixture' Hyperbole implicit button."
     (magit-insert-section (world-cup-match match)
       (magit-insert-heading
         (propertize line
-                    'world-cup-fixture query
-                    'help-echo (format "Action key: YouTube preview \u2014 %s"
-                                       query))))))
+                    'world-cup-fixture match
+                    'help-echo "Action key: open game page")))))
 
 (defun world-cup--insert-fixtures (team)
   "Insert the Fixtures section for TEAM."
@@ -1160,6 +1159,188 @@ implicit button on a roster name."
     (when player
       (world-cup-display-player player team))))
 
+;;;; Game (fixture) buffer
+
+(defun world-cup--match-label (match)
+  "Return a short stage label for MATCH (\"Grp X\" or the stage name)."
+  (let ((grp (alist-get 'group match)))
+    (if grp (format "Grp %s" grp) (or (alist-get 'stage match) ""))))
+
+(defun world-cup--match-team (match side)
+  "Return the team alist for SIDE (`a' or `b') of MATCH, or nil."
+  (let ((code (alist-get (if (eq side 'a) 'team_a_code 'team_b_code) match))
+        (name (alist-get (if (eq side 'a) 'team_a 'team_b) match)))
+    (or (and code (world-cup--find-team-by-code code))
+        (world-cup--find-team-by-name name))))
+
+(defvar world-cup-game-mode-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map special-mode-map)
+    map)
+  "Keymap for `world-cup-game-mode'.")
+
+(define-derived-mode world-cup-game-mode special-mode "WC-Game"
+  "Major mode for a single World Cup game's page.")
+
+(defvar-local world-cup-game--match nil
+  "Match alist backing the current game buffer.")
+
+(defun world-cup-game--guard ()
+  (unless (derived-mode-p 'world-cup-game-mode)
+    (user-error "Not in a World Cup game buffer")))
+
+(defun world-cup-game--teams ()
+  "Return \"TEAM_A vs TEAM_B\" for the current game."
+  (format "%s vs %s"
+          (alist-get 'team_a world-cup-game--match)
+          (alist-get 'team_b world-cup-game--match)))
+
+(defun world-cup-game--web-query ()
+  (format "world cup game %d %s"
+          (alist-get 'match_number world-cup-game--match)
+          (world-cup-game--teams)))
+
+(defun world-cup-game--web-url ()
+  (format world-cup-web-search-url-format
+          (url-hexify-string (world-cup-game--web-query))))
+
+(defun world-cup-game--insert-stats ()
+  "Insert the basic stats block for the buffer's game."
+  (let* ((m world-cup-game--match)
+         (a (alist-get 'team_a m)) (b (alist-get 'team_b m))
+         (ac (alist-get 'team_a_code m)) (bc (alist-get 'team_b_code m)))
+    (insert " " (propertize (format "%s  vs  %s" a b)
+                            'face 'world-cup-summary-title)
+            "\n\n")
+    (dolist (row (list
+                  (cons "Match" (format "#%d" (alist-get 'match_number m)))
+                  (cons "Stage" (let ((g (alist-get 'group m)))
+                                  (if g (format "Group %s" g)
+                                    (or (alist-get 'stage m) "?"))))
+                  (cons "Date" (or (alist-get 'date m) "?"))
+                  (cons "Kickoff" (format "%s ET   (%s local)"
+                                          (alist-get 'time_et m)
+                                          (alist-get 'time_local m)))
+                  (cons "Home" (if ac (format "%s [%s]" a ac) a))
+                  (cons "Away" (if bc (format "%s [%s]" b bc) b))
+                  (cons "Venue" (or (alist-get 'venue m) "?"))
+                  (cons "City" (format "%s, %s"
+                                       (alist-get 'city m)
+                                       (alist-get 'country m)))))
+      (insert (format " %-9s %s\n"
+                      (propertize (concat (car row) ":")
+                                  'face 'font-lock-keyword-face)
+                      (cdr row))))))
+
+(defun world-cup-game--render ()
+  "Render the game buffer from its buffer-local state."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (world-cup-game--insert-stats)
+    (insert "\n" (propertize " Press ? for actions"
+                             'face 'font-lock-comment-face) "\n")
+    (goto-char (point-min))))
+
+(defun world-cup-game-youtube-preview ()
+  "Search YouTube for a preview of this game and stream the choice with mpv."
+  (interactive)
+  (world-cup-game--guard)
+  (world-cup-youtube-watch (format "%s preview" (world-cup-game--teams))))
+
+(defun world-cup-game-web-xwidget ()
+  "Run a web search for this game in an xwidget-webkit buffer."
+  (interactive)
+  (world-cup-game--guard)
+  (unless (fboundp 'xwidget-webkit-browse-url)
+    (user-error "This Emacs was not built with xwidget support"))
+  (xwidget-webkit-browse-url (world-cup-game--web-url)))
+
+(defun world-cup-game-web-browser ()
+  "Run a web search for this game in the external browser."
+  (interactive)
+  (world-cup-game--guard)
+  (browse-url (world-cup-game--web-url)))
+
+(defun world-cup-game-jump-team-a ()
+  "Open the team page for the home team of this game."
+  (interactive)
+  (world-cup-game--guard)
+  (let ((team (world-cup--match-team world-cup-game--match 'a)))
+    (if team (world-cup-display-team team)
+      (user-error "No team page for %s" (alist-get 'team_a world-cup-game--match)))))
+
+(defun world-cup-game-jump-team-b ()
+  "Open the team page for the away team of this game."
+  (interactive)
+  (world-cup-game--guard)
+  (let ((team (world-cup--match-team world-cup-game--match 'b)))
+    (if team (world-cup-display-team team)
+      (user-error "No team page for %s" (alist-get 'team_b world-cup-game--match)))))
+
+(defun world-cup-game-reload ()
+  "Re-render the current game buffer."
+  (interactive)
+  (world-cup-game--guard)
+  (world-cup-game--render))
+
+;;;###autoload
+(defun world-cup-display-game (match)
+  "Show a buffer for MATCH: basic stats plus a `?' actions menu."
+  (let ((buf (get-buffer-create
+              (format "*World Cup Game: %s vs %s (#%d)*"
+                      (alist-get 'team_a match)
+                      (alist-get 'team_b match)
+                      (alist-get 'match_number match)))))
+    (with-current-buffer buf
+      (world-cup-game-mode)
+      (setq world-cup-game--match match)
+      (world-cup-game--render))
+    (pop-to-buffer buf)))
+
+;;;; Fixture search
+
+(defun world-cup--fixture-candidates ()
+  "Return an alist of (DISPLAY . MATCH) for every game."
+  (mapcar (lambda (m)
+            (cons (format "%3d. %s vs %s   %s %5s  %s"
+                          (alist-get 'match_number m)
+                          (world-cup--pad (alist-get 'team_a m) 22)
+                          (world-cup--pad (alist-get 'team_b m) 22)
+                          (alist-get 'date m)
+                          (alist-get 'time_et m)
+                          (world-cup--match-label m))
+                  m))
+          (world-cup-matches)))
+
+(defun world-cup--annotate-fixture (cands)
+  "Return an annotation function for the fixture candidate alist CANDS."
+  (lambda (cand)
+    (when-let* ((m (cdr (assoc cand cands))))
+      (propertize (format "  %s, %s" (alist-get 'venue m) (alist-get 'city m))
+                  'face 'font-lock-comment-face))))
+
+;;;###autoload
+(defun world-cup-consult-fixture ()
+  "Search all World Cup games (by team) and open the selected game's page."
+  (interactive)
+  (let* ((cands (world-cup--fixture-candidates))
+         (annotate (world-cup--annotate-fixture cands))
+         (names (mapcar #'car cands))
+         (choice
+          (if (fboundp 'consult--read)
+              (consult--read names
+                             :prompt "World Cup game: "
+                             :category 'world-cup-fixture
+                             :require-match t
+                             :sort nil
+                             :annotate annotate)
+            (let ((completion-extra-properties
+                   (list :annotation-function annotate)))
+              (completing-read "World Cup game: " names nil t))))
+         (m (cdr (assoc choice cands))))
+    (when m
+      (world-cup-display-game m))))
+
 ;;;; Transient menus (press ? in each buffer)
 
 (transient-define-prefix world-cup-player-menu ()
@@ -1179,8 +1360,27 @@ implicit button on a roster name."
   [["Browse"
     ("t" "Switch team\u2026"      world-cup-consult-team)
     ("p" "Find player\u2026"      world-cup-consult-player)
+    ("f" "Find game\u2026"        world-cup-consult-fixture)
     ("g" "Reload"                world-cup-team-revert)]
    ["Buffer"
+    ("q" "Quit" quit-window)]])
+
+(transient-define-prefix world-cup-game-menu ()
+  "Actions for a World Cup game buffer."
+  [["Search"
+    ("y" "YouTube preview"       world-cup-game-youtube-preview)
+    ("x" "Web search (xwidget)"  world-cup-game-web-xwidget)
+    ("b" "Web search (browser)"  world-cup-game-web-browser)]
+   ["Teams"
+    ("1" world-cup-game-jump-team-a
+     :description (lambda () (format "Page: %s"
+                                    (alist-get 'team_a world-cup-game--match))))
+    ("2" world-cup-game-jump-team-b
+     :description (lambda () (format "Page: %s"
+                                    (alist-get 'team_b world-cup-game--match))))]
+   ["Buffer"
+    ("f" "Find game\u2026" world-cup-consult-fixture)
+    ("g" "Reload" world-cup-game-reload)
     ("q" "Quit" quit-window)]])
 
 (transient-define-prefix world-cup-summary-menu ()
@@ -1207,9 +1407,22 @@ implicit button on a roster name."
   '(("g" . world-cup-team-revert)
     ("t" . world-cup-consult-team)
     ("p" . world-cup-consult-player)
+    ("f" . world-cup-consult-fixture)
     ("?" . world-cup-team-menu)
     ("q" . quit-window))
   "Extra key bindings for `world-cup-team-mode'.")
+
+(defconst world-cup--game-keys
+  '(("y" . world-cup-game-youtube-preview)
+    ("x" . world-cup-game-web-xwidget)
+    ("b" . world-cup-game-web-browser)
+    ("1" . world-cup-game-jump-team-a)
+    ("2" . world-cup-game-jump-team-b)
+    ("f" . world-cup-consult-fixture)
+    ("g" . world-cup-game-reload)
+    ("?" . world-cup-game-menu)
+    ("q" . quit-window))
+  "Key bindings for `world-cup-game-mode'.")
 
 (defconst world-cup--summary-keys
   '(("TAB" . world-cup-summary-toggle-detail)
@@ -1235,11 +1448,13 @@ implicit button on a roster name."
 (world-cup--apply-keys world-cup-player-mode-map world-cup--player-keys)
 (world-cup--apply-keys world-cup-team-mode-map world-cup--team-keys)
 (world-cup--apply-keys world-cup-summary-mode-map world-cup--summary-keys)
+(world-cup--apply-keys world-cup-game-mode-map world-cup--game-keys)
 
 (with-eval-after-load 'evil
   (world-cup--evil-bind world-cup-player-mode-map world-cup--player-keys)
   (world-cup--evil-bind world-cup-team-mode-map world-cup--team-keys)
-  (world-cup--evil-bind world-cup-summary-mode-map world-cup--summary-keys))
+  (world-cup--evil-bind world-cup-summary-mode-map world-cup--summary-keys)
+  (world-cup--evil-bind world-cup-game-mode-map world-cup--game-keys))
 
 (provide 'world-cup)
 
