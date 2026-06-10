@@ -148,6 +148,60 @@ Sorted by match number."
             (equal (alist-get 'team_b_code m) code)))
       (world-cup-matches)))))
 
+;;;; Match times (convert the schedule's Eastern time to a display zone)
+
+(defcustom world-cup-display-time-zone "America/Los_Angeles"
+  "Time zone used to display match times.
+The schedule stores kickoff times in US Eastern time; they are converted to
+this zone for display.  The value is passed to `format-time-string' as ZONE:
+  - a zone name string such as \"America/Los_Angeles\" (Pacific, the default);
+  - t for the system local time zone;
+  - nil for UTC."
+  :type '(choice (string :tag "Zone name")
+                 (const :tag "System local" t)
+                 (const :tag "UTC" nil))
+  :group 'world-cup)
+
+(defconst world-cup--source-time-zone "America/New_York"
+  "Time zone in which the schedule's `time_et' values are expressed.")
+
+(defun world-cup--match-time (match)
+  "Return the absolute Lisp time of MATCH's kickoff, or nil.
+The stored date and `time_et' are interpreted in `world-cup--source-time-zone'."
+  (let ((date (alist-get 'date match))
+        (et (alist-get 'time_et match)))
+    (when (and (stringp date) (stringp et)
+               (string-match
+                "\\`\\([0-9]\\{4\\}\\)-\\([0-9]\\{2\\}\\)-\\([0-9]\\{2\\}\\)\\'" date))
+      (let ((y (string-to-number (match-string 1 date)))
+            (mo (string-to-number (match-string 2 date)))
+            (d (string-to-number (match-string 3 date))))
+        (when (string-match "\\`\\([0-9]\\{1,2\\}\\):\\([0-9]\\{2\\}\\)\\'" et)
+          (let ((h (string-to-number (match-string 1 et)))
+                (mi (string-to-number (match-string 2 et))))
+            (encode-time
+             (list 0 mi h d mo y nil -1 world-cup--source-time-zone))))))))
+
+(defun world-cup--local-time (match)
+  "Return MATCH's kickoff time HH:MM in `world-cup-display-time-zone'."
+  (let ((time (world-cup--match-time match)))
+    (if time
+        (format-time-string "%H:%M" time world-cup-display-time-zone)
+      (or (alist-get 'time_et match) "?"))))
+
+(defun world-cup--local-date (match)
+  "Return MATCH's date YYYY-MM-DD in `world-cup-display-time-zone'."
+  (let ((time (world-cup--match-time match)))
+    (if time
+        (format-time-string "%Y-%m-%d" time world-cup-display-time-zone)
+      (or (alist-get 'date match) "?"))))
+
+(defun world-cup--tz-abbrev (&optional match)
+  "Return the display zone abbreviation (e.g. PDT) for MATCH, or for now."
+  (format-time-string "%Z"
+                      (or (and match (world-cup--match-time match)) (current-time))
+                      world-cup-display-time-zone))
+
 ;;;; Position faces / sorting
 
 (defun world-cup--pos-face (pos)
@@ -832,8 +886,8 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                (label (if grp (format "Grp %s" grp)
                         (or (alist-get 'stage match) "")))
                (line (format "  %s %5s  %-7s  %s %-24s  %s"
-                             (alist-get 'date match)
-                             (alist-get 'time_et match)
+                             (world-cup--local-date match)
+                             (world-cup--local-time match)
                              label
                              (if home-p "vs" "@ ")
                              (propertize (world-cup--pad opp 24)
@@ -861,7 +915,8 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                               'face 'font-lock-comment-face))
         (insert (propertize
                  (format "  %-10s %5s  %-7s  %-27s  %s\n"
-                         "Date" "ET" "Stage" "Opponent" "Venue")
+                         "Date" (world-cup--tz-abbrev (car matches))
+                         "Stage" "Opponent" "Venue")
                  'face 'font-lock-comment-face))
         (dolist (m matches)
           (world-cup--insert-fixture team m)))
@@ -1217,10 +1272,11 @@ implicit button on a roster name."
                   (cons "Stage" (let ((g (alist-get 'group m)))
                                   (if g (format "Group %s" g)
                                     (or (alist-get 'stage m) "?"))))
-                  (cons "Date" (or (alist-get 'date m) "?"))
-                  (cons "Kickoff" (format "%s ET   (%s local)"
-                                          (alist-get 'time_et m)
-                                          (alist-get 'time_local m)))
+                  (cons "Date" (world-cup--local-date m))
+                  (cons "Kickoff" (format "%s %s   (%s ET)"
+                                          (world-cup--local-time m)
+                                          (world-cup--tz-abbrev m)
+                                          (alist-get 'time_et m)))
                   (cons "Home" (if ac (format "%s [%s]" a ac) a))
                   (cons "Away" (if bc (format "%s [%s]" b bc) b))
                   (cons "Venue" (or (alist-get 'venue m) "?"))
@@ -1306,8 +1362,8 @@ implicit button on a roster name."
                           (alist-get 'match_number m)
                           (world-cup--pad (alist-get 'team_a m) 22)
                           (world-cup--pad (alist-get 'team_b m) 22)
-                          (alist-get 'date m)
-                          (alist-get 'time_et m)
+                          (world-cup--local-date m)
+                          (world-cup--local-time m)
                           (world-cup--match-label m))
                   m))
           (world-cup-matches)))
@@ -1341,6 +1397,115 @@ implicit button on a roster name."
     (when m
       (world-cup-display-game m))))
 
+;;;; Dashboard (group standings)
+
+(defib world-cup-team-button ()
+  "Hyperbole implicit button: a team name; opens that team's page.
+The text carries a `world-cup-team-ref' property (the team alist) placed
+by renderers such as the dashboard."
+  (let ((team (get-text-property (point) 'world-cup-team-ref)))
+    (when team
+      (let* ((pos (point))
+             (start (if (and (> pos (point-min))
+                             (get-text-property (1- pos) 'world-cup-team-ref))
+                        (previous-single-property-change pos 'world-cup-team-ref)
+                      pos))
+             (end (or (next-single-property-change pos 'world-cup-team-ref)
+                      (point-max))))
+        (ibut:label-set (world-cup-team-name team) start end)
+        (hact 'world-cup-display-team team)))))
+
+(defun world-cup--groups ()
+  "Return an alist (GROUP-LETTER . (TEAM ...)) derived from the schedule.
+Groups are sorted A..L; teams within a group are sorted by name."
+  (let ((table (make-hash-table :test 'equal))
+        (order nil))
+    (dolist (m (world-cup-matches))
+      (let ((g (alist-get 'group m))
+            (a (alist-get 'team_a_code m))
+            (b (alist-get 'team_b_code m)))
+        (when (and g a b)
+          (unless (member g order) (push g order))
+          (dolist (code (list a b))
+            (puthash g (cons code (gethash g table)) table)))))
+    (mapcar
+     (lambda (g)
+       (cons g
+             (sort (delq nil (mapcar #'world-cup--find-team-by-code
+                                     (delete-dups (gethash g table))))
+                   (lambda (x y) (string< (world-cup-team-name x)
+                                          (world-cup-team-name y))))))
+     (sort order #'string<))))
+
+(defvar world-cup-dashboard-mode-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map magit-section-mode-map)
+    map)
+  "Keymap for `world-cup-dashboard-mode'.")
+
+(define-derived-mode world-cup-dashboard-mode magit-section-mode "WC-Dashboard"
+  "Major mode for the World Cup dashboard / group standings.")
+
+(defun world-cup-dashboard--insert-team-row (team)
+  "Insert a standings row for TEAM (a team-name button + zeroed stats)."
+  (insert "  ")
+  (insert (propertize
+           (world-cup--pad (format "%s (%s)"
+                                   (world-cup-team-name team)
+                                   (world-cup-team-code team))
+                           28)
+           'world-cup-team-ref team
+           'face 'world-cup-player-link
+           'help-echo "Action key: open team page"))
+  ;; No games played yet, so every figure is zero.
+  (insert (format " %3d %3d %3d %3d %3d %3d %4d %4d\n" 0 0 0 0 0 0 0 0)))
+
+(defun world-cup-dashboard--insert-group (letter teams)
+  "Insert a foldable standings table for group LETTER with TEAMS."
+  (magit-insert-section (world-cup-group letter)
+    (magit-insert-heading
+      (propertize (format "Group %s" letter) 'face 'magit-section-heading))
+    (insert "  "
+            (propertize (format "%-28s %3s %3s %3s %3s %3s %3s %4s %4s"
+                                "Team" "MP" "W" "D" "L" "GF" "GA" "GD" "Pts")
+                        'face 'font-lock-comment-face)
+            "\n")
+    (dolist (team teams)
+      (world-cup-dashboard--insert-team-row team))
+    (insert "\n")))
+
+(defun world-cup-dashboard--render ()
+  "Render the dashboard buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (magit-insert-section (world-cup-dashboard)
+      (insert (propertize " FIFA World Cup 2026 \u2014 Group Standings"
+                          'face 'world-cup-summary-title)
+              "\n"
+              (propertize " Press ? for actions" 'face 'font-lock-comment-face)
+              "\n\n")
+      (dolist (entry (world-cup--groups))
+        (world-cup-dashboard--insert-group (car entry) (cdr entry))))
+    (goto-char (point-min))))
+
+(defun world-cup-dashboard-revert ()
+  "Reload data and re-render the dashboard."
+  (interactive)
+  (world-cup-load-data t)
+  (when (derived-mode-p 'world-cup-dashboard-mode)
+    (world-cup-dashboard--render)))
+
+;;;###autoload
+(defun world-cup-dashboard ()
+  "Open the World Cup dashboard showing group standings.
+Team names are buttons that open the corresponding team page."
+  (interactive)
+  (let ((buf (get-buffer-create "*World Cup Dashboard*")))
+    (with-current-buffer buf
+      (world-cup-dashboard-mode)
+      (world-cup-dashboard--render))
+    (pop-to-buffer buf)))
+
 ;;;; Transient menus (press ? in each buffer)
 
 (transient-define-prefix world-cup-player-menu ()
@@ -1362,6 +1527,16 @@ implicit button on a roster name."
     ("p" "Find player\u2026"      world-cup-consult-player)
     ("f" "Find game\u2026"        world-cup-consult-fixture)
     ("g" "Reload"                world-cup-team-revert)]
+   ["Buffer"
+    ("q" "Quit" quit-window)]])
+
+(transient-define-prefix world-cup-dashboard-menu ()
+  "Actions for the World Cup dashboard."
+  [["Browse"
+    ("t" "Find team\u2026"   world-cup-consult-team)
+    ("p" "Find player\u2026" world-cup-consult-player)
+    ("f" "Find game\u2026"   world-cup-consult-fixture)
+    ("g" "Reload"           world-cup-dashboard-revert)]
    ["Buffer"
     ("q" "Quit" quit-window)]])
 
@@ -1432,6 +1607,15 @@ implicit button on a roster name."
     ("q" . quit-window))
   "Key bindings for `world-cup-summary-mode'.")
 
+(defconst world-cup--dashboard-keys
+  '(("g" . world-cup-dashboard-revert)
+    ("t" . world-cup-consult-team)
+    ("p" . world-cup-consult-player)
+    ("f" . world-cup-consult-fixture)
+    ("?" . world-cup-dashboard-menu)
+    ("q" . quit-window))
+  "Key bindings for `world-cup-dashboard-mode'.")
+
 (defun world-cup--apply-keys (map bindings)
   "Bind BINDINGS (alist of KEY . COMMAND) into MAP with `define-key'."
   (dolist (b bindings)
@@ -1449,12 +1633,14 @@ implicit button on a roster name."
 (world-cup--apply-keys world-cup-team-mode-map world-cup--team-keys)
 (world-cup--apply-keys world-cup-summary-mode-map world-cup--summary-keys)
 (world-cup--apply-keys world-cup-game-mode-map world-cup--game-keys)
+(world-cup--apply-keys world-cup-dashboard-mode-map world-cup--dashboard-keys)
 
 (with-eval-after-load 'evil
   (world-cup--evil-bind world-cup-player-mode-map world-cup--player-keys)
   (world-cup--evil-bind world-cup-team-mode-map world-cup--team-keys)
   (world-cup--evil-bind world-cup-summary-mode-map world-cup--summary-keys)
-  (world-cup--evil-bind world-cup-game-mode-map world-cup--game-keys))
+  (world-cup--evil-bind world-cup-game-mode-map world-cup--game-keys)
+  (world-cup--evil-bind world-cup-dashboard-mode-map world-cup--dashboard-keys))
 
 (provide 'world-cup)
 
