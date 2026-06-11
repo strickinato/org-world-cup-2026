@@ -52,11 +52,6 @@
   :type 'string
   :group 'world-cup)
 
-(defcustom world-cup-summaries-file "world-cup-2026-team-summaries.json"
-  "Name of the one-sentence team summaries JSON inside `world-cup-data-directory'."
-  :type 'string
-  :group 'world-cup)
-
 (defcustom world-cup-analysis-file "world-cup-2026-team-analysis.json"
   "Name of the team analysis JSON inside `world-cup-data-directory'."
   :type 'string
@@ -96,8 +91,9 @@
   "Face for a subtitle line beneath a title." :group 'world-cup-faces)
 
 (defface world-cup-heading
-  '((t :inherit magit-section-heading :underline t))
-  "Face for section headings." :group 'world-cup-faces)
+  '((t :inherit (outline-1 magit-section-heading) :weight bold :height 1.2 :overline t))
+  "Face for section headings (Analysis, Power Rankings, History, Fixtures, Squad)."
+  :group 'world-cup-faces)
 
 (defface world-cup-label
   '((t :inherit font-lock-keyword-face :weight bold))
@@ -150,7 +146,6 @@
 
 (defvar world-cup--teams nil "Cached list of team alists.")
 (defvar world-cup--matches nil "Cached list of match alists.")
-(defvar world-cup--summaries nil "Cached alist of CODE -> one-sentence summary.")
 (defvar world-cup--analysis nil "Cached alist of CODE -> analysis alist.")
 (defvar world-cup--fixture-notes nil "Cached alist of match-number -> note string.")
 (defvar world-cup--fox-rankings nil "Cached alist of CODE -> (NUMBER -> ranking alist).")
@@ -187,11 +182,6 @@
     (setq world-cup--matches
           (alist-get 'matches (world-cup--read-json
                               (world-cup--path world-cup-schedule-file)))))
-  (when (or force (null world-cup--summaries))
-    (let ((path (world-cup--path world-cup-summaries-file)))
-      (setq world-cup--summaries
-            (when (file-readable-p path)
-              (alist-get 'summaries (world-cup--read-json path))))))
   (when (or force (null world-cup--analysis))
     (let ((path (world-cup--path world-cup-analysis-file)))
       (setq world-cup--analysis
@@ -239,12 +229,6 @@
 (defun world-cup-team-coach-name (team)
   (let ((coach (alist-get 'coach team)))
     (and coach (alist-get 'name coach))))
-
-(defun world-cup-team-summary (team)
-  "Return the one-sentence summary for TEAM, or nil."
-  (world-cup-load-data)
-  (when-let ((code (world-cup-team-code team)))
-    (alist-get (intern code) world-cup--summaries)))
 
 (defun world-cup-team-analysis (team)
   "Return the analysis alist for TEAM, or nil."
@@ -412,6 +396,16 @@ Uses `consult--read' when available; otherwise `completing-read'."
   "Truncate or pad string S to WIDTH columns."
   (let ((s (or s "")))
     (truncate-string-to-width s width 0 ?\s)))
+
+(defun world-cup--heading (text)
+  "Insert TEXT as a `magit' section heading styled with `world-cup-heading'.
+`magit-insert-heading' doesn't preserve a face passed in the string, so the
+face is applied to the heading region afterwards."
+  (let ((beg (point)))
+    (magit-insert-heading text)
+    (add-face-text-property
+     beg (save-excursion (goto-char beg) (line-end-position))
+     'world-cup-heading)))
 
 ;;;; Wikipedia lookup (consult + EWW reader mode)
 
@@ -996,9 +990,7 @@ Interactively, prompt for the search string."
   "Insert the Squad section for TEAM."
   (let ((players (world-cup-team-players team)))
     (magit-insert-section (world-cup-roster)
-      (magit-insert-heading
-        (propertize (format "Squad (%d players)" (length players))
-                    'face 'world-cup-heading))
+      (world-cup--heading (format "Squad (%d players)" (length players)))
       (insert "  "
               (propertize
                (format "%-38s%-4s%-34s%-5s%-7s%s\n"
@@ -1074,9 +1066,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
   "Insert the Fixtures section for TEAM."
   (let ((matches (world-cup-team-matches team)))
     (magit-insert-section (world-cup-fixtures)
-      (magit-insert-heading
-        (propertize (format "Fixtures (%d)" (length matches))
-                    'face 'world-cup-heading))
+      (world-cup--heading (format "Fixtures (%d)" (length matches)))
       (if (null matches)
           (insert (propertize "  No scheduled matches found.\n"
                               'face 'world-cup-meta))
@@ -1119,17 +1109,9 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                                       (or (world-cup-team-coach-name team) "?"))
                               'face 'world-cup-meta)))
     (magit-insert-section (world-cup-team-root)
-      (when-let ((summary (world-cup-team-summary team)))
-        (insert (propertize "\u201c" 'face 'world-cup-meta))
-        (let ((start (point)))
-          (insert (propertize summary 'face 'world-cup-quote))
-          (insert (propertize "\u201d" 'face 'world-cup-meta))
-          (let ((fill-column 78) (left-margin 1))
-            (fill-region start (point))))
-        (insert "\n\n"))
-      (world-cup--insert-history team)
       (world-cup--insert-analysis team)
       (world-cup--insert-power-rankings team)
+      (world-cup--insert-history team)
       (world-cup--insert-fixtures team)
       (world-cup--insert-roster team))
     (goto-char (point-min))))
@@ -1168,18 +1150,18 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                 (format "last: %d (%s)" last-y last-r)
               "first World Cup")
             parts)
-      (insert " "
-              (propertize "World Cup history: " 'face 'world-cup-label)
-              (propertize (mapconcat #'identity (nreverse parts) "  \u00b7  ")
-                          'face 'world-cup-meta)
-              "\n\n"))))
+      (magit-insert-section (world-cup-history)
+        (world-cup--heading "History")
+        (insert "  "
+                (propertize (mapconcat #'identity (nreverse parts) "  \u00b7  ")
+                            'face 'world-cup-meta)
+                "\n\n")))))
 
 (defun world-cup--insert-analysis (team)
   "Insert the foldable Analysis section for TEAM, if available."
   (when-let ((a (world-cup-team-analysis team)))
     (magit-insert-section (world-cup-analysis)
-      (magit-insert-heading
-        (propertize "Analysis" 'face 'world-cup-heading))
+      (world-cup--heading "Analysis")
       (world-cup--insert-analysis-field "Narrative" (alist-get 'narrative a))
       (world-cup--insert-analysis-field "Key players" (alist-get 'key_players a))
       (world-cup--insert-analysis-field "Hinges on" (alist-get 'hinges_on a))
@@ -1201,10 +1183,9 @@ Each source is its own collapsible sub-section (TAB toggles the write-up)."
     (let* ((ranks (mapcar (lambda (r) (alist-get 'rank r)) prs))
            (avg (/ (apply #'+ ranks) (float (length ranks)))))
       (magit-insert-section (world-cup-power-rankings)
-        (magit-insert-heading
-          (propertize (format "Power Rankings  (avg #%.1f across %d sources)"
-                              avg (length prs))
-                      'face 'world-cup-heading))
+        (world-cup--heading
+         (format "Power Rankings  (avg #%.1f across %d sources)"
+                 avg (length prs)))
         (dolist (r prs)
           ;; Trailing t => each source's write-up starts collapsed.
           (magit-insert-section (world-cup-power-rank r t)
@@ -1748,8 +1729,7 @@ Groups are sorted A..L; teams within a group are sorted by name."
 (defun world-cup-dashboard--insert-group (letter teams)
   "Insert a foldable standings table for group LETTER with TEAMS."
   (magit-insert-section (world-cup-group letter)
-    (magit-insert-heading
-      (propertize (format "Group %s" letter) 'face 'world-cup-heading))
+    (world-cup--heading (format "Group %s" letter))
     (insert "  "
             (propertize (format "%-28s %3s %3s %3s %3s %3s %3s %4s %4s"
                                 "Team" "MP" "W" "D" "L" "GF" "GA" "GD" "Pts")
