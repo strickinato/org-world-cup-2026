@@ -1,0 +1,1402 @@
+{
+ "name": "FIFA World Cup 2026 team power rankings",
+ "sources": [
+  {
+   "name": "FOX Sports (Alexi Lalas)",
+   "url": "https://www.foxsports.com/stories/soccer/2026-world-cup-power-rankings-alexi-lalas"
+  },
+  {
+   "name": "USA Today",
+   "url": "https://www.usatoday.com/story/sports/soccer/worldcup/2026/06/01/2026-world-cup-power-rankings-odds/90315534007/"
+  },
+  {
+   "name": "Bleacher Report",
+   "url": "https://bleacherreport.com/articles/25434991-final-power-ranking-all-48-teams-2026-world-cup"
+  },
+  {
+   "name": "The Guardian",
+   "url": "https://www.theguardian.com/football/2026/apr/01/guardian-power-rankings-france-senegal-japan-top-10-world-cup-2026"
+  },
+  {
+   "name": "The Athletic (NYT)",
+   "url": "https://www.nytimes.com/athletic/7162043/2026/04/01/world-cup-48-teams-rankings/"
+  },
+  {
+   "name": "ESPN FC (panel, top 15)",
+   "url": "https://www.espn.com/soccer/story/_/id/49001555/fifa-world-cup-power-rankings-spain-brazil-germany-england-argentina"
+  }
+ ],
+ "rankings": {
+  "BEL": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 11,
+    "description": "Belgium was drawn into an easy group (Egypt, Iran and New Zealand), so advancing from there won't be a problem. The sum of the Belgians' parts will dictate whether they're a contender in the knockout rounds, though."
+   },
+   {
+    "source": "USA Today",
+    "rank": 11,
+    "description": "Jeremy Doku tortured the United States and Mexico during the March window and with Kevin De Bryune and Youri Tielemans operating behind him, it's a Belgian team that once again looks like they could make a run."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 12,
+    "description": "Belgium has been undefeated since March 21, 2025, and Rudi Garcia deserves a great deal of credit for improving the Red Devils' fortunes. The team's last defeat came in his first game in charge, but since then, it's nine wins from 13, with 45 goals scored and just 10 conceded. This should be the final time we see some members of Belgium's previous Golden Generation line up on the World Cup stage, including Thibaut Courtois, Kevin De Bruyne, Axel Witsel, Thomas Meunier and Romelu Lukaku. They have the opportunity to go out with a bang, though, with Group G a fairly straightforward proposition. With a deep run, there's every chance a new generation of outstanding Belgian football is crowned under the guidance of Garcia."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 7,
+    "description": "The Red Devils went to North America to play against two of the World Cup hosts. With a 5-2 victory against the USA and a 1-1 draw against Mexico, the results were OK, but certainly left room for improvement. Scoring five goals in any international is good, especially if you are without your best goalscorer (Romelu Lukaku) and players such as Benfica’s Dodi Lukébakio certainly stepped up in his absence. Belgium still need Lukaku though. On the negative side Belgium once again conceded from set pieces and that is something that needs to be sorted before the tournament. Kevin De Bruyne also seemed a little irritated in the buildup against Mexico, but at least that shows he is still very motivated to perform for his country. David Van den Broeck, Het Nieuwsblad"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 13,
+    "description": "With their golden generation either gone or lingering on (this will surely be 34-year-old Kevin De Bruyne’s last World Cup) Belgium remain a work in progress, nowhere near their FIFA-ranking glory days (you’ll never sing that, etc), but capable of causing damage, even just via the fast-emerging potential world star that is Jeremy Doku."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 11,
+    "description": "Our voters weren't super bullish on the Belgians, and with good reason as their golden generation of stars is now looking rather rusty and unpredictable. Kevin De Bruyne has lost a step or two as their primary creator from midfield, while Romelu Lukaku isn't the dominant No. 9 he once was -- with just seven games all season at Napoli thanks to myriad injuries, it's unknown if he'll even start -- and their defense looks like a genuine work-in-progress in front of stalwart shot-stopper Thibaut Courtois. (Their qualifying campaign, with just five wins from eight games against Wales, Kazakhstan, North Macedonia and Liechtenstein, also flattered to deceive.) If Belgium are to make a dent at this 48-team footy fiesta, they'll need others to fill in the gaps: don't look past wingers Jérémy Doku (fresh off a super season for Man City) and Leandro Trossard (a Premier League title winner with Arsenal) in that regard. There are opportunities for midfield duo Youri Tielemans and Charles De Ketelaere to make their mark as the stars of Belgium's next wave, too."
+   }
+  ],
+  "NZL": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 43,
+    "description": "The Kiwis qualified directly from the Oceania region, which is the weakest confederation in international soccer. I'll leave it at that."
+   },
+   {
+    "source": "USA Today",
+    "rank": 44,
+    "description": "Though they were defensively stout, results in 2025 were not positive for Darren Bazeley's squad, which will also have to prove it can defend against top teams."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 40,
+    "description": "Heading into the third World Cup in New Zealand's history, perhaps it will be a case of third time lucky as the All Whites' bid for a first win at the tournament. Boosting those hopes is Chris Wood, who has worked hard to recover from a knee injury that kept him out of the majority of Nottingham Forest's 2025-26 season. He helped the club avoid relegation and even put them 90 minutes away from a Europa League final, only for Aston Villa to burst his bubble in the second leg. However, while he appeared in both pre-World Cup friendlies, he didn't make an impact in either. In fact, even though he missed four games with injury, he has scored just once at the international level since March 2025. More troublingly, New Zealand has won just once since June 2025. None of this bodes well."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 41,
+    "description": "The All Whites will be buoyed up by their first win over a South American team after an unexpected 4-1 victory over Chile, which also turned around a three-game losing streak. It means they head overseas to their first World Cup in 16 years with a skip in their step. It was a crucial turnaround after their disappointing 2-0 defeat against Finland in the first friendly. But against Chile, a reinvigorated New Zealand quickly got to work, pouncing after the opposition had been reduced to 10 men with two goals either side of half-time, managing to break down a higher-ranked opponent where they have previously come unstuck. Whether that stands up against top 10-ranked England in June is another matter. JK"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 40,
+    "description": "New Zealand are one of the biggest beneficiaries of an expanded World Cup, with Oceania receiving one direct qualification spot for the first time, helping them reach their first finals since 2010. Chris Wood was there in South Africa and he remains their star player and focal point. It might not be pretty, but they can get a result, shown by their 1-1 draw in Norway in October."
+   }
+  ],
+  "ESP": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 2,
+    "description": "This is not your parents' Spain, which won the Euros twice and the 2010 World Cup. It's better. The Spaniards won Euro 2024 and have not lost since March 2024 — plus, only twice since the start of 2023."
+   },
+   {
+    "source": "USA Today",
+    "rank": 1,
+    "description": "Getting a clean bill of health for Lamine Yamal would solidify this ranking, but the current European champions haven't lost in 28 matches - a streak that is impossible to ignore."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 2,
+    "description": "Ozan KOSE / AFP Spain, the long-time holders in B/R's World Cup power rankings, has slipped off its perch. Three draws in the last four games isn't exactly the form of potential champions, especially when those stalemates came against Iraq, Egypt and Turkiye. For perhaps the 1,000th time in this piece, I'll say that friendlies aren't a great indicator of true current form, especially when managing minutes to keep players fit for a tournament. But those results are still underwhelming, and this is the information we have to go on for now. Group H should be tackled with little fuss, and maybe then we'll start to see what the European champions can really do. As it stands, though, enthusiasm for a famous Spanish dynasty is dimming. That can change quickly, though, as soon as Lamine Yamal, Nico Williams, and Dani Olmo get the chance to rekindle their deadly forward triumvirate."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 2,
+    "description": "The European champions had to change their plans after the Finalissima against Argentina, due to be held in Qatar, was cancelled because of the war in the Middle East. Instead they played friendlies against Serbia (3-0 win) in Villarreal and Egypt in Barcelona (0-0). The latter was overshadowed by chants from Spain fans that police are investigating for Islamophobia and xenophobia and Lamine Yamal said: “To those who sing these things: using a religion as a form of mockery on a pitch shows you up as ignorant and racist.” On the pitch Luis de la Fuente’s team were surprisingly toothless against Egypt – despite having 25 attempts – while Mikel Oyarzabal scored two good goals against Serbia. One potential winner from this window? Víctor Muñoz, who scored Spain’s third on his debut against Serbia. Real Madrid sold the speedy 22-year-old winger (with a buy-back clause) to Osasuna last summer. Billy Munday"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 1,
+    "description": "It’s a little odd to think Spain weren’t really many people’s top choice to win the 2024 European Championship, but as the tournament progressed, it became clearer and clearer that they were the best team in Germany. Their incredible array of young, attacking talent is still maturing, which is pretty terrifying for everyone else. It will take some effort to stop them."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 1,
+    "description": "Our reporters and editors still have the most confidence in La Roja when it comes to who they favor in the expanded, 48-team field -- Spain picked up three more first-place votes than they managed at the 30-day mark -- which is impressive considering they do have a number of question marks around the squad. The biggest of those is, of course, the fitness of teenage superstar Lamine Yamal, who missed the last month of the 2025-26 club season with a torn hamstring and whose road back to match readiness is being carefully managed. Spain boss Luis de la Fuente left Yamal (along with winger Nico Williams and reserve forward Víctor Muñoz) behind at La Roja's base camp in Chattanooga, Tennessee, to continue rehabbing while the remainder of the squad headed to Puebla, Mexico, for the final World Cup tuneup game against Peru. De la Fuente is confident Yamal will be ready for their tournament opener, but it is likely to be a big TBD until matchday. Beyond Yamal, Spain must show that such turbulence hasn't impacted their preparations, with decisions to be made over who starts in goal (Unai Simón is the incumbent, albeit a wobbly one), who leads the attack (Mikel Oyarzabal or Ferran Torres?) and the competency of their central defenders, with none of the group (Pau Cubarsí, Aymeric Laporte, Eric García) looking especially impressive. It also remains to be seen how sharp key midfielder Rodri is following an up-and-down season with injuries, but Spain retain the top spot in our Power Rankings until someone else takes it. Last week's 1-1 draw with Egypt was concerning -- Spain generated just four scoring chances despite two-thirds of the ball, while Egypt scored with one of two shots on target -- but opening group play with their easiest game (on paper, anyway) should allow them to ease into the tournament."
+   }
+  ],
+  "CIV": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 35,
+    "description": "The Ivorians didn't qualify for either of the last two World Cups and have never made it out of the group stage. That will be a tough task this year in a group with Germany and Ecuador."
+   },
+   {
+    "source": "USA Today",
+    "rank": 23,
+    "description": "Manager Emerse Fae gets a few of the regulars who missed the African Cup of Nations back, and the March window went well. The group opener against Ecuador is crucial."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 19,
+    "description": "Ivory Coast's form heading into the World Cup has been sensational. The Elephants have won three out of their last three against fellow tournament participants, Korea Republic, Scotland, and France. Look back a little further, and they've lost just two of their last 15 matches, winning 11 of them. They have a young squad packed with talent, and winger Yan Diomande will be looking to demonstrate exactly why some of the biggest clubs in the world are vying to grab him from RB Leipzig. Group E is a tricky one, but fearlessness could be the key to a knockout berth, and Ivory Coast has that trait coursing through the squad."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 14,
+    "description": "Morocco and Senegal are widely tipped to be the African teams that go furthest at the World Cup, and for good reason, as they are the most recent Afcon finalists. Yet Côte d’Ivoire are quietly emerging as serious contenders too, after impressive friendly wins over South Korea (4–0) and Scotland (1–0). Their main strength lies out wide, where Amad Diallo, Yan Diomandé, Nicolas Pépé and Simon Adingra combine pace, dribbling and end product. Defensive solidity is another key asset. The only real question is up front: who will lead the line? Emerse Faé has brought in Elye Wahi as a potential solution, and the former Marseille striker could be the missing piece for Les Éléphants. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 20,
+    "description": "Surprisingly, for the nation that has brought us Didier Drogba and Yaya Toure, Ivory Coast have never made it out of the group stage at a World Cup. Their prospects of winning the whole thing are slim, but they were unbeaten in qualifying and won AFCON on home soil two years ago."
+   }
+  ],
+  "GHA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 28,
+    "description": "Ghana will have a young and inexperienced squad this summer. It's more of a project capable of making more noise in four years instead of now."
+   },
+   {
+    "source": "USA Today",
+    "rank": 26,
+    "description": "The decision to bring in Carlos Queiroz will certainly lead to a certain style of soccer. It won't be fun to watch for neutrals, but perhaps it will suit a Ghana squad far too leaky at the back in the pre-tournament friendly matches."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 38,
+    "description": "To be fair to Ghana, there has been no shrinking in preparation for the big stage. Warm-up matches have come against Germany, Mexico, Austria and Wales, and while no wins and just one draw came from those matches, it's still a good idea to be tested against quality opposition. However, just three goals scored and 10 conceded in those games doesn't look promising heading into North America. While the heyday of Ghana's international team looks a long way in the past, Antoine Semenyo offers true star quality and could make his presence felt. However, he alone won't be able to compete with England, Croatia and Panama."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 37,
+    "description": "The Ghanaian Federation sacked coach Otto Addo just 72 days before the World Cup. There was no explanation given, but there was none really needed. Under his watch, the Black Stars looked blunt, lacking urgency despite clear potential. Local reports suggest the FA has sounded out the former Morocco coach Walid Regragui as a possible replacement. Whoever takes charge inherits a squad with quality: Antoine Semenyo, Jordan Ayew and Thomas Partey are the pillars of this team. However, Ghana also feel far removed from the dynamism of 2010, when they came within moments of reaching the World Cup semi-finals. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 26,
+    "description": "Any team that contains Mohammed Kudus and Antoine Semenyo should be worth the admission fee alone (although not at FIFA prices, obviously), but Ghana can be inconsistent (they didn’t even qualify for this year’s AFCON), and sacking manager Otto Addo after the recent international friendlies tells you not all is well. Still, they are one of several nations who, with momentum, could go on a bit of a run."
+   }
+  ],
+  "NED": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 8,
+    "description": "While the Dutch have a strong team, it's not quite ready for prime time to truly compete with the top-tiered teams. There is quality around the field in this team, but the Netherlands isn't among the favorites."
+   },
+   {
+    "source": "USA Today",
+    "rank": 5,
+    "description": "The Netherlands has lost once since exiting Euro 2024 in the semifinals, with its reliable back line shutting teams down. Memphis Depay is a wild card, but if he gets hot things could go very well."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 8,
+    "description": "The Netherlands has faced a couple of significant setbacks in recent months. First, Xavi Simons ruptured the ACL in his right knee in April, ruling him out of the tournament and for a long time after. Then, the Oranje fell to a 1-0 friendly defeat to Algeria at the start of June. While it was only a friendly and the team went through wholesale changes at halftime, it wasn't an ideal result with the tournament on the doorstep. That's given them a somewhat harsh drop in the power rankings, although they will be keen to treat the result as just a blip in the warm-up for the real action—a 2-1 win over Uzbekistan was not comprehensive, but it did at least improve the mood. Not all hope is lost, of course, but in a difficult Group F in which every point will be crucial, a bump to confidence isn't ideal."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 13,
+    "description": "The coach, Ronald Koeman, now has to pick up the pieces after two pretty wild matches against Norway (2-1 win) and Ecuador (1-1). Koeman’s No 1 striker, Memphis Depay, missed the two games with injury and the coach is unsure whether the Corinthians forward will be fit for the World Cup. “You need to play matches before the World Cup. During the last World Cup [in Qatar] there was a lack of fitness too,’’ Koeman warned. The Dutch are also sweating on the fitness of Frenkie de Jong and the replacements – Sunderland’s Brian Brobbey and Tottenham’s Xavi Simons – did not impress. The Oranje created a lot of chances against a Norway side without Erling Haaland and Martin Ødegaard but failed to convert most of them. Denzel Dumfries was then sent off against Ecuador after 12 minutes, leading to a disastrous home performance with several second-string players unable to impress. Marcel van der Kraan, De Telegraaf"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 5,
+    "description": "It almost feels like the Netherlands having an incredibly strong team has snuck up on us. They have reached the latter stages at tournaments in recent years without ever really having a group of players you could get excited about, but not anymore. Liverpool captain Virgil van Dijk is the experienced outlier, but the rest are all in their mid-twenties and maturing at the same time. Expect big things."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 8,
+    "description": "Speaking of question marks, the Dutch rank highly among our voters due to their apparent inevitability in major tournaments. No matter how much they're ruled out by pundits and voters alike, they always seem to find another gear in the spotlight: Argentina needed penalties to finish them off in 2022 en route to winning the title, while England needed an injury-time goal to beat them in the Euro 2024 semifinal. Even with that pesky pedigree, this team look tired and in need of a refresh after this summer. Manager Ronald Koeman's contract expires after the World Cup and there has been little talk of a renewal, while talismanic 34-year-old defender Virgil van Dijk is coming off a tough season with Liverpool in which he played every single minute of their 38-game Premier League campaign. There's no dominant scorer among the forwards -- Memphis Depay, Cody Gakpo and Brian Brobbey are far from automatic in front of goal -- and it remains to be seen whether midfielder Frenkie de Jong and right back Denzel Dumfries can provide the added quality after up-and-down domestic seasons. Arsenal defender Jurriën Timber was scratched from the Oranje squad with injury, and goalkeeper Bart Verbruggen will be a fitness concern after landing awkwardly in their final warmup game. All that said, if Netherlands can escape a tricky group stage, you wouldn't bet against them to reach the quarterfinals or more depending on the draw, because few teams are as collectively committed to one another."
+   }
+  ],
+  "CAN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 22,
+    "description": "Canada avoided Italy after Bosnia and Herzegovina's upset in qualifying in late March, but be careful what you wish for. The Canadians have more talent than ever, but it won't be smooth sailing for them this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 21,
+    "description": "The North American co-hosts would be much higher if Jesse Marsch could have confidence his team is fully fit. As it stands, too many key players ended the season with their clubs on the injury report to feel great about a deep run."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 25,
+    "description": "Canada has tasted defeat just twice since July 2025, which is near-perfect preparation for co-hosting the 2026 World Cup. While no recent games have been against truly head-turning opposition, with 46th-ranked Tunisia the best of the last six opponents, it's still a solid record that puts them in good stead for the festivities. CHARLY TRIBALLEAU / AFP Qualifying in second in Group B, behind Switzerland, still looks entirely realistic, with Bosnia not offering much and Qatar suffering under the weight of geopolitical tensions. A disappointing season from Jonathan David isn't ideal, though, with the 26-year-old managing just one Serie A goal for Juventus from February 2 until the end of the season. Meanwhile, Alphonso Davies' fitness remains in question, which will leave the Maple Leafs without true top-level talent."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 31,
+    "description": "Two draws – 2-2 against Iceland and 0-0 against Tunisia – were decent enough on the face of it, but the first of those was the most instructive. The Canadians went down 2-0 to Iceland before looking much better in the second half as two Jonathan David penalties evened the score. Then, Tajon Buchanan’s red card stopped all momentum – the third straight game Canada have finished with 10 men. The big worry, though, is the health of Alphonso Davies. The Bayern Munich star missed this window with a hamstring strain, and he’s an unquestioned ceiling-raiser. AA"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 30,
+    "description": "There were high hopes for Canada in 2022, but they crashed out with three defeats. This time, with home advantage, Jonathan David up front, Alphonso Davies helping pull the strings (assuming he is fit) and manager Jesse Marsch turning them into a more aggressive, direct outfit, Canada should do better. And while they will be second favourites to Switzerland in their group, they will still fancy their chances of qualifying."
+   }
+  ],
+  "MAR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 13,
+    "description": "Everyone's darling from 2022 is no longer a surprise. Morocco is not going to sneak up on opposition this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 19,
+    "description": "The AFCON champions on paper, the performances during the tournament weren't all that convincing. Plus, a new manager leading the way after Walid Regragui left in March will have to work quickly to have any hope of replicating 2022's magic."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 7,
+    "description": "The (albeit disputed) Africa Cup of Nations holders are the best team among the continent's representatives at the competition. Among a clutch of impressive results, Morocco managed to keep Norway's Erling Haaland quiet for 72 minutes in a June friendly, which will undoubtedly lift spirits for what the unit can achieve in North America. With a formidable Brazil attack waiting in Group C, that defensive test was certainly welcome. Captain Achraf Hakimi has also added to his impressive trophy haul, grabbing his second Champions League title in two years. That winning mentality will hopefully spread among his teammates, who will want to take advantage of a winnable pool to get a more favorable knockout-round opponent. The Atlas Lions finished fourth in Qatar, and a podium finish might even be possible this time around."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 10,
+    "description": "On paper, Morocco are African champions, but on the pitch certainty is harder to find. Walid Regragui stepped down as head coach last month, believing he had failed to win the 2025 Afcon, only for Caf to overturn the result a few weeks later. Since then, attention has quickly shifted to his successor, Mohamed Ouahbi, who is fresh from leading Morocco Under-20s to the 2025 World Cup title. Early signs have been encouraging: March friendlies against Ecuador and Paraguay eased concerns about continuity and Ouahbi’s Atlas Lions appear more ambitious, moving away from Regragui’s pragmatic approach built on defensive solidity and set pieces. The lingering question remains: which style is better suited for success at the World Cup? MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 11,
+    "description": "A fascinating case. A lot has happened since we initially compiled these rankings in December: Morocco hosted the Africa Cup of Nations (AFCON), initially lost the final, sacked manager Walid Regragui, but 57 days later were awarded the title anyway after Senegal’s protest against refereeing decisions. That they’re technically African champions, for now, doesn’t change our opinion that the FIFA rankings slightly overrate their chances, but you can’t argue with their semi-final appearance four years ago and their squad still being very strong."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 9,
+    "description": "If world-class fullback Achraf Hakimi is fully fit after missing several big games down the stretch for club team Paris Saint-Germain, Morocco will be feeling a lot better about their chances of building on their 2022 semifinal run and 2025 Africa Cup of Nations performance. However, so much has changed in recent months beside Hakimi's fitness -- namely the man on the sideline. Out went Walid Regragui in March, replaced hastily by the former under-20s boss Mohamed Ouahbi. He at least knows what this squad is capable of, having coached many of them in the past, and he also has tournament experience having won the U20 World Cup title in 2025. His team won't concede much thanks to a robust 4-1-4-1 formation that dares teams to try to play through the defensive lines, but Hakimi will need to connect early and often with playmakers Brahim Díaz, Bilal El Khannouss and Ismael Saibari if the team is to score enough goals to truly threaten."
+   }
+  ],
+  "URU": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 15,
+    "description": "Uruguay's golden generation, which was led by strikers Luis Suárez and Edinson Cavani, has given way to a bronze-ish generation. That doesn't mean this team will be a pushover, though."
+   },
+   {
+    "source": "USA Today",
+    "rank": 20,
+    "description": "A team that almost always pulls in the same direction experienced some dissent, but Marcelo Bielsa still brings a talented group back to North America after their third-place finish at the 2024 Copa América."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 20,
+    "description": "In an unusual strategy, Uruguay has not played any friendlies since March, which might not be the best preparation for the tournament. While that does provide more time on the training ground for Marcelo Bielsa to explain his intricate tactics, it means the players won't be going in with much match fitness. The lack of pitch time might not be so concerning if recent form wasn't so poor, but La Celeste have not won in their last four. As with most Uruguay teams, though, trying to understand what's going on is probably a waste of time. Reports of volatile attitudes in the national team camp during qualifying seem more accurate after Real Madrid fined midfielder Federico Valverde for getting into a fight with teammate Aurélien Tchouaméni. When Group H action starts, everything might fall into place. Or it could be a train wreck. Honestly, who knows?"
+   },
+   {
+    "source": "The Guardian",
+    "rank": 25,
+    "description": "Marcelo Bielsa steadied the ship following the damaging 5-1 defeat against USA in November with two draws in this window, 1-1 against England and 0-0 against Algeria. There was plenty of good news. Fernando Muslera returned in goal after four years away. Agustín Canobbio was also back after two years and was one of Uruguay’s standout players. Federico Valverde was praised for his work rate and Maximiliano Araújo for his performance against Algeria. The team’s defensive work was praised by the media while attacking play and goalscoring remain areas that need improving. Luis Inzaurralde, El Observador"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 12,
+    "description": "As preparation goes, losing 5-1 to the United States in a November friendly (admittedly missing some key players) with a couple of stodgy draws since is not ideal, nor is Marcelo Bielsa calling a press conference to confirm he won’t be resigning. But they qualified with relative ease, beating Argentina and Brazil (twice) along the way. They must surely perform better than last time, when they slunk out embarrassingly in the group stage."
+   }
+  ],
+  "SWE": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 25,
+    "description": "Sweden didn't win a single game in UEFA qualifying but made it to the playoff round thanks to its success in the UEFA Nations League. The Swedes made it to the World Cup thanks to impressive wins in March over Ukraine and Poland."
+   },
+   {
+    "source": "USA Today",
+    "rank": 28,
+    "description": "Which Sweden is the real team? The one that slumped to a last-place spot in World Cup qualification? Or the one that made relatively work of Ukraine and Poland in the playoff to get here behind a player like Viktor Gyökeres?"
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 36,
+    "description": "Sweden's unique path to the World Cup will live long in the memory, relying on a Nations League Group C1 final win to give them one last chance at qualification, which they sealed in dramatic fashion. Things have looked more positive under manager Graham Potter, who has evenly split six games with two wins, two draws and two losses. He still has credit for that qualifying miracle, but there's been little to get enthused about since. In a really tough Group F that could be settled by the finest of margins, Sweden's luck has arguably run out, and they'll be looking up at the three-way battle for the knockouts."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 26,
+    "description": "“We weren’t perfect but who cares?” Graham Potter said after Sweden had beaten Poland 3-2 to reach the World Cup despite not winning a single game in their initial qualifying group. As good as they had been against Ukraine in the semi-final playoff last Thursday, they were as poor against Robert Lewandowski and co. Viktor Gyökeres scored four across the two games, including an 88th-minute winner against the Poles, and there was a hugely encouraging substitute appearance from Lucas Bergvall. Alexander Isak should be fit for the finals and Dejan Kulusevski says he will be too. The Sweden captain has not played since May but joined up with the squad and had tears in his eyes at the final whistle. “As long as I live I will give everything for Sweden,” he said. Marcus Christenson"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 33,
+    "description": "What to make of Sweden? Aside from Premier League strikers Alexander Isak and Viktor Gyokeres, this is a fairly average crop of talent, but is it ‘losing all your qualifiers so you have to rely on the Nations League back door to get into the play-offs’ average? Former Chelsea coach Graham Potter got them through the play-offs, and despite their previous record, you wonder if they might have enough to cause some problems now they’re actually through."
+   }
+  ],
+  "COD": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 39,
+    "description": "Congo DR is back in the World Cup after 52 years. Its reward: an opening match against Portugal. It will be hoping to channel Saudi Arabia's 2022 team, which opened the tournament with a shocking win over Argentina."
+   },
+   {
+    "source": "USA Today",
+    "rank": 31,
+    "description": "The staunch defense will cause problems in their group, but even with a few top-level attackers, the scoring struggles can't be ignored."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 41,
+    "description": "After a last-minute win against Jamaica in their tournament-berth-clinching qualifier, Congo DR earned a 0-0 draw with Denmark, ranked 21st in the world by FIFA. It's not wise to glean too much from friendly results, especially with Denmark's players heading for a summer on the beach rather than at the World Cup. However, Congo DR will certainly focus on the positives, facing up against players like Rasmus Hojlund, Christian Eriksen, and Andreas Christensen and coming away unscathed. More committed sides await, with Portugal, Colombia and Uzbekistan lining up in Group K. But against Uzbekistan, at least a point, if not more, is possible."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 30,
+    "description": "Fifty-two years after their last appearance (as Zaire), the Democratic Republic of Congo are back at the World Cup. Much has changed globally, yet for the Central African nation much has stayed the same. Longstanding ethnic tensions linger, particularly in the eastern part of the country. Yet, the entire nation erupted in joy when the Burnley defender Axel Tuanzebe, born in war-scarred Bunia, scored the winner against Jamaica to seal qualification. “To get the winning goal for the country … this is what you dream about,” he said. On the pitch, concerns persist around scoring goals, but in these difficult times qualification carries a significance that transcends the tournament. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 43,
+    "description": "You can’t say they haven’t earned their place. They finished a close second behind Senegal in their qualification group, then slugged it out with Nigeria in the African play-offs, winning on penalties… which earned them a slot in an intercontinental play-off final, against Jamaica. They got through that thanks to a 1-0, extra-time win, and will be at their first World Cup in 52 years."
+   }
+  ],
+  "AUT": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 24,
+    "description": "The Austrians are back at the World Cup for the first time since 1998, and they're sneaky good. Powered by a strong midfield, Austria could give Argentina problems in"
+   },
+   {
+    "source": "USA Today",
+    "rank": 24,
+    "description": "Leaders David Alaba and Marko Arnautović are both past 30, but the veteran squad has been on fire ever since qualification was in the picture."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 22,
+    "description": "It's nine wins from 11 games since April for Austria, and Ralf Rangnick has the team under complete control. Relying on the strength of the collective, the 67-year-old has made his sides really difficult to break down, with just nine goals conceded since the start of 2025. That defensive mettle will be tested against Argentina, but against Algeria and Jordan, it will be plenty to keep Alexander Schlager's net safe while they go grab a goal or two. A knockout-round appearance is within grasp, something not achieved since 1978."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 17,
+    "description": "Ralf Rangnick was satisfied. “We did not choose these opponents by accident,” he said after Austria followed a 5-1 win over Ghana with a 1-0 victory over South Korea. With Jordan, Algeria and Argentina awaiting them at the World Cup, the reasoning was obvious: Africa and Asia, covered. Austria had spared themselves the playoff drama by drawing with Bosnia in November, sealing direct qualification for a first World Cup since 1998. There was fresh intrigue, too, as Paul Wanner and Carney Chukwuemeka were only cleared to represent Austria shortly before the camp and both made an immediate impression, especially against Ghana. This is already a team with a clear identity, one that is now being sharpened further. The key players are in form and the fight for places is on. Andreas Hagenauer, Der Standard"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 29,
+    "description": "Briefly emerged as an outside bet in Euro 2024 when topping a group containing France and the Netherlands, but then came unstuck against Turkey. Under Ralf ‘Red Bull’ Rangnick, expect vertical dynamism, plus attacking gems Christoph Baumgartner and Marcel Sabitzer. With a bit of luck, they could go far, but they were handed a very tough draw, which costs them a few places."
+   }
+  ],
+  "CZE": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 29,
+    "description": "Czechia thrives through set pieces, physicality and its size. Those tools will only get you so far against the best teams in the world."
+   },
+   {
+    "source": "USA Today",
+    "rank": 40,
+    "description": "The draw for our lowest-ranked European team is favorable, but they'll still need to muck things up and get a bit fortunate in front of goal to move on."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 26,
+    "description": "Czechia has won six of its last six games. While that sounds impressive, the stat loses its shine when you take a closer look. Two were penalty-shootout victories in World Cup qualifying playoffs, and the rest were against teams with an average FIFA ranking of 147. Even one was against the bottom-ranked side, San Marino, and Czechia only scraped by with a 1-0 win. So, looks can be deceiving. Czechia will struggle against higher-caliber teams, but with the path to the knockouts more forgiving in the 2026 tournament, it might still see a viable route."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 35,
+    "description": "The Czechs are back at a World Cup for the first time in 20 years but they certainly did it the hard way. Having lost to the Faroe Islands and finished second in their qualifying group behind Croatia, they beat Ireland and Denmark on penalties in their playoff games to reach the tournament. In fact, they were only four minutes plus added time away from going out against Ireland before Wolves’ Ladislav Krejci equalised. No wonder the coach, 74-year-old Miroslav Koubek, who was appointed in December, was emotional after the Denmark game. “ There isn’t exactly tears streaming down my face, but my eyes were definitely a little wet,” he said. “I am very happy.” MC"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 39,
+    "description": "Having reached only one World Cup since 1990, the Czech Republic might have been pessimistic about their chances in the play-offs, but got through both games on penalties, beating Ireland and then Denmark. Patrik Schick remains their most potent attacker, but there’s not much else to write home about."
+   }
+  ],
+  "KSA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 31,
+    "description": "Just 56 days before its first game of the tournament, Saudi Arabia moved on from manager Herve Renard. It's a bold move for a team that faces Uruguay and Spain in its first two games of the tournament."
+   },
+   {
+    "source": "USA Today",
+    "rank": 42,
+    "description": "A late managerial change rarely portends success, though March's friendlies didn't go well at all for the Green Falcons."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 42,
+    "description": "After going winless to start 2026, losing three consecutive games to Egypt, Serbia and Ecuador, Saudi Arabia finally grabbed a win against Puerto Rico in June. Manager Hervé Renard will try to build on that as quickly as possible, and luckily, he has shown he can do the business at the tournament before. The Frenchman orchestrated one of the biggest World Cup shocks in history when he guided the Green Falcons to a group stage win against eventual tournament winners Argentina in 2022. To achieve something similar this time around, he'll be looking to topple Spain, one of the tournament's front-runners. If he can do that, and grab a vital point or three against Cabo Verde, Saudi Arabia would surely reach the knockout rounds for the first time since 1994."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 46,
+    "description": "It is not a good sign when the federation denies that the coach has been fired midway through an international window but coach Hervé Renard was on shaky ground after a dismal 4-0 loss to Egypt in Jeddah on Friday. “It could have been 6-0 by half-time,” said Saeed al-Owairan, Saudi’s slaloming goalscoring hero of 1994. And you know it is bad when opposition pundits are complaining that the tests are too easy. A trip to Serbia looked daunting but then Abdullah al-Hamdan scored to give some hope before the hosts came back with, inevitably, former Al-Hilal striker Aleksandar Mitrovic heading home a late winner. No clean sheets in the last eight now and plenty of pressure on the coach who, some reports suggest, wants to leave anyway. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 32,
+    "description": "Saudi Arabia made heavy work of qualifying, with some truly unconvincing performances and results leading to Roberto Mancini’s dismissal in October 2024. In truth, they didn’t improve too much after Herve Renard returned — which may explain why, at the time of writing, reports suggest he is about to be sacked — but as they showed when they beat eventual champions Argentina under the Frenchman in one of the shocks of the 2022 World Cup, they are capable of producing some big results."
+   }
+  ],
+  "EGY": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 34,
+    "description": "Egypt has never won a World Cup game. That could change this summer with matches against Iran and New Zealand in the group stage."
+   },
+   {
+    "source": "USA Today",
+    "rank": 29,
+    "description": "The defense looks dialed in, but if Mo Salah doesn't score, then it often feels like no one will, which was the issue in AFCON defeats to Senegal in the semifinals and Nigeria in the third-place game."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 27,
+    "description": "As Mohamed Salah's previous blistering form continues to desert him, Egypt is perhaps less positive about its World Cup prospects. But, thankfully for the Pharaohs, a group that contains an Iran side in disarray and a struggling New Zealand squad still provides a chance of progression to the knockouts, and Salah might even recapture some of his best now that he needs to convince a club to offer him a big contract. It's never wise to rule out the Egyptian King on the biggest stages, though, and they don't come much bigger than the World Cup."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 19,
+    "description": "Egypt have some soul-searching to do before the World Cup. Their coach, Hossam Hassan, the nation’s greatest striker, would seem naturally inclined toward attacking football, yet at the 2025 Afcon, the Pharaohs often sat deep and relied on counterattacks, despite boasting more quality in attack than in defence. March friendlies against Saudi Arabia and Spain suggest a desire to balance both approaches, but many fans will hope Egypt leans into its strengths going forward. With Mohamed Salah, Omar Marmoush, Trezeguet, Zizo, Mohamed Mostafa and Emam Ashour, their attacking arsenal is too potent to be restrained. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 15,
+    "description": "One of the World Cup’s great enigmas. The seven-time AFCON winners have only ever qualified for the World Cup three times, one of which was 1934, and they have never actually won a match at the finals, going out in the first round in 1990 and 2018. This time, they will hope Mohamed Salah goes into the tournament at full fitness, and with a little more support around him, maybe they can improve on their miserable historical record."
+   }
+  ],
+  "JPN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 18,
+    "description": "Japan beat England at Wembley Stadium in London in late March. It was an impressive victory that saw the Japanese clean up on — and off — the field."
+   },
+   {
+    "source": "USA Today",
+    "rank": 15,
+    "description": "Japan will miss the injured Kaoru Mitoma, but there is still plenty of talent for a team that showed in qualification that it's the class of Asia."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 16,
+    "description": "Japan is no stranger to a \"dark horse\" label at a World Cup tournament, and the Samurai Blue are quietly stacking up results that could lead to yet another such designation. It's now six wins in six for Japan, with just two goals conceded. Among those wins are a 3-2 triumph against Brazil and a 1-0 victory against England. A solid defensive platform, impressive game management, an obvious capability to win against overmatched teams, and the mental strength to not get complacent against lower-ranked sides are all fantastic attributes to have in tournament football. Knockout qualification should be a formality, but they could even top Group F ahead of the Netherlands given the professionalism they have demonstrated heading into North America."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 8,
+    "description": "The past few days could not have gone better for Japan with the only potential downside that World Cup opponents will now see them as a greater threat. The Samurai Blue started their UK tour with a comfortable 1-0 win over Scotland in Glasgow. The win against England by the same scoreline was also deserved and historic as they became the first Asian team to beat the Three Lions. Much was made of England’s absences but Japan were without some of their biggest stars as well in Wataru Endo, Takumi Minamino, Takefusa Kubo and Takehiro Tomiyasu. A well-coached team and a dark horse that is looking more visible all the time. “I’m happy that we were able to win, but we still have a long way to go. We have to be even stronger,” the coach Hajime Moriyasu said. John Duerden"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 21,
+    "description": "The first team (aside from the hosts) to qualify for the tournament, thanks more to Asia’s scheduling than their own brilliance, they topped their final group emphatically, letting in just three goals over their 10 games. This will be their eighth World Cup in a row, but they have yet to get past the first knockout round: they certainly have the talent to go further this time."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 15,
+    "description": "Last but not least in our ranking is Japan, who are still rating among our electorate despite two of their most established stars -- winger Kaoru Mitoma and playmaker Takumi Minamino -- ruled out with injury, and holding midfielder Wataru Endo limping back into the squad after fighting a foot issue for much of the season. However, there's much to still admire about manager Hajime Moriyasu and his 3-4-2-1 formation, built to maximize the impact of winger Takefusa Kubo in the attacking third and wingback Keito Nakamura, who was the star in Japan's recent warmup win over England. Few sides will outwork Japan this summer, but the loss of key depth will require them to put in more effort just to stay ahead."
+   }
+  ],
+  "SUI": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 19,
+    "description": "The Swiss national team is like the country's banking system: safe, boring and effective. Switzerland is not going to dominate in attack, but it will be efficient and be a tough out for any opposition."
+   },
+   {
+    "source": "USA Today",
+    "rank": 18,
+    "description": "A good draw and a balanced team set Switzerland up to be a potential dark horse in the tournament, especially if forward Breel Embolo can get hot."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 17,
+    "description": "After a breezy World Cup qualifying slate, Switzerland has taken the collective foot off the gas pedal. The last seven games have yielded just two wins, both coming against teams they would be expected to beat. A loss to Germany and a draw with Norway during that time might have been influenced by keeping players out of trouble with the tournament on the horizon, but it doesn't breed confidence that they can succeed when the opponents get tougher. After landing in Group B, they don't even have to be all that good to get to the knockouts. Canada, Bosnia and Qatar have an average FIFA ranking of 50th, so just like qualification, they can probably progress without a lot of effort. However, complacency before big knockout-round tests could be a recipe for disaster, and perhaps the Swiss just aren't prepared for what's on the way."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 20,
+    "description": "Switzerland had two very different matches: first a wild 4-3 defeat against Germany and then a dull 0–0 against Norway, though the latter was partly down to the very poor pitch in Oslo. For the manager, Murat Yakin, however, the results were of secondary importance; his main focus was on testing a few things and giving all the squad some playing time. He rotated all 10 outfield players and captain Granit Xhaka played only the first half against Germany. That defeat was the first loss since November 2024. “Sometimes a defeat like that is good, so you can start demanding things again,” said Yakin. Four days later, the defence showed a marked improvement against Haaland and co, with Yakin reverting to a back three for the first time in a long while – a formation that had formed the basis of a successful tournament at Euro 2024, when they lost a quarter-final on penalties to England. Christian Finkbeiner, Blick"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 22,
+    "description": "Their sixth consecutive World Cup appearance. Is there anything to suggest Switzerland can go further than the last 16, the round they’ve got to in four of the past five tournaments? Well, yeah, maybe; they went unbeaten in 2025 (10 games), beating Mexico and the United States along the way, and with a settled team, they could do some damage."
+   }
+  ],
+  "CRO": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 10,
+    "description": "Croatia is the favorite of dads and old guys everywhere. Modrić is in the final chapter of his international career and leads a Croatian team that has shown it's more than capable of beating any team in this tournament."
+   },
+   {
+    "source": "USA Today",
+    "rank": 17,
+    "description": "After podium finishes in the past two editions of the tournament, bet against Croatia at your own peril. But even with a strong, young defense, Luka Modric at 40 and Ivan Perisic at 37 have to slow down at some point."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 10,
+    "description": "Croatia has nine wins in its last 12 games. That sounds like a fantastic record, but looking at the opponents during that run makes those results a little less impressive. Yes, a 2-1 win against Colombia was undoubtedly excellent, but the next-best team was Czechia (ranked 39th by FIFA), while the worst was Gibraltar (ranked 202nd by FIFA). Meanwhile, they were comfortably beaten by Brazil and Belgium in the space of two months, which suggests where they stand against more evenly matched teams. Taken at face value, the Vatreni look in decent form going into Group L. But it becomes a little more concerning when you drill down into the specifics. With that comes a slight fall in the power ranking."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 11,
+    "description": "The key takeaways from Croatia’s excursion to Florida are: yes, they can indeed play with three at the back and yes, Luka Vuskovic is definitely the man they have been missing in defence, the youngster having proved himself and surely cementing a starting place for the World Cup. Against Colombia (2-1 win) they looked much more dynamic and aggressive in a 3-4-2-1 while against Brazil (3-1 defeat) the coach, Zlatko Dalic, opted for a cautious 5-4-1, which raised new questions about the team’s identity. With the return of Josko Gvardiol and Mateo Kovacic, Dalic is likely to switch back to 4-3-3/4-2-3-1 for the World Cup. Alexander Holiga, Telegram"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 10,
+    "description": "Croatia’s ageing squad may have more wrinkles than grandma’s favourite bedsheet, but it would be unwise to write them off, even if four of their first-choice midfield and attack are aged 34 and over. To be fair, they would probably like to be ignored — the underdog tag has helped them reach a final and a semi-final in the past two tournaments."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 14,
+    "description": "As the saying goes, three things in life are inevitable: death, taxes, and Croatia's wily bunch of veterans making a deep run at a major tournament. Much of this team has fought side-by-side for over a decade, with Luka Modric (40), Ivan Perisic (37), Andrej Kramaric (34) and Mateo Kovacic (31) at the heart of back-to-back semifinal runs at the past two World Cups. (Manager Zlatko Dalic, appointed in 2017, is also a mainstay and model of consistency for this group.) Drawn in a tricky group, Dalic will need to hope that this experience is a genuine difference-maker, though newer arrivals such as versatile defender/midfielders Josko Gvardiol and Josip Stanisic can do the running for their elders. Look out for young Tottenham center back Luka Vuskovic (who impressed on loan with Hamburg in the Bundesliga) and midfielder Martin Baturina (fresh off a breakthrough campaign with Como) to inject youth and unpredictability to one of the most known quantities at this level."
+   }
+  ],
+  "PAR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 26,
+    "description": "If Paraguay is going to have any success this summer, it's not going to be pretty. The goal for this team will be to muck it up and grind it out in a competitive"
+   },
+   {
+    "source": "USA Today",
+    "rank": 32,
+    "description": "Gustavo Alfaro's teams are rarely thrilling to watch, but he has a system that works with Paraguay - and even has seen a few attackers start to produce as well."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 31,
+    "description": "Paraguay took up the last available World Cup spot from CONMEBOL qualifying, and they've looked solid if not spectacular heading into the competition. La Albirroja have split their last six evenly with three wins and three losses, including a 2-1 victory over Mexico late last year. On their day, this squad can beat the best in the business, as demonstrated by toppling Brazil and Argentina on the way to a World Cup berth. While Paraguay isn't successful every game, it has at least proved it can be competitive, and that counts for a lot in tournament football. In a forgiving Group D featuring USA, Australia and Turkiye, top spot isn't at all out of the question."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 32,
+    "description": "Two games – one win and one defeat and a lot of mixed feelings. Greece were beaten 1-0 before Paraguay, somewhat paradoxically, played the better football in the 2-1 defeat by Morocco. La Albirroja dominated against the Afcon champions but ultimately paid the price for two defensive slips. Julio Enciso showed once again that he is Paraguay’s best player and the one to watch at the World Cup. The coach had also called up a quartet of debutants with most eyes being on goalkeeper Gastón Olveira from Olimpia and playmaker Maurício Prado, from Palmeiras. Olveira was born in Uruguay and Prado in Brazil. Both were only granted Paraguayan citizenship recently but slotted straight into the team and they are now very likely to go to the World Cup. In fact they impressed to such a degree that some experts are calling for them to be in the starting XI come June. Paraguay can be excited for what’s to come. Óscar Gómez, VS Sports"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 31,
+    "description": "It’s been a long time since Paraguay beat Japan to reach the quarter-finals in 2010, where they lost to eventual winners Spain. We haven’t seen them in a World Cup since, but an obdurate defence (they conceded 10 goals in 18 qualifiers, scoring only 14 themselves) suggests they’ll be hard to beat. And boring to watch."
+   }
+  ],
+  "ECU": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 17,
+    "description": "Ecuador has a golden generation of players here, featuring Caicedo and defenders Piero Hincape and Willian Pacho. Believing in this team, though, is fool's gold."
+   },
+   {
+    "source": "USA Today",
+    "rank": 10,
+    "description": "What's not to like? Sebastián Beccacece has a group of dynamic attackers and top-level defenders, many of whom came through the Independiente del Valle academy. Veteran forward Enner Valencia must be effective in front of goal, though."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 23,
+    "description": "Ecuador's love of a good draw results in a slide down the rankings. In El Tri's last 13 games, they had nine stalemates and four wins. That does make them undefeated since September 2024, though. A brick wall of a defense is great, but it becomes a bit of a drag when you can't capitalize on that fortitude. Of course, that resilience helped them to second in CONCACAF qualifying, and points don't matter in friendlies, so it doesn't really matter in the grand scheme of things. But getting into a winning habit is no bad thing with a major tournament in sight. With only eight of the best third-place teams going through to the knockouts based on points and then goal difference, draws won't be so helpful to Ecuador."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 18,
+    "description": "Ecuador came out of their two friendlies feeling positive, having extended their unbeaten run of games to 17, but it feels as if there is still quite a lot of work to do before the World Cup. In the 1-1 draw against Morocco, they competed well, pressed well and showed good organisation, although they once again lacked the cutting edge to seal victory. Against the Netherlands, another 1-1 draw, they played against 10 men for most of the game and their approach was the right one – a high press, aggressive wing-backs and a total commitment to attack – and that is the path forward. La Tri are already demonstrating intention, energy, and structure; now they need to translate all of that into greater clarity, more clear chances and victories. Francisco Hanna, Studio Fútbol"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 17,
+    "description": "Ecuador finished second behind Argentina in qualifying, particularly impressive given they had three points deducted for an administrative gaffe. Don’t expect many thrillers: their qualification was built on a miserly defence, conceding five goals in 18 games while only scoring 14. At a tournament where a good third place in your group should be enough to go through, they ought to fancy their chances."
+   }
+  ],
+  "IRN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 30,
+    "description": "Iran enters the tournament with a lot of uncertainty, but it can make some noise in a group that is pretty tame after Belgium with Egypt and New Zealand."
+   },
+   {
+    "source": "USA Today",
+    "rank": 36,
+    "description": "A clear second-best in Asian qualification, it will be difficult to block out the off-field situation, even if staying in Tijuana is an elegant solution to the 'problem' of the team not spending the night in the U.S."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 30,
+    "description": "No other team's World Cup preparations have been thrown into as much disarray as Iran's. Amid the United States' and Israel's war on the nation, Iran's training camp has been moved from Tucson, Arizona, to Tijuana, Mexico. Meanwhile, the U.S. government has been reluctant to grant visas to players and staff, according to the Guardian, which is a problem when group games are set to be held in Los Angeles and Seattle. The players, through no fault of their own, have been put in a difficult spot, and that could affect the team's performance at the tournament. The squad has made efforts to stay sharp, though, with four wins in the last six friendly games. However, the baggage surrounding their participation in the 2026 competition could hinder a team tipped for a first knockout-round appearance in the country's history. Enner Valencia"
+   },
+   {
+    "source": "The Guardian",
+    "rank": 38,
+    "description": "The Fifa president, Gianni Infantino, may be determined that Iran go to the United States but with the co-host’s head of state threatening a land invasion after weeks of aerial bombardment, the decision is unlikely to be in his hands. Football is obviously not a priority but the national team was in action, starting with a 2-1 loss to Nigeria in a game that had been moved from Jordan to Turkey. Captain Mehdi Taremi looked more uncomfortable than most when singing the anthem but the striker scored and then got two more as Costa Rica were thrashed 5-0 on Tuesday. On the pitch then, it went pretty well but nobody knows what is going to happen off it. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 28,
+    "description": "It feels wrong including them in this ranking at all, given that we still don’t know if they’ll actually be playing. All the noises coming out of their FA suggest not, but FIFA president Gianni Infantino has the blinkers on and is insisting they will still take part. As they are still, at the time of writing, participating, we’ve got them in 28th spot because of the experience in their squad."
+   }
+  ],
+  "JOR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 37,
+    "description": "The only parting gift Jordan should expect to get from the World Cup this summer is an autograph from Lionel Messi in its final"
+   },
+   {
+    "source": "USA Today",
+    "rank": 47,
+    "description": "Already underdogs, Jordan couldn't afford to see key players go down with injury like it has."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 44,
+    "description": "Jordan has also seen some fixture disruption because of geopolitical issues, but of the four games Al Nashama have played in 2026, they've drawn two and lost two. The latter two, against Switzerland and Colombia, produced a combined scoreline of 6-1, with those teams ranked 19th and 13th, respectively, by FIFA. That's a tough assignment for the 63rd-ranked team in the world, but that's the level they will be facing in Group J action. With little to cheer heading into the tournament, they now will have to figure out how to get something from Austria, Algeria and Argentina."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 42,
+    "description": "Preparing for a first World Cup, Al-Nashama don’t get many chances to play opposition from outside Asia or the Arab world so there was a lot of anticipation for the Fifa Series, even if it was moved from Amman to Antalya in Turkey. It brought successive 2-2 draws against Costa Rica and then Nigeria. Jordan are a team built on a solid defence so conceding four was concerning but on the other hand scoring four was welcome, especially with two-thirds of their three-man frontline, Ali Olwan and Yazan al-Naimat, out injured. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 41,
+    "description": "Jordan continue to surprise and delight by punching above their weight. After shocking the 2023 Asian Cup by reaching the final when most thought they would struggle to get past the first round, they qualified for the World Cup for the first time, confirming their place with a 3-0 win against Oman in June. Some concern might come from some rough results in post-qualification friendlies, and they will have to get past the “just happy to be there” attitude if they are to make an impact."
+   }
+  ],
+  "HAI": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 48,
+    "description": "Hey, when you're at the bottom, there's nowhere to go but up. This will be Haiti's second World Cup and first since 1974."
+   },
+   {
+    "source": "USA Today",
+    "rank": 37,
+    "description": "More than just a remarkable story, Haiti blend veteran national team players with new recruits who play in top European leagues."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 48,
+    "description": "Haiti is still rooted to the bottom of the World Cup power rankings. While the tiny Caribbean island nation will have the backing of anyone who loves a good underdog story, Les Granadiers' tournament will likely start bad and continue to get worse. Scotland is up first, with the Tartan Army sure to be ruthless in pursuit of crucial points. Up next is Brazil, one of the most notorious footballing nations in history, and then comes Morocco, arguably the standard-bearers of the African game. In all, it spells a brutal 10-day stretch that could see goalkeeper Johny Placide picking the ball out of the net with regularity."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 47,
+    "description": "Despite a 2-1 defeat against Tunisia and a 1-1 draw with Iceland, the March Fifa window offered valuable lessons for the head coach, Sébastien Migné. Haiti started the games too slowly and the lack of early intensity exposed a collective weaknesses, leaving the team chasing games. Tactically, however, Haiti showed promise in transitions and attacking movements. Wilson Isidor impressed, scoring his first international goal to earn the draw against Iceland, while Josué Casimir stood out with pace, technical quality and relentless pressing. Injuries to Johny Placide and Carlens Arcus forced adjustments, but also opened the door to useful experimentation ahead of bigger challenges. While significant work remains, Haiti has shown it possesses the resources to make an impact on the World Cup stage. Pierre Richard Midy"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 48,
+    "description": "There will be plenty of beneficiaries from the expanded tournament, but arguably just as fortunate are the CONCACAF nations traditionally shunted out by the three hosts. Haiti, whose only previous appearance was in 1974, were one of those countries, but they performed superbly to finish above recent qualifiers Honduras and Costa Rica. They surely won’t get further than the first round, but even this is an extraordinary achievement."
+   }
+  ],
+  "SCO": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 27,
+    "description": "After a horrible showing at Euro 2024, Scotland is back at its first World Cup since 1998. Scottish supporters are great, but their team will need to win its first game against Haiti to have any success this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 30,
+    "description": "Qualification was sensational, and Scott McTominay continues to star, but there still seems to be a limit to where this team's talent can take it."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 28,
+    "description": "You could almost scoop up and bottle the enthusiasm that's radiating from Scotland at the moment. After sealing a spot in the tournament in memorable fashion, the Scots have won both warm-up fixtures by a combined score of 8-1. While wins against 77th-ranked Bolivia and 82nd-ranked Curaçao were perhaps expected, the manner of those victories was still impressive, giving them a strong platform to build on. That also provides confidence that a big three points can be sealed against 83rd-ranked Haiti when they kick off Group C action, and just a point against Brazil or Morocco might be enough to reach the knockouts."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 39,
+    "description": "Steve Clarke’s strong endorsement of a three- (or five-) man defence in the aftermath of defeat to Côte d’Ivoire implied Scotland may use the system at the World Cup. Previously, this was seen primarily as a format which allowed both Andy Robertson and Kieran Tierney to start for Scotland. Clarke had edged away from it but it was restored for the loss in Liverpool. George Hirst did not score in the international window but impressed in the Scottish attack. Problematic positions – centre-back and goalkeeper – remain precisely that. Both would be offset if Clarke can discover cutting edge among his squad between now and June. Ewan Murray"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 35,
+    "description": "Their astonishing victory against Denmark to seal their first qualification since 1998 is still so fresh in the memory, even a few months on, that it would be easy to think Scotland could win the whole thing. They won’t, but they have as good a chance as any of making it through their group, assuming Scott McTominay and John McGinn take their domestic excellence to the international game."
+   }
+  ],
+  "TUR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 21,
+    "description": "A new sense of pragmatism may enable the Turks to live up to the hype around their young team. This team will be the Americans' biggest competition in"
+   },
+   {
+    "source": "USA Today",
+    "rank": 22,
+    "description": "There's no doubt the creativity is present in this squad with Arda Guler and Kenan Yıldız, but with a converted center forward playing as a No. 9, manager Vincenzo Montella has had to settle for a lot of 1-0 results."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 18,
+    "description": "Seven wins in the last eight games for Turkiye, including a draw against Spain, is a great record heading into the tournament. Confidence will already be high after successfully navigating the World Cup qualification playoffs (a knockout competition all of its own), and with young players like Real Madrid's Arda Güler and Juventus' Kenan Yıldız having excellent seasons at club level, Turkiye might have sights on topping a forgiving Group D. Hakan Çalhanoğlu will be leading the side in his first and likely only World Cup appearance, and his set-pieces will be even more dialed in than usual to make magic for his nation."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 23,
+    "description": "Are Turkey dark horses to be this summer’s dark horses? They managed a fiendish assignment in Kosovo calmly, deserving to sneak through, and Vincenzo Montella’s side can boast attacking wizardry along with a solid core. Finding the right balance will be key on their return to the World Cup after 24 years’ absence, but Arda Guler and Kenan Yildiz have the ability to trouble anyone. Montella has instilled a discipline and composure that had not always been present and a place in the knockout stage should be comfortably achievable. Nick Ames"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 24,
+    "description": "Anyone hyping up Turkey’s chances at a major tournament will have their disastrous Euro 2020 campaign in mind, where they were tipped as dark horses but lost all three games. But while many mourned Italy not qualifying through the play-offs, it would have been a much bigger detriment to the tournament if Turkey hadn’t made it, broadly down to their individual attacking talent. Let’s not call them dark horses again… but they should be fun horses, at least."
+   }
+  ],
+  "KOR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 20,
+    "description": "The Koreans have a good team, but they did not get any luck from the draw. South Korea will play all of its games in the group stage in Mexico."
+   },
+   {
+    "source": "USA Today",
+    "rank": 25,
+    "description": "While heavily dependent on Son Heung-Min and Lee Kang-In, the path is there for Korea to come out of the group in Mexico - and perhaps make some noise after."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 21,
+    "description": "Korea Republic hasn't been so convincing in recent matches. While it secured wins over low-ranking national teams like Trinidad and El Salvador, it has also been thrashed by Ivory Coast and narrowly beaten by Austria. In games where Taegeuk Warriors have been truly tested, they've often come up second best. In a weak Group A, they should still progress to the next round. The toughest team on their docket is Mexico, whom they held to a 2-2 draw in September 2025. A similar result, a win against South Africa, and at least a point against Czechia will be all that's needed. LAFC's Heung-min Son isn't getting any younger, and this will be his last chance to make a mark on the world stage with his nation. He is still coming up clutch for Korea, with five goals and an assist in his last 10 games."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 44,
+    "description": "“It’s too early to discuss that,” said the Korea coach, Hong Myung-bo, when asked whether Son Heung-min should remain an automatic starter, an unthinkable question until recently. Son is not the only concern, however, after the Taeguk Warriors lost 4-0 to Côte d’Ivoire in the first of their two games. There are worries that this all feels like the leadup to coach Hong’s first time in charge, the dismal 2014 World Cup. The focus was on the new-look three-man defence containing defenders that don’t play in that system for their clubs. So unpopular has Hong become that there were those who wanted a similar result in Vienna in the hope there would be a change, but a 1-0 defeat against Austria means the window ends with more questions than before at both ends of the pitch – not what you really want at this stage. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 16,
+    "description": "If their big-name players turn up, South Korea are Asia’s best bet to go far in the competition, but that’s a huge if. Son Heung-min will be a tournament poster boy and he’ll need Wolverhampton Wanderers’ Hwang Hee-chan and Lee Kang-in of Paris Saint-Germain to step up if South Korea are to repeat their heroics from 2002, when they made the most of home advantage to become the first Asian side to reach the semi-finals. They have a decent draw, with Mexico, South Africa and potentially the weakest team from the European play-offs, Czech Republic, in Group A."
+   }
+  ],
+  "MEX": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 14,
+    "description": "Mexico gets all of its group-stage games on home soil. That's a positive on paper, but if results don't go their way, the Mexicans will be in trouble."
+   },
+   {
+    "source": "USA Today",
+    "rank": 12,
+    "description": "Hopes aren't high for El Tri, but if they can win the group they'll stay in Mexico for the next two (potential) knockout matches - a huge boost given the crowd and the altitude."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 9,
+    "description": "Mexico will open the World Cup on June 11, and preparations for the tournament have been near perfect—the best among their co-hosts, at least. El Tri are undefeated in eight, taking six comfortable wins against solid teams while picking up just two draws against well-matched foes, Portugal and Belgium. With the home fans' expectation levels already sky-high, that form could be a double-edged sword, perhaps increasing anxiety among the crowd if a game isn't going in the right direction. But it's certainly better than beginning the action in a rut, and Mexico will already be in the party spirit before even a minute is played."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 16,
+    "description": "In two big tests for Javier Aguirre’s side, El Tri passed – not with flying colours, mind you, but enough to create some warranted optimism. A scoreless draw with Portugal was followed by a 1-1 draw with Belgium, and in both games Mexico competently strung together phases of possession and created chances, while keeping talented opponents mostly at bay. That’s a huge positive considering the squad’s current wide-ranging injury crisis. Mexico will sorely miss goalkeeper Luis Malagón (achilles) and midfielder Marcel Ruíz (cruciate ligament) at the World Cup, but the captain Edson Álvarez, striker Santiago Giménez, and others should be back in time. Alexander Abnos"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 18,
+    "description": "The perennial second-rounders finally broke their curse of losing in the round of 16 at seven consecutive World Cups in 2022… by being dumped out of the group stage. To do the same again here on home soil would be a national disaster. Expect the home fans — and 17-year-old wonderkid Gilberto Mora — to lift them to greater heights. They were arguably the biggest winners of the draw and should kick the tournament off in June with optimism."
+   }
+  ],
+  "ARG": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 5,
+    "description": "In a vacuum, I'd have Argentina higher, but no team has won back-to-back World Cups since Brazil way back in 1958 and 1962. There is no doubt, though, that the Argentines remain serious contenders, led by one of the best players ever in Messi."
+   },
+   {
+    "source": "USA Today",
+    "rank": 3,
+    "description": "The defending champions still boast Lionel Messi, Julian Alvarez, Dibu Martinez and other stars of 2022, but there are too many questions about fitness - including Messi's - to see them top the list."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 3,
+    "description": "FIFA, in its infinite wisdom, has Argentina at the top of its rankings, but it's not entirely obvious why. Six wins on the trot sounds like a good place to start, but then look at those opponents: Honduras, Zambia, Mauritania, Angola, Puerto Rico, Venezuela. It's not exactly a who's who of elite international teams. But wins are wins, and FIFA bumped them up two places from its previous list. In terms of World Cup prospects, though, that doesn't elevate La Albiceleste's potential much. The possibility of success is clear, certainly, looking at the squad alone. But there's not much to go on in terms of relevant recent form. Confidence building is one thing, but in a squad that boasts Lionel Messi, Lautaro Martinez, Emiliano Martinez, Julian Alvarez and Enzo Fernandez, is confidence really necessary? Still, Group J looks like a formality; then we'll really see what Argentina is made of when the stakes increase."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 3,
+    "description": "A slightly surreal international window for the world champions, which started with a narrow 2-1 win over Mauritania. The lineup was experimental, to be fair, but the coach, Lionel Scaloni was not impressed: “We didn’t play and the important lesson here is to make sure it does not happen again.” For the second game, also at La Bombonera, a certain Lionel Messi returned as so did Argentina’s form. Zambia were beaten 5-0 with the Inter Miami forward scoring one goal and providing one assist. There was bad news as well though with debutant Joaquín Panichelli of Strasbourg facing a long spell on the sidelines after suffering a serious knee injury. Overall though the mood was good and at the end of the Zambia game the team received a warm farewell from the supporters, who sang “dale campeón” – go champions – in celebration. Mariano Dayan, Olé"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 2,
+    "description": "Not only are Argentina the reigning champions from Qatar in 2022, but they also won back-to-back Copa America titles in 2021 and 2024. For recent pedigree, can we really look much further? With the same manager, Lionel Scaloni, and the same GOAT, Lionel Messi, their status as favourites is deserved — albeit Messi really is getting on a bit. He will turn 39 during the tournament."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 3,
+    "description": "Lionel Messi finally got his hands on the World Cup in Qatar after nearly two decades of trying ... but can he do it again? Becoming the first team since Brazil (1958, 1962) to repeat as World Cup champions won't be easy, and while the Seleção had Pelé in their lineup when they did it in the black-and-white TV era, Messi comes close in terms of impact. However, this is a squad that has gotten older and arguably worse while Messi has improved with age (and careful load management at Inter Miami), and some lingering injuries/bad form to key players are a worry. Defender Cristian Romero has been racing to get fit after a late-season knee injury sustained in the thick of Tottenham's relegation fight, midfielder Alexis Mac Allister had a poor season by his standards with Liverpool, and forward Julián Álvarez has just three goals for club/country since the beginning of April. Inauspicious World Cup preparations aren't always reliable predictors of tournament performance, but it'll take every bit of manager Lionel Scaloni's savvy and trust in his established squad to battle through the knockouts. He might also find himself missing the magic of winger Ángel Di María, who retired from international duty following Argentina's Copa America win in 2023. Lucky for them, a gentle group draw gives them plenty of time to work things out."
+   }
+  ],
+  "TUN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 38,
+    "description": "Tunisia has never advanced out of the group stage at a World Cup, although it won games at each of the last two tournaments. I'm still not expecting this team to make the knockout stage this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 39,
+    "description": "The AFCON was unimpressive, and the attack is too unpredictable to expect big things in Mexico (and one U.S. game)."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 32,
+    "description": "Tunisia flew through its World Cup qualifying campaign, going undefeated in Group H with nine wins in 10 games. But the wheels have come off a bit since, stumbling through the group stage at the Africa Cup of Nations and getting dumped out in the first knockout round at the hands of Mali. The Eagles of Carthage have also lost all but one of their last four friendlies, with the only win coming against Haiti. A November draw with Brazil is looking like a distant memory now, and some vast improvements need to be made quickly to even have a chance of escaping Group F."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 27,
+    "description": "When a new coach is hired, fans often want to see fresh ideas and personnel. Since taking over after Afcon, Sabri Lamouchi has delivered just that, making changes in goal and at centre-back. He also recruited Rani Khedira, brother of the former Real Madrid midfielder Sami, persuading the 32-year-old to represent Tunisia. Some Carthage Eagles fans labelled him an opportunist, but the Union Berlin midfielder impressed in his early appearances. Tunisia may lack the star power to excite neutrals, but they do remain highly disciplined and difficult to break down as shown during the 2026 World Cup qualifying campaign, in which they did not concede a single goal. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 36,
+    "description": "Tunisia did not concede a single goal in 10 qualifiers, winning nine of them, but to describe them as having a granite-like back line would need more rigorous testing than it got against Namibia and Liberia. Getting out of the group stage, which they have never done before, from six attempts, would be a huge success."
+   }
+  ],
+  "SEN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 23,
+    "description": "The African champions (allegedly) come into this tournament as a popular dark-horse pick. Unfortunately, Senegal was paired with France and Norway, so it faces an uphill battle."
+   },
+   {
+    "source": "USA Today",
+    "rank": 9,
+    "description": "Reports of dissent between manager Pape Thiaw and the federation are concerning, but the vibes were fantastic in March when Senegal showed off its African Cup of Nations trophy in France, then back home. Africa's best hope, the back line will fluster even top attacks."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 14,
+    "description": "Whether you believe Senegal should have been awarded the Africa Cup of Nations title or not, the Lions of Teranga still won in the final against Morocco on the pitch. Accounting for that victory, Senegal has lost just once since November 16, in a June friendly against the United States. After the AFCON debacle, Senegal will be desperate to get through the World Cup with little drama, letting the football do the talking. With Norway and France joining them in what is arguably the tournament's group of death, there can be little in the way of distraction if they want to get through unscathed. With a squad loaded with attacking talent—including Nicolas Jackson, Ismaila Sarr, Sadio Mane and Iliman Ndiaye—there should be some high-scoring games against those two other teams, which also boast fearsome forwards."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 6,
+    "description": "“If I had any doubts about our ability to win the World Cup, I wouldn’t be here,” said Pape Thiaw after a 3–1 friendly win over the Gambia. Strikingly, his confidence has drawn neither ridicule nor backlash. For perhaps the first time, an African side can realistically target winning the World Cup before it kicks off. Senegal’s belief is rooted in a steady pipeline of talent from elite domestic academies such as Generation Foot and Diambars. For Thiaw, the priority will now be to maintain unity and, above all, fitness. The memory of Sadio Mané missing the last World Cup still lingers and is a reminder of how fragile even the strongest ambitions can be. Maher Mezahi"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 14,
+    "description": "Senegal have twice reached the knockout stage (2002 quarter-finalists, round of 16 in 2022) and you would expect the same again this time from a team familiar to Premier League viewers (including Sadio Mane, Nicolas Jackson, Iliman Ndiaye, Pape Matar Sarr and Ismaila Sarr). Maybe more relevant is that AFCON ‘win’, even though at the time of writing they aren’t officially champions…"
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 13,
+    "description": "Arguably the strongest African team in the World Cup, Senegal are still on the fringes of our voters' minds thanks to a difficult group with a world superpower (France) and star-heavy outsiders (Norway). However, that could well be no great drama for Pape Thiaw & Co., who ride into the U.S. with depth and talent in just about every position. With the leadership of defender Kalidou Koulibaly, aggressive midfield play and the unpredictable magic of Sadio Mané and Ismaïla Sarr in attack, this team can easily outwork most of the 48-team field. However, Senegal must score goals if they are to make a genuine impact, and it remains to be seen if Chelsea striker Nicolas Jackson -- fresh off an 11-goal loan season with Bayern Munich -- can be the talismanic No. 9 they'll need him to be. The ease with which the U.S. carved through Senegal's press in a 3-2 friendly defeat last week will also weigh heavily on a squad that has big ambitions."
+   }
+  ],
+  "RSA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 45,
+    "description": "South Africa is going to need a bigger vuvuzela to make an impact at this World Cup. It will have a big chance to shake things up in the opening match of the tournament against Mexico."
+   },
+   {
+    "source": "USA Today",
+    "rank": 35,
+    "description": "Hugo Broos' squad is heavily domestic-based, but the standouts that are based abroad raise the level on a disciplined group."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 43,
+    "description": "Until a June 6 meeting with Jamaica, South Africa hadn't won any matches in 2026. Four games in that time might not be the broadest set of fixtures, but it was still an alarming run heading into the tournament. That 1-0 win against Jamaica will at least boost spirits, but it doesn't change the fact that Group C is going to be tough to get much from. Mexico, Korea Republic and Czechia are waiting, and all will be counting on respective meetings with Bafana Bafana for three points to aid possible qualification to the knockouts."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 29,
+    "description": "For the first time since taking charge, Hugo Broos is facing criticism at home. A draw and a defeat against Panama during the March window have raised real questions about Bafana Bafana’s readiness for the tournament. “That’s why we played twice against Panama – to learn and understand what we still need to improve,” Broos said, though the response did little to quieten the noise. Despite the results, South Africa played football that was easy on the eye and that won’t change. Built around a core of well-drilled Mamelodi Sundowns players, Bafana Bafana could be one of the most technically pleasing sides in North America in the summer. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 37,
+    "description": "A glance at their qualification record would suggest South Africa only just squeaked through, but they had to overcome a three-point deduction for fielding an ineligible player, so they’re stronger than their record suggests. This is their first World Cup since hosting in 2010, and their prospects might be aided by the fact that the core of their team is provided by the dominant club side Mamelodi Sundowns. A decent draw means they will fancy their chances of making it out of their group."
+   }
+  ],
+  "ALG": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 33,
+    "description": "The Algerian attack is strong, led by winger Riyad Mahrez and a solid supporting cast. This team’s potential downfall: its defense."
+   },
+   {
+    "source": "USA Today",
+    "rank": 33,
+    "description": "Algeria made quick work of its World Cup qualification group and outlasted fellow World Cup team DR Congo at the AFCON in the first knockout game, but the ceiling isn't as high as Fennecs teams of the past."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 34,
+    "description": "Africa Cup of Nations quarterfinalists Algeria do not have the \"dark horse\" label like previous squads from the nation, but the Desert Foxes will be encouraged by one standout result from their World Cup warmups. Against a strong Netherlands side, albeit one that made wholesale changes at halftime, Algeria came away with a 1-0 win. A victory against a squad of such caliber and reputation, even in a friendly, is a great sign of things to come. The Group J matchup against Argentina is basically a free hit, but games against Jordan and Austria bring real possibilities of three points. Maybe Riyad Mahrez will roll back the years and deliver a timely reminder of his quality."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 22,
+    "description": "A complete unknown, even to their own players, staff and media. What is certain, however, is they boast a wealth of technical quality across the pitch. Marcelo Bielsa recently captured this, stating: “The Algerians are more technical than the English,” after his Uruguay side’s friendly at Wembley. The claim doesn’t seem far-fetched when watching Rayan Aït-Nouri, Riyad Mahrez, Ibrahim Maza or Amine Gouiri on the ball. But technique alone is not enough, and the clearest example of that came in the quarter-finals of the 2025 Afcon when Vladimir Petkovic’s side were physically dominated by Nigeria. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 27,
+    "description": "Algeria marched through qualifying without ever really being spectacular. Guided from the dugout by former Switzerland coach Vladimir Petkovic, on the pitch, former Manchester City winger Riyad Mahrez is still their leader, but it probably won’t be long before he passes the baton to 25-year-old Mohamed Amoura or another young forward. You would be surprised if they don’t make it out of their group — although Austria and Jordan will be no joke — but much more than that might be a stretch."
+   }
+  ],
+  "CPV": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 44,
+    "description": "Cape Verde is an incredible story, but this team will be happy just to be involved in the World Cup and collect the gift bag."
+   },
+   {
+    "source": "USA Today",
+    "rank": 45,
+    "description": "Another new face in the World Cup, the Blue Sharks are going to need some heroic performances from veteran players to get anything out of their first trip to the biggest stage."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 39,
+    "description": "In back-to-back friendlies against European opposition, Cabo Verde claimed a 0-0 draw with Finland and an impressive 3-0 win against Serbia. While they began 2026 with a 4-2 defeat to Chile, the African island nation lost just once in 2025—on penalties, in a friendly. For those counting, that's one defeat over 90 minutes in about a year and a half. A nation known for its stout back line will be a source of frustration for Spain, Uruguay and Saudi Arabia in Group H, and at this point, they could even snag a win against the latter."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 45,
+    "description": "“Honestly, I still can’t believe what we’ve achieved,” Ryan Mendes said after Cape Verde’s final qualifying match against Eswatini. “When I was little, I used to dream about Ronaldo’s Brazil and all the great football nations, and I dreamed of being there one day too. But what we experienced … was something we had never seen before.” Having helped his country to reach their first Afcon in 2013, the legendary captain has now sealed his legacy in guiding the Blue Sharks to a World Cup. But like Egypt and Morocco, Cape Verde must now forge an identity on the biggest stage. In previous Afcons, they’ve held their own through sharp, possession-based football. The question is whether, against far tougher opposition, they’ll back themselves to do it again. MM"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 44,
+    "description": "The joy at qualifying for their first World Cup hasn’t come close to subsiding, but when it does, perhaps some reality will set in. Few of their players operate at the highest domestic level, and most of their squad will be spread around a collection of the world’s, shall we say, less fashionable leagues. Even being there is an astonishing achievement, so making it out of their group featuring Spain, Uruguay and Saudi Arabia will be a miracle… but you never know."
+   }
+  ],
+  "GER": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 9,
+    "description": "Even a mediocre German team is still German. While manager Julian Nagelsmann's squad lacks truly elite players, it will still be a force to be reckoned with this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 6,
+    "description": "There is loads of experience in the Germany team, perhaps making the omission of game-changing teenager Said El Mala all the more surprising."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 4,
+    "description": "It's now nine wins on the bounce for Germany, and that poor start under Julian Nagelsmann now looks like ancient history. With a strong squad increasingly built on youth, and a couple of veterans thrown in for dressing-room presence and tournament know-how, the nation is poised to cause real trouble at the tournament. The group stages should allow the team time to settle without a heavy lift, and they can build on that as the fixtures intensify. Nagelsmann is getting the best out of Florian Wirtz despite his difficult season at Liverpool, and he has plenty of options all over the pitch, meaning he can change accordingly to meet the moment without sacrificing top talent for significantly lesser quality."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 9,
+    "description": "The nation once renowned for its powerful “9ers” are still searching for a successor to Thomas Müller, Jürgen Klinsmann and Miroslav Klose. Deniz Undav scored the winner in the 2-1 victory against Ghana on Monday night but Julian Nagelsmann then said that he was unlikely to start at the World Cup. “If he had 70 minutes under his belt, he wouldn’t be able to finish those chances,” the coach said. That debate, however, distracts from the team’s real problem: the defence, with Nico Schlotterbeck not the only player who looked shaky in this window. There were some positives, though, with Florian Wirtz producing arguably his best ever game for Germany in the 4-3 win against Switzerland with two assists and two goals while 18-year-old Lennart Karl was applauded by opposition fans for his dribbling skills. Oliver Fritsch, Die Zeit"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 8,
+    "description": "The Germans have, by their standards, gone through a rough time in the past few years: they haven’t got past the quarter-finals in their past four tournaments, crashing out at the World Cup group stage in 2018 and 2022. But they do have some talent, and if they manage to solve their centre-forward problem, bet on them to look more like the Germany we know and fear from years gone by."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 7,
+    "description": "To crudely paraphrase Forrest Gump, Germany are like a box of chocolates ... in that you truly don't know what you're going to get from them. After being bounced out of the 2022 World Cup in the group stage because of (among many things) 10 bad minutes against Japan in their opener, Die Mannschaft must get off to a good start. But to do that, manager Julian Nagelsmann must show that he has answers to their biggest questions. Is Kai Havertz good enough at the No. 9 position? Is Jamal Musiala back to his best in attacking midfield? Will the Florian Wirtz that shone in Bayer Leverkusen's midfield show up, or will it be the subdued version that muddled through his first season with Liverpool? Is their defense good enough around Nico Schlotterbeck? And will goalkeeper Manuel Neuer (who turned 40 in March) be an asset or a problem between the posts having missed half the season with injury before unretiring from the national team just three weeks ago?"
+   }
+  ],
+  "UZB": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 40,
+    "description": "Almost the entire Uzbekistan team plays its club soccer in its home country, so I'm not expecting much from it this summer."
+   },
+   {
+    "source": "USA Today",
+    "rank": 38,
+    "description": "Our highest-ranked debutant, Uzbekistan has some real talent, but they're yet to be tested against the types of teams they're about to face."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 35,
+    "description": "As the first representatives of Central Asia in the World Cup, Uzbekistan will be keen to pick up a statement win. Even if not the most high-profile nation in the tournament, the White Wolves are fairly consistent. They've lost just three times since the start of 2025, to Canada, Uruguay and the Netherlands. In a group also containing Colombia and Portugal, Uzbekistan will be looking at the matchup with Congo DR to get a famous three points, but getting beyond the group might be just out of reach."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 34,
+    "description": "“We still lack consistency, and this is a worrying signal before the World Cup,” said Fabio Cannavaro after Uzbekistan beat Gabon 3-1. It was a win but not a convincing one, with defensive mistakes contributing to some testy exchanges with reporters in the post-match press conference. The second game against Venezuela was a better all-round performance. It ended goalless and the White Wolves won the shootout, which is good preparation in itself for the summer. Manchester City’s Abdukodir Khusanov was named Fifa Series MVP despite missing the first game and the teenage defender Bekhruz Karimov made a promising debut. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 45,
+    "description": "This is a long-overdue World Cup debut for a football-mad nation. Uzbekistan’s success in youth internationals in recent years — including victories against England and Croatia (the latter on penalties) in Under-17 World Cups — hints at an emerging force. Their recently appointed manager, Fabio Cannavaro, certainly knows how to handle a World Cup."
+   }
+  ],
+  "QAT": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 41,
+    "description": "Qatar is back after scoring one goal and losing all three of its games as the host nation in 2022."
+   },
+   {
+    "source": "USA Today",
+    "rank": 46,
+    "description": "Since narrowly securing qualification, Qatar hasn't won a match. Preparations being disrupted by the war in Iran is understandable, but it's tough to see them delivering a better showing than 2022."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 45,
+    "description": "Qatar's preparations for the 2026 World Cup have been heavily disrupted by the United States' and Israel's war on Iran, with the country having to suspend its March fixture against Argentina and seeing its domestic league and club competitions disrupted, too. Meanwhile, Qatar also canceled a May friendly against Sudan, and a meeting with the Republic of Ireland was disrupted twice by fan protests. With all that, the nation hasn't won a game since October 2025. That's not exactly ideal to get ready for encounters with co-hosts Canada, Switzerland and Bosnia and Herzegovina. Qatar lost all three games when they hosted the tournament in 2022 and scored just once. All things considered, they might be lucky to even get that one goal in 2026."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 43,
+    "description": "It is as you were for the 2022 hosts who squeezed into 2026 by the narrowest of play-off margins. It has been hard for the head coach, Julen Lopetegui, to build on that momentum as both the team’s March friendlies were cancelled due to the war in the Middle East. Missing out on the chance to face Argentina is particularly galling and Serbia wouldn’t have been a bad test either. Instead it has all been about the coaching staff working with the players. Officials said that having no games could help in terms of fatigue down the line and that training went well. JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 38,
+    "description": "Four years ago, they were among the more pathetic hosts in World Cup history, losing their three games by an aggregate score of 7-1. But on either side of that disaster, they won and then retained the Asian Cup, so they’re clearly not complete jokers. Actually having to go through a qualification campaign might stand them in good stead, rather than the succession of soft friendlies four years ago… but they will still be among the favourites for a first-round exit, even if their draw could have been tougher."
+   }
+  ],
+  "USA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 12,
+    "description": "Nothing beats home cooking, but the United States might need a double helping of it this summer if it wants to contend. The Americans enter the tournament coming off a win over Senegal and loss to Germany in friendlies."
+   },
+   {
+    "source": "USA Today",
+    "rank": 13,
+    "description": "The hosts have the potential to win over the nation and ride fan support to the best finish in the modern era. They also could totally collapse like they did in both March friendly matches and crash out in the group stage."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 24,
+    "description": "The United States hasn't done much to convince as the nation prepares to open its doors. A run of four wins in five to close out 2025 has been almost forgotten after three losses in the last four. The Stars and Stripes were flattened by Belgium, couldn't stop Portugal, and were second-best against Germany. A decent win against Senegal interrupted those losses. Mauricio Pochettino certainly hasn't performed the miracles that were hoped for when he signed on the dotted line, but given the talent at his disposal, that's perhaps not entirely surprising. Making the U.S. competitive will at least ensure embarrassment on home turf doesn't await, and there is still every chance of winning a favorable Group D. It just won't get much better than that."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 24,
+    "description": "Which USA team are you going to get? The one that looked like the (somewhat) finished article in the 5-1 win against Uruguay to close out 2025, or the disjointed, occasionally lackadaisical squad that turned up for this window’s 5-2 defeat by Belgium and the 2-0 defeat against Portugal at home? Christian Pulisic is in a terrible moment, having missed several key chances in those games, and while Weston McKennie is carrying over some of his Juventus form to the national team, it hasn’t been enough. There’s no question that there’s talent in this team, but under Pochettino they have yet to fully put it together into a cohesive whole. AA"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 23,
+    "description": "The co-hosts have been patchy under Mauricio Pochettino: hiring a blue-chip manager to guide them in their home tournament wasn’t going to plan and after an upturn in results, things have dipped again. Steering a team towards a World Cup with limited competitive action is always a tricky task, and their prospects at home are uncertain."
+   }
+  ],
+  "NOR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 16,
+    "description": "Norway will be a sexy dark-horse pick after dominating qualifying, which includes two wins over Italy. The Norwegians will need more than just Haaland if they want to really compete this summer, though."
+   },
+   {
+    "source": "USA Today",
+    "rank": 14,
+    "description": "Most fans know Erling Haaland and Martin Ødegaard. If casuals come away learning the names of defenders, it will mean a successful tournament."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 15,
+    "description": "In friendly matches heading into the tournament, Norway has chosen to test the squad rather than find minnows for Erling Haaland to swell his goal tally against. That has resulted in one win, two draws, and a loss in four games. The defeat to the Netherlands was not a whitewash, and the draws were against well-matched Switzerland and Morocco teams. A 3-1 win against Sweden without Haaland in the squad also shows they can pick up results without their key marksman. Really, Norway's preparations have made a lot of sense. A fit Haaland, a team with greater collective understanding, and no recent dispiriting results will make Group I easier to navigate."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 15,
+    "description": "Ståle Solbakken’s side started this window with a 2-1 defeat against the Netherlands but were missing key players such as Erling Haaland, Martin Ødegaard and Fredrik Aursnes. That, however, gave others the chance to shine and Andreas Schjelderup was one of those who seized the opportunity, scoring a magnificent goal. Tuesday’s goalless draw against Switzerland was played on a terrible pitch, making it almost impossible to play any decent football. Solbakken and his players won’t have learned too much from it but the past week has seen two decent performances against two teams that regularly play in major tournaments. Vegard Bjelland, TV 2 Norway"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 19,
+    "description": "Norway’s first World Cup since 1998 will see them firmly installed as the resident ‘dark horses’ at this edition. They were a juggernaut in qualifying, winning eight from eight and scoring a whopping 37 goals (16 of which came from Erling Haaland), which makes them a hugely dangerous team."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 10,
+    "description": "Norway have bounced around at the lower end of our top 15 since the 100 days out mark, and it's clear that our voters fancy them as a chaotic outsider pick thanks to the twin threat of maestro Martin Ødegaard in midfield and goal machine Erling Haaland up front. Bolstered by a strong supporting class boasting tons of experience in Europe's top domestic leagues, Norway have the talent to make a decent run beyond the group stage if they can find the right defensive balance. Having cruised through qualifying, Stale Solbakken's side look good heading into the tournament, promptly thumping Italy 4-1 (after conceding first) to book its place prior to the March playoffs. Warmup games against Sweden (a 3-1 win) and Morocco (1-1 draw) showed Norway can hang with opponents up and down the FIFA rankings, too, though neither side comes close to what awaits them in Group I. If the supporting cast -- Sander Berge at the base of midfield, Oscar Bobb and Antonio Nusa out wide -- is as good as the stars, then anything's possible. Also look for the inevitable Alexander Sørloth as another bruising forward option to support Haaland if they are chasing the game."
+   }
+  ],
+  "PAN": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 46,
+    "description": "Panama returns to the World Cup after missing out on 2022. It gets a brutal group against England, Croatia and Ghana. The Panamanians will be lucky to score a goal."
+   },
+   {
+    "source": "USA Today",
+    "rank": 41,
+    "description": "Central America's only representative in the World Cup would be higher were it not for two big blows: Uncertainty around do-it-all midfielder Coco Carrasquilla's fitness and getting drawn into a group with England, Croatia and Ghana."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 29,
+    "description": "With England, Croatia and Ghana alongside Panama in Group L, the latter would have hoped for a better recent run of form. Just two wins from the last six, against the 143rd-ranked Dominican Republic and the 60th-ranked South Africa (Los Canaleros also drew with Bafana Bafana in that stretch), is not an encouraging record in preparation for facing some of the tournament's big-name teams. A 6-2 thrashing at the hands of Brazil in late May, meanwhile, demonstrates that a well-organized defense is not necessarily impenetrable. How Panama will wish it were back in a cushy CONCACAF qualifying group now."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 40,
+    "description": "While some countries seem to chop and change managers on a monthly basis, Los Canaleros have stuck by Thomas Christiansen since 2020 and have reaped the rewards. They may have benefited from three of Concacaf’s big beasts qualifying automatically as hosts but they were unbeaten in qualifying – 10 games played, seven wins, three, draws, 19 goals scored and just five conceded – even if they were grateful for Suriname’s capitulation against Guatemala in the final round. Their March friendlies took the shape of a rather curious double-header against South Africa, where they drew the first game and won the second 2-1. “These kinds of matches help us grow,” said Christiansen, whose team are now ranked 33rd in the world by Fifa. John Ashdown"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 34,
+    "description": "With traditional CONCACAF powerhouses U.S., Canada and Mexico having no need for qualifying as hosts, the path was open for Panama to dominate. Which they did… sort of. They won their group but drew three games, including twice against Suriname, so can they translate that into relative success at the tournament? Maybe, but they needed a kind draw and, after being matched with England, Croatia and Ghana, you don’t fancy their chances."
+   }
+  ],
+  "ENG": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 3,
+    "description": "It pains me to say this, but this is the best England team in decades. With striker Harry Kane leading the attack and Bellingham and Declan Rice in midfield, this could be the year that England breaks through and wins a major international trophy."
+   },
+   {
+    "source": "USA Today",
+    "rank": 4,
+    "description": "With Thomas Tuchel managing the squad and Harry Kane in superb form in front of goal, an England triumph could come by way of Munich."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 5,
+    "description": "Truth be told, this England team should be more exciting than it is. Harry Kane is a phenomenal striker and is at peak form following another Bundesliga Golden Boot and a league title. Then players like Bukayo Saka, Jude Bellingham and Morgan Rogers can provide highlight-reel moments. But put them all together under Thomas Tuchel (or not in the case of Bellingham), and things start to look a bit uninspired. It's a problem that has haunted England teams in the past, but it's particularly notable this time around with the German set to manage in his first international tournament. Scraping a 1-0 win against New Zealand is fine in the context of a warm-up game, but a defeat to Japan and a draw to Uruguay point to bigger issues within the Three Lions' setup. Is Tuchel's style conducive to successful international play? Group L could cause plenty of headaches, and while getting through might be near-guaranteed, it will come with a few bruises to both pride and body. England needs to start being more convincing, or else it will be yet another instance of wasted potential."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 12,
+    "description": "The caveat is England played the reserves against Uruguay (1-1) and had six probable starters out against Japan (0-1). The concern, though, is that Thomas Tuchel has a draw and two defeats from games against top-20 opposition. England do not have momentum or recognisable identity. A host of players flunked auditions for a spot in the final 26 and the biggest worry of all is how the side fared without Harry Kane to lead the line against Japan. They cannot afford their captain and best source of goals to lose form or pick up an injury. Jacob Steinberg"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 6,
+    "description": "Years of disappointment mean English fans can find it difficult to believe they’re among the favourites for the World Cup, but speak to people from any other country and they will tell you Thomas Tuchel’s side are right up there, and rightly so: their results were flawless in qualifying, they possess great depth, have a Champions League-winning manager and reached two finals in their past three tournaments. A tricky March international break doesn’t change the fact that they will be among the favourites, but a tough group means they’re just outside the top five."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 4,
+    "description": "Is soccer coming home this summer? Our voters don't think so, with the Three Lions garnering zero first-place votes in our ballot, and that sense of uncertainty is further amplified by Thomas Tuchel's decision-making with the final roster. Among the names left out: Trent Alexander-Arnold, Cole Palmer, Phil Foden, Harry Maguire and Adam Wharton, all of whom had expected inclusion. Surprise calls for Ivan Toney, John Stones and Jordan Henderson might raise eyebrows, but Tuchel is a tactician who never played favorites, and this England squad is no different. (For those keen-eyed among you: 20 of his 26 selections were called into his very first England camp last year, which is the epitome of \"he showed you how the magic trick works and you just missed it.\") Ultimately, this is striker Harry Kane's team, and England fans will be hoping he carries his transcendent club form with Bayern Munich -- 64 goals in 56 games across all competitions in the 2025-26 season -- and dynamism into the World Cup. Surrounding him are a cadre of skilled, speedy players with clearly defined roles and expectations: Bukayo Saka, Anthony Gordon and Noni Madueke will offer pace and delivery from wide positions, Jude Bellingham and Morgan Rogers will vie for the No. 10 attacking midfield role behind Kane, and box-to-box midfielder Declan Rice will knit defense and attack despite a grueling club season (55 appearances) with Arsenal. It's clear, that win or lose, England are going to do things Tuchel's way, which is arguably why they hired him as manager in 2025 to replace the outgoing Gareth Southgate. (The other reason: He is second-to-none with in-game adjustments, and those fine margins could make the difference in the heat of the American summer.)"
+   }
+  ],
+  "COL": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 4,
+    "description": "I see the heat and environment in the United States favoring South American teams this summer. Colombia has shown it can compete with the best at these big tournaments, and it has a star in attack (winger Luis Diaz) who could lead it to the promised land."
+   },
+   {
+    "source": "USA Today",
+    "rank": 16,
+    "description": "James Rodriguez won't be named best player of the tournament like he was in the 2024 Copa América as the Cafeteros made the final of the South American championship, but with Luis Díaz leading the attack and the same back line returning, they don't need him to shoulder as much of the load."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 13,
+    "description": "Colombia takes a skid in the power rankings following a couple of disappointing results and a relative drought for its star player. Los Cafeteros are still beating the teams that they should, but back-to-back defeats against Croatia and France perhaps provide a better account of where they stand at the moment. Then there is Luis Diaz. While Colombia will be grateful that he wasn't risked too much on the pitch after Bayern Munich secured the Bundesliga title, it does mean his last league goal of the season came in mid-March. After such a blistering start to the 2025-26, it is a notable, albeit understandable, drop-off. Getting back on the scoring trail might not be a problem for the 29-year-old, but it might have disrupted his rhythm slightly. For a national team well known for its lack of consistency, these issues will be a problem for both the collective and the individual."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 21,
+    "description": "It was not a good window for Colombia as it ended with two defeats – against Croatia and France – or for the coach Néstor Lorenzo, but then he had opted for tough assignments, learning from the country’s past experiences before other major tournaments where friendlies against lesser teams have given next to nothing. James Rodríguez was again at the centre of attention but not in a good way. Having played only 40 minutes of club football in 2026 he still started both games before being taken off just after the hour on both occasions. Jenny Gámez of El Tiempo called it a “cowardly decision” not to start Rodríguez on the bench in one of the games. MC"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 9,
+    "description": "The 2024 Copa America finalists finished third in South American qualifying, largely because of a six-game winless run/existential crisis, but they set themselves right towards the end and will go to the tournament with high hopes. James Rodriguez will lead them in what will probably be his last World Cup, but the danger man is surely Luis Diaz, the former Liverpool winger in terrific form at Bayern Munich."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 12,
+    "description": "After missing the 2022 World Cup entirely, Colombia are back at the top table and should make waves in Group K despite still being a little underestimated by our voting panel. The incandescent club form of Bayern winger Luis Díaz means he will be expected to drive their attack, while attacking midfielder James Rodríguez will be keen to prove he still has plenty left in the tank at 34 years old. Coach Nestor Lorenzo has a strong, cohesive squad at his disposal -- 14 of the 26 have 30 caps or more, with Rodríguez and goalkeeper David Ospina boasting over 125 each -- and such harmony could be essential. Question marks remain over their defense -- first-choice central defensive pairing Jhon Lucumí and Davinson Sánchez will struggle if left isolated by their attack-minded fullbacks -- but Lorenzo will back his team to beat both the heat and Uzbekistan in the opener, setting the stage for what could be a fruitful competition."
+   }
+  ],
+  "AUS": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 36,
+    "description": "There are no stars to be found on this team, but the underdog role suits the Australians. They could be a spoiler in"
+   },
+   {
+    "source": "USA Today",
+    "rank": 27,
+    "description": "Cristian Volpato's inclusion should boost Australia rather than cause friction, but they're still yet to excel against top teams."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 37,
+    "description": "After a remarkable trip to the round of 16 in Qatar, Australia will be looking to at least match that achievement. While two wins from four friendlies leading into North America might seem reasonable, the victories came against Cameroon and Curaçao, ranked 44th and 82nd by FIFA, respectively, while they lost to 14th-ranked Mexico and drew with Switzerland, which sits 19th. That failure to take a win against more notable national teams will be a concern, especially when they are the second-lowest-ranked team in Group D. The Socceroos might be lucky to even be in with a chance of the knockouts by the final pool game."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 28,
+    "description": "The window started with a grumble but ended with a backflip, a sequinned glove, a Michael Jackson move and a tantalising glimpse into the future of the Socceroos. “I am a huge MJ fan,” Nestory Irankunda confirmed after Australia stunned Curaçao 5-1 in their Fifa Series friendly. The Watford striker combined with his fellow substitutes Jordan Bos and Riley McGree to devastating effect for three goals in the final 20 minutes. Irankunda’s double demonstrated a new level of attacking composure from the 20-year-old which the coach, Tony Popovic, will hope continues to grow ahead of the World Cup. After a drab showing against Cameroon earlier in the window, Australia’s final preparations have received a much-needed boost. Jo Khan"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 25,
+    "description": "Qualification was slightly hairier than it could have been and they drew too many games, but Australia did also beat Japan. Under Tony Popovic, they will still think they can surpass their previous best performance of the first knockout round. There’s plenty of excitement about young winger Nestory Irankunda, doing his thing at club level for Watford. The 20-year-old looks like he will be Australia’s key attacking threat."
+   }
+  ],
+  "IRQ": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 42,
+    "description": "The good news for Iraq: It's back in the World Cup for the first time in 40 years! The bad news: The Iraqis will face France, Senegal and Norway in their group games."
+   },
+   {
+    "source": "USA Today",
+    "rank": 43,
+    "description": "Graham Arnold's squad overcame many obstacles to qualify from FIFA's intercontinental playoff, but a spot in the \"Group of Death\" is a rude reward."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 47,
+    "description": "Iraq's preparations for the tournament have taken an alarming turn that is out of the nation's control."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 33,
+    "description": "The last of the 48 teams to make it. The Lions of Mesopotamia are back after 40 years away and sealed the deal, fittingly, on Mexican soil with a 2-1 win over Bolivia. Nobody knows what qualifying just two months or so before the tournament means for preparation but few in the football-mad country will care especially as there is little pressure with France, Senegal and Norway waiting. The team’s Australian coach, Graham Arnold, was hoisted up on shoulders and walked around the pitch draped in an Iraqi flag as he celebrated his extraordinary achievement. “I’ve got to give so much thanks to the players,” he told Fifa+. “Their work ethic, they showed the real Iraqi mentality of fighting and putting their bodies on the line, that’s why we won the game.” JD"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 46,
+    "description": "Iraq’s qualification campaign was full of drama: they sacked Jesus Casas in March and replaced him with former Australia coach Graham Arnold, who took them close to automatic qualification. They only finished behind Saudi Arabia on goals scored in the final group stage, then beat the United Arab Emirates with a 107th-minute penalty in the Asian play-off, which granted them access to the intercontinental phase. Thanks to the situation in the Middle East, even getting to those play-offs in Mexico wasn’t a picnic, but get there they did, beating Bolivia in the final. An extraordinary journey."
+   }
+  ],
+  "POR": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 6,
+    "description": "The dynamic surrounding Ronaldo will make or break this tournament for Portugal. The 41-year-old is missing one major trophy in his career, and that's the World Cup. Will the attention he draws be a help or a hindrance?"
+   },
+   {
+    "source": "USA Today",
+    "rank": 8,
+    "description": "Cristiano Ronaldo can be a contributor, but the talent around him is perhaps even more important. Bernardo Silva, Joao Felix and Vitinha all will be more critical to their long-term success."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 6,
+    "description": "Portugal's squad is perhaps the best going to the tournament. While other teams might have better players, few could field two different XIs without a massive drop in quality. That's perhaps why the Seleçao are held to such a high standard, and why unconvincing results lead to disappointment. Portugal should have beaten Mexico instead of picking up a 0-0 draw, and it should have scored more than twice against the USA and Chile. With the standard of players in the squad, it's all just a bit underwhelming. A lot of that will be down to the manager. While Roberto Martinez does have an international pedigree, he's never really made the most of the talent available to him. That will worry Portugal, especially one particular player who will have only one more chance to pick up a trophy that doesn't already sit in his cabinet."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 5,
+    "description": "The matches against Mexico and USA were a good test of Portugal fans’ ability to stay awake in the middle of the night. Not only because of the time they were played but also because of the lethargic performances. Even so, Portugal did not lose, and after a 0-0 draw with Mexico, in the reopening of the Azteca Stadium, they managed to beat USA in Atlanta, 2-0, with goals from Francisco Trincão and João Félix. In the absence of Cristiano Ronaldo, Bernardo Silva, Rúben Dias, Diogo Costa and Rafael Leão, Bruno Fernandes was the team’s main reference. Samu Costa and the 33-year-old Toluca striker Paulinho (who was not even in the initial squad selection for these two games) were able to audition for World Cup places while Ricardo Velho and Mateus Fernandes made their debuts. However, the games will not have given the coach, Roberto Martínez, many sleepless nights as he already had a good idea about who was going to the tournament before this window. Nuno Travassos, A Bola"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 7,
+    "description": "The winners of the 2025 Nations League (plus the 2019 Nations League and the 2016 Euros) have never reached a World Cup final. Will 2026 be their year? The talent is there, but they’re a little down this list because question marks loom over Roberto Martinez’s tactics and how he uses that guy Cristiano Ronaldo, who is 41 years old."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 6,
+    "description": "As goes Cristiano Ronaldo, so goes Portugal. As has been the case for several years, Portugal's biggest star -- and one of the game's all-time greats -- could also be their biggest flaw if the 41-year-old forward can't learn to play well with a deeply talented roster and let them shine around him. The World Cup is the last trinket he has yet to secure and motivation will be sky-high after his biggest rival, Messi, did it in 2022. It's clear from recent months that Portugal need to revolve around midfielder Bruno Fernandes, not CR7, and finessing that direction will be Roberto Martinez's biggest challenge as manager. Aligned with Fernandes and Ronaldo are a cadre of world-class veterans (defender Rúben Dias, midfielders Bernardo Silva and Rúben Neves), plus fast-rising young stars (fullback Nuno Mendes, midfielders Vitinha and João Gomes), and a healthy dose of unpredictability and industry from supporting cast members Pedro Neto and Rafael Leão. The group stage should prove manageable, but how will Martinez navigate rising expectations and any lingering frustration from Ronaldo should his own personal World Cup not get off to a great start?"
+   }
+  ],
+  "FRA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 1,
+    "description": "The combination of talent, depth and arrogance in this square … it's like a lethal French perfume. Manager Didier Deschamps' team has everything needed to send him off with a win this summer in his final major tournament in charge."
+   },
+   {
+    "source": "USA Today",
+    "rank": 2,
+    "description": "Dembélé, Mbappé, Tchouaméni, Upamecano, the names go on for France. Didier Deschamps needs to keep the vibes high, and the sky is clearly the limit."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 1,
+    "description": "France has lost its No. 1 spot in the FIFA World Rankings, but it's at the top of the B/R power ranking. A loss to Côte d'Ivoire for sure sows some doubt, but prior results in March's international break saw France pick up wins against Colombia and Brazil. On top of that, this team is stacked with players coming off trophy-winning seasons with their clubs. Arsenal's William Saliba is a Premier League title winner, and Michael Olise and Dayot Upamecano grabbed a Bundesliga trophy with Bayern Munich. Meanwhile, Warren Zaire-Emery, Bradley Barcola, Ousmane Dembele and Désiré Doué picked up their second consecutive Champions League title with Paris Saint-Germain. Oh, and they have Kylian Mbappé, too. In terms of recent national team results and the taste for winning that's now cultivated among the squad, Les Bleus have arrived in North America as the side to beat."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 1,
+    "description": "“There’s more talent and potential than in 2022,” Kylian Mbappé said ominously this week after France had beaten Brazil 2-1 despite having Dayot Upamecano sent off after 55 minutes. He may well be right. For the second game of this window, against Colombia, Didier Deschamps changed the entire starting XI but was still able to field an attack of Marcus Thuram, Désiré Doué, Rayan Cherki and Maghnes Akliouche. Doué scored two in a comfortable 3-1 victory. “I’m well aware that there are some very good players that I won’t be bringing because, in my opinion, there are even better ones,” Deschamps said. Marcus Christenson"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 3,
+    "description": "On paper, France should probably win it. They arguably have the strongest XI in the tournament and their whole squad is strewn with enviable riches, especially in their Kylian Mbappe-led attack. Didier Deschamps’ task, in his final tournament before stepping down, is to knit it all together, but that didn’t happen at Euro 2024, when a dreary side never convinced. They have moved up to top spot in the FIFA rankings, but we’re keeping them at No 3 here."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 2,
+    "description": "After Les Bleus' painful runners-up finish in 2022, despite Kylian Mbappé's hat trick against Argentina, our reporters reckon France are well-positioned to mount another strong challenge this time around, awarding them six first-place votes. The tournament is manager Didier Deschamps' swansong as manager, and a talented squad will be keen to send him off with a third World Cup win, his second as a coach. Star forward -- and No. 1 in Ryan O'Hanlon's ranking of the Top 50 players at the World Cup -- Ousmane Dembélé spoke of wanting to give Deschamps a happy conclusion to an impressive 14-year tenure, and you'd back him to deliver. An injury scare around center back William Saliba has come and gone, with team doctors declaring him match fit despite a long-standing (and only recently reported) back injury, and the form of stars like Michael Olise, Désiré Doué and Dembélé will strike fear into their Group I opponents, but they'll need to start strong against Senegal to show that some uneven warmup form (including a 2-1 defeat to Ivory Coast) is nothing to fear."
+   }
+  ],
+  "BIH": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 32,
+    "description": "Did the Bosnians peak by beating Italy to qualify for this tournament? That will be the big question for this team entering the tournament. Bosnia and Herzegovina will face Canada on its home soil and a tough matchup against Switzerland in"
+   },
+   {
+    "source": "USA Today",
+    "rank": 34,
+    "description": "They clawed their way past Italy to get to the World Cup after a pair of tight March playoff games. Sergej Barbarez's style of aggressive defending may see them grind out a point or two, but perhaps not many more."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 33,
+    "description": "Italians will likely never forgive Bosnia and Herzegovina for keeping the Azzurri from a third World Cup in succession. They will be even more mad if they don't make the most of the opportunity. As it stands, though, Bosnia has not won a match in 90 minutes since November 2025, with four consecutive stalemates. There's certainly a lot to be said for consistency and defensive solidity, but the Dragons will need to show a little more to make their efforts to get to this stage worthwhile. Relying on a 40-year-old striker like Edin Dzeko doesn't inspire much confidence that they can do that, despite his impressive international record."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 36,
+    "description": "This Bosnian team picked the most difficult, but at the same time the sweetest way to the World Cup. Sergej Barbarez got his first coaching job at the age of 52 in April 2024 and rejuvenated the team, introducing a dozen new and young players. They finished the qualifiers behind Austria and dropped into their sixth playoff for a major tournament. In Cardiff, against Wales, they were losing four minutes before the final whistle but ended up winning on penalties. They then went behind to Italy after 15 minutes in Zenica, but produced another comeback and another shootout win. The winning spot-kick in Cardiff was scored by 18-year-old Kerim Alajbegovic, the one against Italy by 21-year-old Esmir Bajraktarevic, with 40-year-old veteran Edin Dzeko as captain. This is an exciting, young, and joyful team that deserves its place at the World Cup. Sasa Ibrulj"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 42,
+    "description": "They were just 13 minutes away from securing qualification when a late Austrian equaliser dropped them into the play-offs, where they consigned Italy to a third successive World Cup absence in an extraordinary penalty shootout. If you like your strikers old and gangly, Edin Dzeko, formerly of Manchester City, is still going strong(ish), aged 40, with Schalke in the 2. Bundesliga."
+   }
+  ],
+  "CUW": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 47,
+    "description": "Curaçao is the smallest nation in the World Cup with a population of about 156,000. Size doesn't matter … until it does."
+   },
+   {
+    "source": "USA Today",
+    "rank": 48,
+    "description": "The debutants make for an amazing story, but their group would be difficult even for a much larger nation."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 46,
+    "description": "Despite stepping down as Curaçao manager in February to focus on his daughter's health, Dick Advocaat is back in charge, resuming the role after compatriot Fred Rutten kept his seat warm. That's a huge boost for the smallest nation ever to qualify for the tournament, with the experienced Advocaat crucial to making a nation's dreams come true with a first-ever World Cup berth. It's been a mixed bag in pre-tournament friendlies, with a 4-1 hammering at the hands of Scotland followed a couple of days later by a 4-0 thrashing of Aruba. There is an obvious gulf in quality between those nations—147 FIFA ranking spots—and Curaçao will be up against teams in Group E with an average rank of 22, so that's perhaps a clue about what they can expend when the tournament gets underway. However, Advocaat's return is a massive psychological boost and also provides a jump in the power rankings."
+   },
+   {
+    "source": "The Guardian",
+    "rank": 48,
+    "description": "Curaçao’s two friendlies in the new Fifa Series served as a stark reminder of the work needed before the World Cup. The new coach, Fred Rutten, saw his side lose 2-0 to China and 5-1 to Australia. There were glimpses of quality, with many players nurtured in the Netherlands (Curaçao’s constituent country), but consistency was lacking. In both matches, Curaçao faded late on, losing sharpness and intensity. Against Australia they conceded four goals in 17 minutes. Among the team’s priorities is adding more steel, particularly in defence, where greater edge is needed. These matches should serve as a timely wake-up call. Arthur Renard"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 47,
+    "description": "Curacao only achieved country status 15 years ago, and became the smallest nation ever to qualify for the World Cup when they beat Jamaica in a winner-takes-all final-day decider. They’re the fourth debutant, after Jordan, Uzbekistan and Cape Verde, and they look the weakest of that quartet. If they even manage to pick up a point at the World Cup, that would be an achievement. If they win a game, or get through their group… well, stranger things have happened, but not many."
+   }
+  ],
+  "BRA": [
+   {
+    "source": "FOX Sports (Alexi Lalas)",
+    "rank": 7,
+    "description": "It's rare that Brazil enters a World Cup this low in anyone's rankings. I like the idea of the Brazilians entering this tournament with low expectations attached to them. That might make them more dangerous."
+   },
+   {
+    "source": "USA Today",
+    "rank": 7,
+    "description": "Carlo Ancelotti has a less talented team than most Brazil squads of old - and including Neymar in the team was only further proof. Yet, even a 'bad' Brazil still has a lot of merit."
+   },
+   {
+    "source": "Bleacher Report",
+    "rank": 11,
+    "description": "Things might be starting to click between Carlo Ancelotti and the Brazil national team. It's now three wins in three as the Seleçao Canarinho appear to be getting their groove back, with 11 goals scored and four conceded. That sounds more like the Brazil we all know and love, rather than a team that struggled for results and identity. With spirits high, Ancelotti can set a marker in Group C to put knockout opponents on edge. While the presence of Neymar in the 2026 World Cup squad is a bit of a head-scratcher, it's likely Don Carlo has his reasons, and who are we to question one of the finest managerial minds the game has ever seen?"
+   },
+   {
+    "source": "The Guardian",
+    "rank": 4,
+    "description": "As was expected Brazil were overpowered by France 2-1 before recovering to beat Croatia 3-1. Carlo Ancelotti said he has the 26-player squad as well as the starting XI for the World Cup in his mind, but in this window he was unable to perfect his plans because of injuries to key players such as Alisson, Gabriel, Alex Sandro, Bruno Guimarães and Raphinha, who came off at half-time in the game against France. Luiz Henrique benefited from the Barcelona forward’s absence and showed he can be a gamechanger at the World Cup. Endrick also made his case with a promising cameo against Croatia and although Casemiro and Vinícius Jr weren’t quite at their best, these two games were a good test of Brazil’s depth. Gustavo Torres, Estadão"
+   },
+   {
+    "source": "The Athletic (NYT)",
+    "rank": 4,
+    "description": "Brazil are overdue a World Cup win… their last one was so long ago, it was when original Ronaldo had a quarter of a haircut. After a chaotic qualifying campaign, can we really expect them to challenge, or will it be another early exit against European opposition? Manager Carlo Ancelotti, a serial winner, could be their trump card."
+   },
+   {
+    "source": "ESPN FC (panel, top 15)",
+    "rank": 5,
+    "description": "The Seleção won it all the last time the U.S. hosted the men's tournament in 1994, but Brazil will need more than past precedent to assert themselves this summer. The hiring of Carlo Ancelotti as manager could prove masterful given his finesse with superstar egos at his previous jobs at Real Madrid, Chelsea, Milan, PSG and Bayern, and one senses that this team might be the most vibes-based favorite in a crowded field of contenders. Young winger Estêvão has been ruled out due to injury and the squad lacks an established No. 9 striker, but Ancelotti's gambit might be a 4-2-4 formation that provides attacking fireworks and defensive chaos in equal measure. Key to it all will be defensive midfielder Casemiro (who enjoyed a late-season renaissance at Manchester United) and Bruno Guimarães doing the dirty work that allows the likes of Vinicius Jr., Raphinha, Igor Thiago (22 Premier League goals for Brentford this season) and Matheus Cunha to thrive in the attacking third. Also essential will be the center back pair of Marquinhos and Gabriel Magalhães, who are as calm as can be under the kind of pressure this four-forward formation could invite. A lack of credible fullbacks might allow opponents to pin Brazil back and force others to break through, but there is potential here for a deep run. Warmup wins over Panama (6-2, with six different scorers) and Egypt (2-1) could be the start of something good."
+   }
+  ]
+ }
+}

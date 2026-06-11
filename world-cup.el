@@ -72,6 +72,11 @@
   :type 'string
   :group 'world-cup)
 
+(defcustom world-cup-power-rankings-file "world-cup-2026-power-rankings.json"
+  "Name of the team power-rankings JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
 ;;;; Faces
 
 (defgroup world-cup-faces nil
@@ -144,6 +149,7 @@
 (defvar world-cup--analysis nil "Cached alist of CODE -> analysis alist.")
 (defvar world-cup--fixture-notes nil "Cached alist of match-number -> note string.")
 (defvar world-cup--fox-rankings nil "Cached alist of CODE -> (NUMBER -> ranking alist).")
+(defvar world-cup--power-rankings nil "Cached alist of CODE -> list of power-ranking alists.")
 
 (defun world-cup--path (file)
   "Return the absolute path of FILE inside `world-cup-data-directory'."
@@ -193,6 +199,11 @@
   (when (or force (null world-cup--fox-rankings))
     (let ((path (world-cup--path world-cup-fox-rankings-file)))
       (setq world-cup--fox-rankings
+            (when (file-readable-p path)
+              (alist-get 'rankings (world-cup--read-json path))))))
+  (when (or force (null world-cup--power-rankings))
+    (let ((path (world-cup--path world-cup-power-rankings-file)))
+      (setq world-cup--power-rankings
             (when (file-readable-p path)
               (alist-get 'rankings (world-cup--read-json path))))))
   (cons world-cup--teams world-cup--matches))
@@ -247,6 +258,12 @@
   "Return the FOX ranking alist for PLAYER of TEAM, or nil."
   (world-cup-fox-ranking (world-cup-team-code team)
                          (alist-get 'number player)))
+
+(defun world-cup-team-power-rankings (team)
+  "Return the list of power-ranking alists (source, rank, description) for TEAM."
+  (world-cup-load-data)
+  (when-let ((code (world-cup-team-code team)))
+    (alist-get (intern code) world-cup--power-rankings)))
 
 (defun world-cup--find-team-by-code (code)
   (seq-find (lambda (team) (equal (world-cup-team-code team) code))
@@ -1094,6 +1111,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
             (fill-region start (point))))
         (insert "\n\n"))
       (world-cup--insert-analysis team)
+      (world-cup--insert-power-rankings team)
       (world-cup--insert-fixtures team)
       (world-cup--insert-roster team))
     (goto-char (point-min))))
@@ -1127,6 +1145,34 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                 (fill-region start (point)))
               (insert "\n")))))
       (insert "\n"))))
+
+(defun world-cup--insert-power-rankings (team)
+  "Insert the Power Rankings section for TEAM, if available.
+Each source is its own collapsible sub-section (TAB toggles the write-up)."
+  (when-let ((prs (world-cup-team-power-rankings team)))
+    (let* ((ranks (mapcar (lambda (r) (alist-get 'rank r)) prs))
+           (avg (/ (apply #'+ ranks) (float (length ranks)))))
+      (magit-insert-section (world-cup-power-rankings)
+        (magit-insert-heading
+          (propertize (format "Power Rankings  (avg #%.1f across %d sources)"
+                              avg (length prs))
+                      'face 'world-cup-heading))
+        (dolist (r prs)
+          ;; Trailing t => each source's write-up starts collapsed.
+          (magit-insert-section (world-cup-power-rank r t)
+            (magit-insert-heading
+              (concat "  "
+                      (propertize (format "#%d" (alist-get 'rank r))
+                                  'face 'world-cup-rank)
+                      "  "
+                      (propertize (alist-get 'source r) 'face 'world-cup-label)))
+            (let ((start (point)))
+              (insert "      "
+                      (propertize (alist-get 'description r) 'face 'world-cup-quote)
+                      "\n")
+              (let ((fill-column 88) (fill-prefix "      "))
+                (fill-region start (point))))))
+        (insert "\n")))))
 
 (defun world-cup-team-revert ()
   "Reload data from disk and re-render the current team buffer."
