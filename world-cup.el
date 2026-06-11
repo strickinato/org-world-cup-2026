@@ -67,6 +67,11 @@
   :type 'string
   :group 'world-cup)
 
+(defcustom world-cup-fox-rankings-file "world-cup-2026-fox-rankings.json"
+  "Name of the FOX Sports top-100 rankings JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
 ;;;; Faces
 
 (defface world-cup-position-gk '((t :inherit font-lock-builtin-face))
@@ -91,6 +96,7 @@
 (defvar world-cup--summaries nil "Cached alist of CODE -> one-sentence summary.")
 (defvar world-cup--analysis nil "Cached alist of CODE -> analysis alist.")
 (defvar world-cup--fixture-notes nil "Cached alist of match-number -> note string.")
+(defvar world-cup--fox-rankings nil "Cached alist of CODE -> (NUMBER -> ranking alist).")
 
 (defun world-cup--path (file)
   "Return the absolute path of FILE inside `world-cup-data-directory'."
@@ -137,6 +143,11 @@
       (setq world-cup--fixture-notes
             (when (file-readable-p path)
               (alist-get 'notes (world-cup--read-json path))))))
+  (when (or force (null world-cup--fox-rankings))
+    (let ((path (world-cup--path world-cup-fox-rankings-file)))
+      (setq world-cup--fox-rankings
+            (when (file-readable-p path)
+              (alist-get 'rankings (world-cup--read-json path))))))
   (cons world-cup--teams world-cup--matches))
 
 ;;;###autoload
@@ -177,6 +188,18 @@
   (world-cup-load-data)
   (when-let ((n (alist-get 'match_number match)))
     (alist-get (intern (number-to-string n)) world-cup--fixture-notes)))
+
+(defun world-cup-fox-ranking (code number)
+  "Return the FOX ranking alist (rank, summary, name) for CODE + NUMBER, or nil."
+  (world-cup-load-data)
+  (when (and code number)
+    (alist-get (intern (number-to-string number))
+               (alist-get (intern code) world-cup--fox-rankings))))
+
+(defun world-cup-player-fox-ranking (team player)
+  "Return the FOX ranking alist for PLAYER of TEAM, or nil."
+  (world-cup-fox-ranking (world-cup-team-code team)
+                         (alist-get 'number player)))
 
 (defun world-cup--find-team-by-code (code)
   (seq-find (lambda (team) (equal (world-cup-team-code team) code))
@@ -873,6 +896,13 @@ Interactively, prompt for the search string."
                         'world-cup-player player
                         'face 'world-cup-player-link
                         'help-echo "Action key: open this player's page"))
+    ;; Asterisk if the player is on the FOX Sports Top 100.
+    (when-let ((fox (world-cup-fox-ranking
+                     (and world-cup-team (world-cup-team-code world-cup-team))
+                     num)))
+      (insert (propertize "*" 'face 'font-lock-warning-face
+                          'help-echo (format "FOX Sports Top 100: #%d"
+                                             (alist-get 'rank fox)))))
     (insert (make-string (max 1 (- world-cup--name-col (current-column))) ?\s))
     (insert (format "%-4s%-34s%-5s%-7s%s\n"
                     (propertize pos 'face (world-cup--pos-face pos))
@@ -1146,6 +1176,15 @@ The buffer shows collapsible Fixtures and Squad sections."
   (let ((inhibit-read-only t))
     (erase-buffer)
     (world-cup-player--insert-stats)
+    (when-let ((fox (world-cup-player-fox-ranking
+                     world-cup-player--team world-cup-player--player)))
+      (insert "\n " (propertize (format "\u2014 FOX Sports Top 100: #%d \u2014"
+                                        (alist-get 'rank fox))
+                                'face 'font-lock-comment-face) "\n")
+      (let ((start (point)))
+        (insert " " (propertize (alist-get 'summary fox) 'face 'font-lock-doc-face) "\n")
+        (let ((fill-column 80) (left-margin 1) (fill-prefix " "))
+          (fill-region start (point)))))
     (insert "\n " (propertize "\u2014 Wikipedia \u2014"
                               'face 'font-lock-comment-face) "\n")
     (cond
