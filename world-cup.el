@@ -77,6 +77,11 @@
   :type 'string
   :group 'world-cup)
 
+(defcustom world-cup-history-file "world-cup-2026-history.json"
+  "Name of the team World Cup history JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
 ;;;; Faces
 
 (defgroup world-cup-faces nil
@@ -150,6 +155,7 @@
 (defvar world-cup--fixture-notes nil "Cached alist of match-number -> note string.")
 (defvar world-cup--fox-rankings nil "Cached alist of CODE -> (NUMBER -> ranking alist).")
 (defvar world-cup--power-rankings nil "Cached alist of CODE -> list of power-ranking alists.")
+(defvar world-cup--history nil "Cached alist of CODE -> history alist.")
 
 (defun world-cup--path (file)
   "Return the absolute path of FILE inside `world-cup-data-directory'."
@@ -206,6 +212,11 @@
       (setq world-cup--power-rankings
             (when (file-readable-p path)
               (alist-get 'rankings (world-cup--read-json path))))))
+  (when (or force (null world-cup--history))
+    (let ((path (world-cup--path world-cup-history-file)))
+      (setq world-cup--history
+            (when (file-readable-p path)
+              (alist-get 'history (world-cup--read-json path))))))
   (cons world-cup--teams world-cup--matches))
 
 ;;;###autoload
@@ -264,6 +275,12 @@
   (world-cup-load-data)
   (when-let ((code (world-cup-team-code team)))
     (alist-get (intern code) world-cup--power-rankings)))
+
+(defun world-cup-team-history (team)
+  "Return the World Cup history alist for TEAM, or nil."
+  (world-cup-load-data)
+  (when-let ((code (world-cup-team-code team)))
+    (alist-get (intern code) world-cup--history)))
 
 (defun world-cup--find-team-by-code (code)
   (seq-find (lambda (team) (equal (world-cup-team-code team) code))
@@ -1110,6 +1127,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
           (let ((fill-column 78) (left-margin 1))
             (fill-region start (point))))
         (insert "\n\n"))
+      (world-cup--insert-history team)
       (world-cup--insert-analysis team)
       (world-cup--insert-power-rankings team)
       (world-cup--insert-fixtures team)
@@ -1125,6 +1143,36 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
       (let ((fill-column 80) (left-margin 4) (fill-prefix "    "))
         (fill-region start (point)))
       (insert "\n"))))
+
+(defun world-cup--insert-history (team)
+  "Insert a one-line World Cup history summary for TEAM, if available."
+  (when-let ((h (world-cup-team-history team)))
+    (let* ((apps (alist-get 'appearances h))
+           (titles (alist-get 'titles h))
+           (ru (alist-get 'runners_up h))
+           (best (alist-get 'best_finish h))
+           (last-y (alist-get 'last_appearance h))
+           (last-r (alist-get 'last_result h))
+           (parts nil))
+      (push (format "%d appearance%s" apps (if (= apps 1) "" "s")) parts)
+      (cond
+       ((> (length titles) 0)
+        (push (format "%d title%s (%s)" (length titles)
+                      (if (= (length titles) 1) "" "s")
+                      (mapconcat #'number-to-string titles ", ")) parts))
+       ((> (length ru) 0)
+        (push (format "runners-up %s" (mapconcat #'number-to-string ru ", ")) parts)))
+      (when (and best (= (length titles) 0) (= (length ru) 0))
+        (push (format "best: %s" best) parts))
+      (push (if (and last-y last-r)
+                (format "last: %d (%s)" last-y last-r)
+              "first World Cup")
+            parts)
+      (insert " "
+              (propertize "World Cup history: " 'face 'world-cup-label)
+              (propertize (mapconcat #'identity (nreverse parts) "  \u00b7  ")
+                          'face 'world-cup-meta)
+              "\n\n"))))
 
 (defun world-cup--insert-analysis (team)
   "Insert the foldable Analysis section for TEAM, if available."

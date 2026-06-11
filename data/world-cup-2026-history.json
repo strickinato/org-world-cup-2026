@@ -1,0 +1,986 @@
+{
+ "name": "FIFA World Cup history (men's, through 2022)",
+ "source": "https://github.com/jfjelstul/worldcup",
+ "note": "Germany merges West Germany; DR Congo includes 1974 as Zaire; Czechia = Czech Republic only.",
+ "history": {
+  "ALG": {
+   "appearances": 4,
+   "years": [
+    1982,
+    1986,
+    2010,
+    2014
+   ],
+   "first_appearance": 1982,
+   "last_appearance": 2014,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "ARG": {
+   "appearances": 18,
+   "years": [
+    1930,
+    1934,
+    1958,
+    1962,
+    1966,
+    1974,
+    1978,
+    1982,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Winners",
+   "titles": [
+    1978,
+    1986,
+    2022
+   ],
+   "runners_up": [
+    1930,
+    1990,
+    2014
+   ],
+   "third_place": [],
+   "best_finish": "Winners"
+  },
+  "AUS": {
+   "appearances": 6,
+   "years": [
+    1974,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1974,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "AUT": {
+   "appearances": 7,
+   "years": [
+    1934,
+    1954,
+    1958,
+    1978,
+    1982,
+    1990,
+    1998
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 1998,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [
+    1954
+   ],
+   "best_finish": "Third place"
+  },
+  "BEL": {
+   "appearances": 14,
+   "years": [
+    1930,
+    1934,
+    1938,
+    1954,
+    1970,
+    1982,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [
+    2018
+   ],
+   "best_finish": "Third place"
+  },
+  "BIH": {
+   "appearances": 1,
+   "years": [
+    2014
+   ],
+   "first_appearance": 2014,
+   "last_appearance": 2014,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "BRA": {
+   "appearances": 22,
+   "years": [
+    1930,
+    1934,
+    1938,
+    1950,
+    1954,
+    1958,
+    1962,
+    1966,
+    1970,
+    1974,
+    1978,
+    1982,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Quarter-finals",
+   "titles": [
+    1958,
+    1962,
+    1970,
+    1994,
+    2002
+   ],
+   "runners_up": [
+    1950,
+    1998
+   ],
+   "third_place": [
+    1938,
+    1978
+   ],
+   "best_finish": "Winners"
+  },
+  "CPV": {
+   "appearances": 0,
+   "years": [],
+   "first_appearance": null,
+   "last_appearance": null,
+   "last_result": "Debut (2026)",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": null
+  },
+  "CAN": {
+   "appearances": 2,
+   "years": [
+    1986,
+    2022
+   ],
+   "first_appearance": 1986,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "COL": {
+   "appearances": 6,
+   "years": [
+    1962,
+    1990,
+    1994,
+    1998,
+    2014,
+    2018
+   ],
+   "first_appearance": 1962,
+   "last_appearance": 2018,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "COD": {
+   "appearances": 1,
+   "years": [
+    1974
+   ],
+   "first_appearance": 1974,
+   "last_appearance": 1974,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "CRO": {
+   "appearances": 6,
+   "years": [
+    1998,
+    2002,
+    2006,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1998,
+   "last_appearance": 2022,
+   "last_result": "Third place",
+   "titles": [],
+   "runners_up": [
+    2018
+   ],
+   "third_place": [
+    1998,
+    2022
+   ],
+   "best_finish": "Runners-up"
+  },
+  "CUW": {
+   "appearances": 0,
+   "years": [],
+   "first_appearance": null,
+   "last_appearance": null,
+   "last_result": "Debut (2026)",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": null
+  },
+  "CZE": {
+   "appearances": 1,
+   "years": [
+    2006
+   ],
+   "first_appearance": 2006,
+   "last_appearance": 2006,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "CIV": {
+   "appearances": 3,
+   "years": [
+    2006,
+    2010,
+    2014
+   ],
+   "first_appearance": 2006,
+   "last_appearance": 2014,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "ECU": {
+   "appearances": 4,
+   "years": [
+    2002,
+    2006,
+    2014,
+    2022
+   ],
+   "first_appearance": 2002,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "EGY": {
+   "appearances": 3,
+   "years": [
+    1934,
+    1990,
+    2018
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2018,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "ENG": {
+   "appearances": 16,
+   "years": [
+    1950,
+    1954,
+    1958,
+    1962,
+    1966,
+    1970,
+    1982,
+    1986,
+    1990,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1950,
+   "last_appearance": 2022,
+   "last_result": "Quarter-finals",
+   "titles": [
+    1966
+   ],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Winners"
+  },
+  "FRA": {
+   "appearances": 16,
+   "years": [
+    1930,
+    1934,
+    1938,
+    1954,
+    1958,
+    1966,
+    1978,
+    1982,
+    1986,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Runners-up",
+   "titles": [
+    1998,
+    2018
+   ],
+   "runners_up": [
+    2006,
+    2022
+   ],
+   "third_place": [
+    1958,
+    1986
+   ],
+   "best_finish": "Winners"
+  },
+  "GER": {
+   "appearances": 20,
+   "years": [
+    1934,
+    1938,
+    1954,
+    1958,
+    1962,
+    1966,
+    1970,
+    1974,
+    1978,
+    1982,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [
+    1954,
+    1974,
+    1990,
+    2014
+   ],
+   "runners_up": [
+    1966,
+    1982,
+    1986,
+    2002
+   ],
+   "third_place": [
+    1934,
+    1970,
+    2006,
+    2010
+   ],
+   "best_finish": "Winners"
+  },
+  "GHA": {
+   "appearances": 4,
+   "years": [
+    2006,
+    2010,
+    2014,
+    2022
+   ],
+   "first_appearance": 2006,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "HAI": {
+   "appearances": 1,
+   "years": [
+    1974
+   ],
+   "first_appearance": 1974,
+   "last_appearance": 1974,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "IRN": {
+   "appearances": 6,
+   "years": [
+    1978,
+    1998,
+    2006,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1978,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "IRQ": {
+   "appearances": 1,
+   "years": [
+    1986
+   ],
+   "first_appearance": 1986,
+   "last_appearance": 1986,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "JPN": {
+   "appearances": 7,
+   "years": [
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1998,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "JOR": {
+   "appearances": 0,
+   "years": [],
+   "first_appearance": null,
+   "last_appearance": null,
+   "last_result": "Debut (2026)",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": null
+  },
+  "KOR": {
+   "appearances": 11,
+   "years": [
+    1954,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1954,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Fourth place"
+  },
+  "MEX": {
+   "appearances": 17,
+   "years": [
+    1930,
+    1950,
+    1954,
+    1958,
+    1962,
+    1966,
+    1970,
+    1978,
+    1986,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "MAR": {
+   "appearances": 6,
+   "years": [
+    1970,
+    1986,
+    1994,
+    1998,
+    2018,
+    2022
+   ],
+   "first_appearance": 1970,
+   "last_appearance": 2022,
+   "last_result": "Fourth place",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Fourth place"
+  },
+  "NED": {
+   "appearances": 11,
+   "years": [
+    1934,
+    1938,
+    1974,
+    1978,
+    1990,
+    1994,
+    1998,
+    2006,
+    2010,
+    2014,
+    2022
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2022,
+   "last_result": "Quarter-finals",
+   "titles": [],
+   "runners_up": [
+    1974,
+    1978,
+    2010
+   ],
+   "third_place": [
+    2014
+   ],
+   "best_finish": "Runners-up"
+  },
+  "NZL": {
+   "appearances": 2,
+   "years": [
+    1982,
+    2010
+   ],
+   "first_appearance": 1982,
+   "last_appearance": 2010,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "NOR": {
+   "appearances": 3,
+   "years": [
+    1938,
+    1994,
+    1998
+   ],
+   "first_appearance": 1938,
+   "last_appearance": 1998,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "PAN": {
+   "appearances": 1,
+   "years": [
+    2018
+   ],
+   "first_appearance": 2018,
+   "last_appearance": 2018,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "PAR": {
+   "appearances": 8,
+   "years": [
+    1930,
+    1950,
+    1958,
+    1986,
+    1998,
+    2002,
+    2006,
+    2010
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2010,
+   "last_result": "Quarter-finals",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "POR": {
+   "appearances": 8,
+   "years": [
+    1966,
+    1986,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1966,
+   "last_appearance": 2022,
+   "last_result": "Quarter-finals",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [
+    1966
+   ],
+   "best_finish": "Third place"
+  },
+  "QAT": {
+   "appearances": 1,
+   "years": [
+    2022
+   ],
+   "first_appearance": 2022,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "KSA": {
+   "appearances": 6,
+   "years": [
+    1994,
+    1998,
+    2002,
+    2006,
+    2018,
+    2022
+   ],
+   "first_appearance": 1994,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Round of 16"
+  },
+  "SCO": {
+   "appearances": 8,
+   "years": [
+    1954,
+    1958,
+    1974,
+    1978,
+    1982,
+    1986,
+    1990,
+    1998
+   ],
+   "first_appearance": 1954,
+   "last_appearance": 1998,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "SEN": {
+   "appearances": 3,
+   "years": [
+    2002,
+    2018,
+    2022
+   ],
+   "first_appearance": 2002,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "RSA": {
+   "appearances": 3,
+   "years": [
+    1998,
+    2002,
+    2010
+   ],
+   "first_appearance": 1998,
+   "last_appearance": 2010,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "ESP": {
+   "appearances": 16,
+   "years": [
+    1934,
+    1950,
+    1962,
+    1966,
+    1978,
+    1982,
+    1986,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [
+    2010
+   ],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Winners"
+  },
+  "SWE": {
+   "appearances": 12,
+   "years": [
+    1934,
+    1938,
+    1950,
+    1958,
+    1970,
+    1974,
+    1978,
+    1990,
+    1994,
+    2002,
+    2006,
+    2018
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2018,
+   "last_result": "Quarter-finals",
+   "titles": [],
+   "runners_up": [
+    1958
+   ],
+   "third_place": [
+    1950,
+    1994
+   ],
+   "best_finish": "Runners-up"
+  },
+  "SUI": {
+   "appearances": 12,
+   "years": [
+    1934,
+    1938,
+    1950,
+    1954,
+    1962,
+    1966,
+    1994,
+    2006,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1934,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Quarter-finals"
+  },
+  "TUN": {
+   "appearances": 6,
+   "years": [
+    1978,
+    1998,
+    2002,
+    2006,
+    2018,
+    2022
+   ],
+   "first_appearance": 1978,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Group stage"
+  },
+  "TUR": {
+   "appearances": 2,
+   "years": [
+    1954,
+    2002
+   ],
+   "first_appearance": 1954,
+   "last_appearance": 2002,
+   "last_result": "Third place",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [
+    2002
+   ],
+   "best_finish": "Third place"
+  },
+  "USA": {
+   "appearances": 11,
+   "years": [
+    1930,
+    1934,
+    1950,
+    1990,
+    1994,
+    1998,
+    2002,
+    2006,
+    2010,
+    2014,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Round of 16",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [
+    1930
+   ],
+   "best_finish": "Third place"
+  },
+  "URU": {
+   "appearances": 14,
+   "years": [
+    1930,
+    1950,
+    1954,
+    1962,
+    1966,
+    1970,
+    1974,
+    1986,
+    1990,
+    2002,
+    2010,
+    2014,
+    2018,
+    2022
+   ],
+   "first_appearance": 1930,
+   "last_appearance": 2022,
+   "last_result": "Group stage",
+   "titles": [
+    1930,
+    1950
+   ],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": "Winners"
+  },
+  "UZB": {
+   "appearances": 0,
+   "years": [],
+   "first_appearance": null,
+   "last_appearance": null,
+   "last_result": "Debut (2026)",
+   "titles": [],
+   "runners_up": [],
+   "third_place": [],
+   "best_finish": null
+  }
+ }
+}
