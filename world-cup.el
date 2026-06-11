@@ -74,19 +74,66 @@
 
 ;;;; Faces
 
-(defface world-cup-position-gk '((t :inherit font-lock-builtin-face))
-  "Face for goalkeepers." :group 'world-cup)
-(defface world-cup-position-df '((t :inherit font-lock-keyword-face))
-  "Face for defenders." :group 'world-cup)
-(defface world-cup-position-mf '((t :inherit font-lock-function-name-face))
-  "Face for midfielders." :group 'world-cup)
-(defface world-cup-position-fw '((t :inherit font-lock-string-face))
-  "Face for forwards." :group 'world-cup)
+(defgroup world-cup-faces nil
+  "Faces used in World Cup buffers." :group 'world-cup)
+
+(defface world-cup-title
+  '((t :inherit info-title-2 :weight bold))
+  "Face for the main title of a World Cup buffer." :group 'world-cup-faces)
+
+(defface world-cup-subtitle
+  '((t :inherit shadow :slant italic))
+  "Face for a subtitle line beneath a title." :group 'world-cup-faces)
+
+(defface world-cup-heading
+  '((t :inherit magit-section-heading :underline t))
+  "Face for section headings." :group 'world-cup-faces)
+
+(defface world-cup-label
+  '((t :inherit font-lock-keyword-face :weight bold))
+  "Face for field labels such as \"Team:\"." :group 'world-cup-faces)
+
+(defface world-cup-meta
+  '((t :inherit shadow))
+  "Face for dim secondary text (hints, venues, footers)." :group 'world-cup-faces)
+
+(defface world-cup-column-header
+  '((t :inherit (bold shadow) :underline t))
+  "Face for table column headers." :group 'world-cup-faces)
+
+(defface world-cup-code
+  '((t :inherit font-lock-constant-face :weight bold))
+  "Face for 3-letter team codes." :group 'world-cup-faces)
+
+(defface world-cup-quote
+  '((t :inherit font-lock-doc-face :slant italic))
+  "Face for editorial summaries and quotes." :group 'world-cup-faces)
+
+(defface world-cup-note
+  '((t :inherit font-lock-string-face :slant italic))
+  "Face for fixture notes." :group 'world-cup-faces)
+
+(defface world-cup-rank
+  '((t :inherit warning :weight bold))
+  "Face for FOX Sports ranking markers." :group 'world-cup-faces)
+
 (defface world-cup-player-link '((t :inherit link))
   "Face for a clickable player name (Hyperbole implicit button)."
-  :group 'world-cup)
-(defface world-cup-summary-title '((t :inherit info-title-3))
-  "Face for the title in a Wikipedia summary overlay." :group 'world-cup)
+  :group 'world-cup-faces)
+
+(defface world-cup-position-gk '((t :inherit font-lock-builtin-face :weight bold))
+  "Face for goalkeepers." :group 'world-cup-faces)
+(defface world-cup-position-df '((t :inherit font-lock-keyword-face :weight bold))
+  "Face for defenders." :group 'world-cup-faces)
+(defface world-cup-position-mf '((t :inherit font-lock-function-name-face :weight bold))
+  "Face for midfielders." :group 'world-cup-faces)
+(defface world-cup-position-fw '((t :inherit font-lock-string-face :weight bold))
+  "Face for forwards." :group 'world-cup-faces)
+
+;; Backward-compatible alias for the former title face name.
+(put 'world-cup-summary-title 'face-alias 'world-cup-title)
+(defface world-cup-summary-title '((t :inherit world-cup-title)) "Alias."
+  :group 'world-cup-faces)
 
 
 ;;;; Data loading
@@ -299,12 +346,12 @@ The stored date and `time_et' are interpreted in `world-cup--source-time-zone'."
     (when-let ((team (cdr (assoc cand cands))))
       (concat
        (propertize (format "  [%s]" (world-cup-team-code team))
-                   'face 'font-lock-keyword-face)
+                   'face 'world-cup-label)
        (propertize (format "  %d players" (length (world-cup-team-players team)))
-                   'face 'font-lock-comment-face)
+                   'face 'world-cup-meta)
        (when-let ((coach (world-cup-team-coach-name team)))
          (propertize (format "  coach: %s" coach)
-                     'face 'font-lock-comment-face))))))
+                     'face 'world-cup-meta))))))
 
 (defun world-cup--read-team ()
   "Prompt for a team, returning the chosen team alist.
@@ -469,7 +516,7 @@ Section headings are kept in wiki form (== Heading ==).  Returns nil on error."
     (when title
       (insert " " (propertize title 'face 'world-cup-summary-title) "\n\n"))
     (when (and desc (stringp desc) (not (string-empty-p desc)))
-      (insert " " (propertize desc 'face 'font-lock-comment-face) "\n\n"))
+      (insert " " (propertize desc 'face 'world-cup-meta) "\n\n"))
     (when image
       (insert " ")
       (insert-image image)
@@ -534,7 +581,7 @@ Section headings are kept in wiki form (== Heading ==).  Returns nil on error."
             (propertize (if world-cup-summary--full
                             "[TAB] show summary only"
                           "[TAB] load full article")
-                        'face 'font-lock-comment-face)
+                        'face 'world-cup-meta)
             "\n")
     (goto-char (point-min))))
 
@@ -680,7 +727,7 @@ returned no results."
                     (when-let* ((r (cdr (assoc cand cands)))
                                 (d (plist-get r :desc))
                                 ((not (string-empty-p d))))
-                      (concat "  " (propertize d 'face 'font-lock-comment-face)))))
+                      (concat "  " (propertize d 'face 'world-cup-meta)))))
                  (prompt (format "Wikipedia (%s): " query))
                  (choice
                   (if (fboundp 'consult--read)
@@ -822,10 +869,10 @@ Interactively, prompt for the search string."
                    (when dur (propertize (format "  [%s]" dur)
                                          'face 'font-lock-constant-face))
                    (when ch (propertize (format "  %s" ch)
-                                        'face 'font-lock-comment-face))
+                                        'face 'world-cup-meta))
                    (when (numberp views)
                      (propertize (format "  %s views" views)
-                                 'face 'font-lock-comment-face)))))))
+                                 'face 'world-cup-meta)))))))
            (prompt (format "YouTube (%s): " query))
            (choice
             (if (fboundp 'consult--read)
@@ -900,7 +947,7 @@ Interactively, prompt for the search string."
     (when-let ((fox (world-cup-fox-ranking
                      (and world-cup-team (world-cup-team-code world-cup-team))
                      num)))
-      (insert (propertize "*" 'face 'font-lock-warning-face
+      (insert (propertize "*" 'face 'world-cup-rank
                           'help-echo (format "FOX Sports Top 100: #%d"
                                              (alist-get 'rank fox)))))
     (insert (make-string (max 1 (- world-cup--name-col (current-column))) ?\s))
@@ -917,12 +964,12 @@ Interactively, prompt for the search string."
     (magit-insert-section (world-cup-roster)
       (magit-insert-heading
         (propertize (format "Squad (%d players)" (length players))
-                    'face 'magit-section-heading))
+                    'face 'world-cup-heading))
       (insert "  "
               (propertize
                (format "%-38s%-4s%-34s%-5s%-7s%s\n"
                        "Name" "Pos" "Club (Nat)" "Age" "Ht" "#")
-               'face 'font-lock-comment-face))
+               'face 'world-cup-column-header))
       (dolist (p players)
         (world-cup--insert-player p))
       (insert "\n"))))
@@ -977,7 +1024,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                               (format "%s, %s"
                                       (alist-get 'venue match)
                                       (alist-get 'city match))
-                              'face 'font-lock-comment-face))))
+                              'face 'world-cup-meta))))
     (magit-insert-section (world-cup-match match)
       (magit-insert-heading
         (propertize line
@@ -985,7 +1032,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                     'help-echo "Action key: open game page"))
       (when-let ((note (world-cup-match-note match)))
         (let ((start (point)))
-          (insert "       \u21b3 " (propertize note 'face 'font-lock-doc-face) "\n")
+          (insert "       \u21b3 " (propertize note 'face 'world-cup-note) "\n")
           (let ((fill-column 84) (left-margin 9) (fill-prefix "         "))
             (fill-region start (point))))))))
 
@@ -995,15 +1042,15 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
     (magit-insert-section (world-cup-fixtures)
       (magit-insert-heading
         (propertize (format "Fixtures (%d)" (length matches))
-                    'face 'magit-section-heading))
+                    'face 'world-cup-heading))
       (if (null matches)
           (insert (propertize "  No scheduled matches found.\n"
-                              'face 'font-lock-comment-face))
+                              'face 'world-cup-meta))
         (insert (propertize
                  (format "  %-10s %5s  %-7s  %-27s  %s\n"
                          "Date" (world-cup--tz-abbrev (car matches))
                          "Stage" "Opponent" "Venue")
-                 'face 'font-lock-comment-face))
+                 'face 'world-cup-column-header))
         (dolist (m matches)
           (world-cup--insert-fixture team m)))
       (insert "\n"))))
@@ -1029,16 +1076,20 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
     (erase-buffer)
     (setq world-cup-team team)
     (setq header-line-format
-          (format " %s  [%s]   Coach: %s"
-                  (world-cup-team-name team)
-                  (world-cup-team-code team)
-                  (or (world-cup-team-coach-name team) "?")))
+          (concat " "
+                  (propertize (world-cup-team-name team) 'face 'world-cup-title)
+                  "  "
+                  (propertize (format "[%s]" (world-cup-team-code team))
+                              'face 'world-cup-code)
+                  (propertize (format "   Coach: %s"
+                                      (or (world-cup-team-coach-name team) "?"))
+                              'face 'world-cup-meta)))
     (magit-insert-section (world-cup-team-root)
       (when-let ((summary (world-cup-team-summary team)))
-        (insert (propertize "\u201c" 'face 'font-lock-comment-face))
+        (insert (propertize "\u201c" 'face 'world-cup-meta))
         (let ((start (point)))
-          (insert (propertize summary 'face 'font-lock-doc-face))
-          (insert (propertize "\u201d" 'face 'font-lock-comment-face))
+          (insert (propertize summary 'face 'world-cup-quote))
+          (insert (propertize "\u201d" 'face 'world-cup-meta))
           (let ((fill-column 78) (left-margin 1))
             (fill-region start (point))))
         (insert "\n\n"))
@@ -1050,7 +1101,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
 (defun world-cup--insert-analysis-field (label text)
   "Insert a labelled, filled analysis paragraph for LABEL and TEXT."
   (when (and text (stringp text) (not (string-empty-p text)))
-    (insert "  " (propertize (concat label ": ") 'face 'font-lock-keyword-face))
+    (insert "  " (propertize (concat label ": ") 'face 'world-cup-label))
     (let ((start (point)))
       (insert text)
       (let ((fill-column 80) (left-margin 4) (fill-prefix "    "))
@@ -1062,13 +1113,13 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
   (when-let ((a (world-cup-team-analysis team)))
     (magit-insert-section (world-cup-analysis)
       (magit-insert-heading
-        (propertize "Analysis" 'face 'magit-section-heading))
+        (propertize "Analysis" 'face 'world-cup-heading))
       (world-cup--insert-analysis-field "Narrative" (alist-get 'narrative a))
       (world-cup--insert-analysis-field "Key players" (alist-get 'key_players a))
       (world-cup--insert-analysis-field "Hinges on" (alist-get 'hinges_on a))
       (let ((notes (alist-get 'notes a)))
         (when notes
-          (insert "  " (propertize "Notes:" 'face 'font-lock-keyword-face) "\n")
+          (insert "  " (propertize "Notes:" 'face 'world-cup-label) "\n")
           (dolist (n notes)
             (let ((start (point)))
               (insert "    \u2022 " n)
@@ -1165,11 +1216,11 @@ The buffer shows collapsible Fixtures and Squad sections."
                   (cons "Height" (if cm (format "%s   (%s cm)" ht cm) "?"))))
       (insert (format " %-10s %s\n"
                       (propertize (concat (car row) ":")
-                                  'face 'font-lock-keyword-face)
+                                  'face 'world-cup-label)
                       (cdr row))))))
 
 (defun world-cup-player--insert-help ()
-  (insert (propertize " Press ? for actions" 'face 'font-lock-comment-face) "\n"))
+  (insert (propertize " Press ? for actions" 'face 'world-cup-meta) "\n"))
 
 (defun world-cup-player--render ()
   "Render the player buffer from its buffer-local state."
@@ -1180,13 +1231,13 @@ The buffer shows collapsible Fixtures and Squad sections."
                      world-cup-player--team world-cup-player--player)))
       (insert "\n " (propertize (format "\u2014 FOX Sports Top 100: #%d \u2014"
                                         (alist-get 'rank fox))
-                                'face 'font-lock-comment-face) "\n")
+                                'face 'world-cup-meta) "\n")
       (let ((start (point)))
-        (insert " " (propertize (alist-get 'summary fox) 'face 'font-lock-doc-face) "\n")
+        (insert " " (propertize (alist-get 'summary fox) 'face 'world-cup-quote) "\n")
         (let ((fill-column 80) (left-margin 1) (fill-prefix " "))
           (fill-region start (point)))))
     (insert "\n " (propertize "\u2014 Wikipedia \u2014"
-                              'face 'font-lock-comment-face) "\n")
+                              'face 'world-cup-meta) "\n")
     (cond
      (world-cup-player--no-results
       (insert "\n " (propertize "<no wikipedia results>" 'face 'warning) "\n"))
@@ -1209,10 +1260,10 @@ The buffer shows collapsible Fixtures and Squad sections."
       (insert "\n " (propertize (if world-cup-player--full
                                     "[TAB] show summary only"
                                   "[TAB] load full article")
-                                'face 'font-lock-comment-face) "\n"))
+                                'face 'world-cup-meta) "\n"))
      (t
       (insert "\n " (propertize "Looking up Wikipedia\u2026"
-                                'face 'font-lock-comment-face) "\n")))
+                                'face 'world-cup-meta) "\n")))
     (insert "\n")
     (world-cup-player--insert-help)
     (goto-char (point-min))))
@@ -1318,9 +1369,9 @@ either."
         (concat
          (propertize (format "  %-2s" pos) 'face (world-cup--pos-face pos))
          (propertize (format "  %s" (world-cup--club-label p))
-                     'face 'font-lock-comment-face)
+                     'face 'world-cup-meta)
          (when age (propertize (format "  age %d" age)
-                               'face 'font-lock-comment-face)))))))
+                               'face 'world-cup-meta)))))))
 
 ;;;###autoload
 (defun world-cup-consult-player ()
@@ -1419,7 +1470,7 @@ implicit button on a roster name."
                                        (alist-get 'country m)))))
       (insert (format " %-9s %s\n"
                       (propertize (concat (car row) ":")
-                                  'face 'font-lock-keyword-face)
+                                  'face 'world-cup-label)
                       (cdr row))))))
 
 (defun world-cup-game--render ()
@@ -1430,11 +1481,11 @@ implicit button on a roster name."
     (when-let ((note (world-cup-match-note world-cup-game--match)))
       (insert "\n")
       (let ((start (point)))
-        (insert " " (propertize note 'face 'font-lock-doc-face) "\n")
+        (insert " " (propertize note 'face 'world-cup-note) "\n")
         (let ((fill-column 84) (left-margin 1) (fill-prefix " "))
           (fill-region start (point)))))
     (insert "\n" (propertize " Press ? for actions"
-                             'face 'font-lock-comment-face) "\n")
+                             'face 'world-cup-meta) "\n")
     (goto-char (point-min))))
 
 (defun world-cup-game-youtube-preview ()
@@ -1513,7 +1564,7 @@ implicit button on a roster name."
   (lambda (cand)
     (when-let* ((m (cdr (assoc cand cands))))
       (propertize (format "  %s, %s" (alist-get 'venue m) (alist-get 'city m))
-                  'face 'font-lock-comment-face))))
+                  'face 'world-cup-meta))))
 
 ;;;###autoload
 (defun world-cup-consult-fixture ()
@@ -1604,11 +1655,11 @@ Groups are sorted A..L; teams within a group are sorted by name."
   "Insert a foldable standings table for group LETTER with TEAMS."
   (magit-insert-section (world-cup-group letter)
     (magit-insert-heading
-      (propertize (format "Group %s" letter) 'face 'magit-section-heading))
+      (propertize (format "Group %s" letter) 'face 'world-cup-heading))
     (insert "  "
             (propertize (format "%-28s %3s %3s %3s %3s %3s %3s %4s %4s"
                                 "Team" "MP" "W" "D" "L" "GF" "GA" "GD" "Pts")
-                        'face 'font-lock-comment-face)
+                        'face 'world-cup-column-header)
             "\n")
     (dolist (team teams)
       (world-cup-dashboard--insert-team-row team))
@@ -1622,7 +1673,7 @@ Groups are sorted A..L; teams within a group are sorted by name."
       (insert (propertize " FIFA World Cup 2026 \u2014 Group Standings"
                           'face 'world-cup-summary-title)
               "\n"
-              (propertize " Press ? for actions" 'face 'font-lock-comment-face)
+              (propertize " Press ? for actions" 'face 'world-cup-meta)
               "\n\n")
       (dolist (entry (world-cup--groups))
         (world-cup-dashboard--insert-group (car entry) (cdr entry))))
