@@ -52,6 +52,21 @@
   :type 'string
   :group 'world-cup)
 
+(defcustom world-cup-summaries-file "world-cup-2026-team-summaries.json"
+  "Name of the one-sentence team summaries JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
+(defcustom world-cup-analysis-file "world-cup-2026-team-analysis.json"
+  "Name of the team analysis JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
+(defcustom world-cup-fixture-notes-file "world-cup-2026-fixture-notes.json"
+  "Name of the per-fixture notes JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
 ;;;; Faces
 
 (defface world-cup-position-gk '((t :inherit font-lock-builtin-face))
@@ -73,6 +88,9 @@
 
 (defvar world-cup--teams nil "Cached list of team alists.")
 (defvar world-cup--matches nil "Cached list of match alists.")
+(defvar world-cup--summaries nil "Cached alist of CODE -> one-sentence summary.")
+(defvar world-cup--analysis nil "Cached alist of CODE -> analysis alist.")
+(defvar world-cup--fixture-notes nil "Cached alist of match-number -> note string.")
 
 (defun world-cup--path (file)
   "Return the absolute path of FILE inside `world-cup-data-directory'."
@@ -104,6 +122,21 @@
     (setq world-cup--matches
           (alist-get 'matches (world-cup--read-json
                               (world-cup--path world-cup-schedule-file)))))
+  (when (or force (null world-cup--summaries))
+    (let ((path (world-cup--path world-cup-summaries-file)))
+      (setq world-cup--summaries
+            (when (file-readable-p path)
+              (alist-get 'summaries (world-cup--read-json path))))))
+  (when (or force (null world-cup--analysis))
+    (let ((path (world-cup--path world-cup-analysis-file)))
+      (setq world-cup--analysis
+            (when (file-readable-p path)
+              (alist-get 'analysis (world-cup--read-json path))))))
+  (when (or force (null world-cup--fixture-notes))
+    (let ((path (world-cup--path world-cup-fixture-notes-file)))
+      (setq world-cup--fixture-notes
+            (when (file-readable-p path)
+              (alist-get 'notes (world-cup--read-json path))))))
   (cons world-cup--teams world-cup--matches))
 
 ;;;###autoload
@@ -126,6 +159,24 @@
 (defun world-cup-team-coach-name (team)
   (let ((coach (alist-get 'coach team)))
     (and coach (alist-get 'name coach))))
+
+(defun world-cup-team-summary (team)
+  "Return the one-sentence summary for TEAM, or nil."
+  (world-cup-load-data)
+  (when-let ((code (world-cup-team-code team)))
+    (alist-get (intern code) world-cup--summaries)))
+
+(defun world-cup-team-analysis (team)
+  "Return the analysis alist for TEAM, or nil."
+  (world-cup-load-data)
+  (when-let ((code (world-cup-team-code team)))
+    (alist-get (intern code) world-cup--analysis)))
+
+(defun world-cup-match-note (match)
+  "Return the fixture note string for MATCH, or nil."
+  (world-cup-load-data)
+  (when-let ((n (alist-get 'match_number match)))
+    (alist-get (intern (number-to-string n)) world-cup--fixture-notes)))
 
 (defun world-cup--find-team-by-code (code)
   (seq-find (lambda (team) (equal (world-cup-team-code team) code))
@@ -901,7 +952,12 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
       (magit-insert-heading
         (propertize line
                     'world-cup-fixture match
-                    'help-echo "Action key: open game page")))))
+                    'help-echo "Action key: open game page"))
+      (when-let ((note (world-cup-match-note match)))
+        (let ((start (point)))
+          (insert "       \u21b3 " (propertize note 'face 'font-lock-doc-face) "\n")
+          (let ((fill-column 84) (left-margin 9) (fill-prefix "         "))
+            (fill-region start (point))))))))
 
 (defun world-cup--insert-fixtures (team)
   "Insert the Fixtures section for TEAM."
@@ -948,9 +1004,48 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                   (world-cup-team-code team)
                   (or (world-cup-team-coach-name team) "?")))
     (magit-insert-section (world-cup-team-root)
+      (when-let ((summary (world-cup-team-summary team)))
+        (insert (propertize "\u201c" 'face 'font-lock-comment-face))
+        (let ((start (point)))
+          (insert (propertize summary 'face 'font-lock-doc-face))
+          (insert (propertize "\u201d" 'face 'font-lock-comment-face))
+          (let ((fill-column 78) (left-margin 1))
+            (fill-region start (point))))
+        (insert "\n\n"))
+      (world-cup--insert-analysis team)
       (world-cup--insert-fixtures team)
       (world-cup--insert-roster team))
     (goto-char (point-min))))
+
+(defun world-cup--insert-analysis-field (label text)
+  "Insert a labelled, filled analysis paragraph for LABEL and TEXT."
+  (when (and text (stringp text) (not (string-empty-p text)))
+    (insert "  " (propertize (concat label ": ") 'face 'font-lock-keyword-face))
+    (let ((start (point)))
+      (insert text)
+      (let ((fill-column 80) (left-margin 4) (fill-prefix "    "))
+        (fill-region start (point)))
+      (insert "\n"))))
+
+(defun world-cup--insert-analysis (team)
+  "Insert the foldable Analysis section for TEAM, if available."
+  (when-let ((a (world-cup-team-analysis team)))
+    (magit-insert-section (world-cup-analysis)
+      (magit-insert-heading
+        (propertize "Analysis" 'face 'magit-section-heading))
+      (world-cup--insert-analysis-field "Narrative" (alist-get 'narrative a))
+      (world-cup--insert-analysis-field "Key players" (alist-get 'key_players a))
+      (world-cup--insert-analysis-field "Hinges on" (alist-get 'hinges_on a))
+      (let ((notes (alist-get 'notes a)))
+        (when notes
+          (insert "  " (propertize "Notes:" 'face 'font-lock-keyword-face) "\n")
+          (dolist (n notes)
+            (let ((start (point)))
+              (insert "    \u2022 " n)
+              (let ((fill-column 80) (left-margin 6) (fill-prefix "      "))
+                (fill-region start (point)))
+              (insert "\n")))))
+      (insert "\n"))))
 
 (defun world-cup-team-revert ()
   "Reload data from disk and re-render the current team buffer."
@@ -1293,6 +1388,12 @@ implicit button on a roster name."
   (let ((inhibit-read-only t))
     (erase-buffer)
     (world-cup-game--insert-stats)
+    (when-let ((note (world-cup-match-note world-cup-game--match)))
+      (insert "\n")
+      (let ((start (point)))
+        (insert " " (propertize note 'face 'font-lock-doc-face) "\n")
+        (let ((fill-column 84) (left-margin 1) (fill-prefix " "))
+          (fill-region start (point)))))
     (insert "\n" (propertize " Press ? for actions"
                              'face 'font-lock-comment-face) "\n")
     (goto-char (point-min))))

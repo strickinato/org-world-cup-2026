@@ -1,0 +1,472 @@
+{
+  "name": "FIFA World Cup 2026 team analysis",
+  "sources": {
+    "A-D": "https://www.youtube.com/watch?v=bvA4mN9QyrE",
+    "E-H": "https://www.youtube.com/watch?v=Kd-fNPe_ojA",
+    "I-L": "https://www.youtube.com/watch?v=UETzADOlmZQ"
+  },
+  "attribution": "Synthesised from the Guardian Football Weekly World Cup group previews (auto-caption transcripts). Concise editorial paraphrase.",
+  "analysis": {
+    "MEX": {
+      "narrative": "Javier 'El Vasco' Aguirre's third World Cup in charge of El Tri, perennial group-stage qualifiers who slipped up in Qatar and now host with everything geared around home advantage.",
+      "key_players": "A mostly home-based squad pulled into camp early; veteran keeper Guillermo Ochoa in for a sixth World Cup.",
+      "hinges_on": "Leaning on altitude, heat and home advantage to win a kind group and stay in Mexico for the last 32.",
+      "notes": [
+        "Play at altitude in Mexico City (2,240m) and Guadalajara, plus heat in Monterrey.",
+        "Arguably weaker on paper than past Mexican generations.",
+        "Domestic-based players are well rested and acclimatised."
+      ]
+    },
+    "RSA": {
+      "narrative": "Back at a World Cup for the first time since hosting in 2010, built around a strong Mamelodi Sundowns core fresh off an African Champions League win.",
+      "key_players": "Heavy Sundowns contingent under Belgian coach Hugo Broos.",
+      "hinges_on": "Surprising people by nicking a game in an open group.",
+      "notes": [
+        "Arrived late in the US due to player visa issues.",
+        "Few players based abroad, so largely an unknown quantity.",
+        "Tipped by some to finish bottom of Group A."
+      ]
+    },
+    "KOR": {
+      "narrative": "Hong Myung-bo, the 2002 semi-final captain, leads a side a touch weaker than recent vintages chasing another knockout spot.",
+      "key_players": "Son Heung-min (33), the talisman, though he scored only twice in MLS this year.",
+      "hinges_on": "Getting something from an open group without needing to be brilliant.",
+      "notes": [
+        "Already grumbling about playing the whole tournament at altitude.",
+        "Lost 4-0 to Ivory Coast and 1-0 to Australia in recent friendlies."
+      ]
+    },
+    "CZE": {
+      "narrative": "Miroslav Koubek's spirited, physical side came through the playoffs but lack ball-playing finesse.",
+      "key_players": "Patrik Schick and Tomas Soucek; nearly half the squad play together at Slavia Prague.",
+      "hinges_on": "Whether their cohesion can offset a brutal travel-and-heat schedule.",
+      "notes": [
+        "Punishing draw: altitude vs Korea in Guadalajara, then 3,500km hops to Atlanta and Mexico City.",
+        "Based in New Jersey, making little effort to acclimatise.",
+        "Coach is 74."
+      ]
+    },
+    "CAN": {
+      "narrative": "Jesse Marsch's side, billed as the best Canadian team ever, want to top the group to stay in Vancouver.",
+      "key_players": "Alphonso Davies (fitness a major doubt), Jonathan David (Juventus) and Tajon Buchanan.",
+      "hinges_on": "Alphonso Davies' fitness and finally turning good play into goals.",
+      "notes": [
+        "Davies may miss the first game or two.",
+        "First non-Canadian coach; signed an extension to 2030.",
+        "'Ted Lasso' positivity from Marsch."
+      ]
+    },
+    "BIH": {
+      "narrative": "Beat Italy and Wales in the playoffs to reach only their second World Cup as an independent nation.",
+      "key_players": "40-year-old Edin Dzeko still scoring; teenager Kerim Alajbegovic (Salzburg) caught the eye in the playoffs.",
+      "hinges_on": "Finding runners to do Dzeko's running in the heat.",
+      "notes": [
+        "Surprise playoff run, aided by an Italy red card.",
+        "Alajbegovic tipped to break out."
+      ]
+    },
+    "QAT": {
+      "narrative": "Hosts in 2022, back via the Asian fourth-round playoff after churning through three coaches in qualifying.",
+      "key_players": "Akram Afif, off a title-winning Qatar Stars League season, under coach Julen Lopetegui.",
+      "hinges_on": "Simply winning a game; their third group match is the realistic chance.",
+      "notes": [
+        "Not big physically and could get bullied.",
+        "Lost 1-0 to Ireland in a recent friendly, mostly against 10 men."
+      ]
+    },
+    "SUI": {
+      "narrative": "Murat Yakin's experienced, deeply familiar core grinds out effective, low-mistake football.",
+      "key_players": "Granit Xhaka (4th World Cup), Manuel Akanji and Dan Ndoye, with Breel Embolo up front.",
+      "hinges_on": "Defensive solidity and taking their chances; they are often more durable than expected.",
+      "notes": [
+        "Conceded just two goals in qualifying.",
+        "Shaqiri, Sommer and Schar have retired from international duty.",
+        "Short on a creative spark."
+      ]
+    },
+    "BRA": {
+      "narrative": "Carlo Ancelotti's five-time winners limp out of a poor qualifying campaign (lost six of 18) but have the talent to leave it behind.",
+      "key_players": "Vinicius Jr, Raphinha, Bruno Guimaraes and Casemiro; Rayan (Bournemouth) made the cut.",
+      "hinges_on": "Balancing an attack-stacked XI so the forwards actually track back.",
+      "notes": [
+        "Neymar's omission and fitness saga threaten to overshadow.",
+        "Missing Rodrygo, Estevao and Militao to injury; Alisson had an injury-hit season.",
+        "Climate suits them more than most big nations.",
+        "Sometimes line up in a front-loaded 4-2-4."
+      ]
+    },
+    "MAR": {
+      "narrative": "2022 semi-finalists under new boss Mohamed Ouahbi, the U20 World Cup-winning coach, who has promoted youngsters and plays more adventurously than the pragmatic Regragui.",
+      "key_players": "Brahim Diaz, plus a canny, solid defense and a couple of game-changers.",
+      "hinges_on": "Defensive solidity and patience in the heat; too good to be mere dark horses.",
+      "notes": [
+        "Reached the semis in 2022.",
+        "Pundits split on whether more 'adventure' is wise in this climate."
+      ]
+    },
+    "HAI": {
+      "narrative": "First World Cup since 1974, qualifying amid a state of emergency and playing 'home' games in Curacao.",
+      "key_players": "Jean-Ricner Bellegarde and goalkeeper Johny Placide.",
+      "hinges_on": "Avoiding a heavy defeat in a group with Brazil and Morocco.",
+      "notes": [
+        "Coach Sebastien Migne and most players have never set foot in Haiti.",
+        "In 1974 they ended Dino Zoff's 1,142-minute clean-sheet run before losing to Italy."
+      ]
+    },
+    "SCO": {
+      "narrative": "First World Cup since 1998 and a chance to escape a group for the first time ever, with everything riding on the opener vs Haiti.",
+      "key_players": "A strong midfield and in-form Lawrence Shankland up top; lost Billy Gilmour to injury (Tyler Fletcher called up).",
+      "hinges_on": "Beating Haiti by a two- or three-goal margin in game one.",
+      "notes": [
+        "Goalkeeper and centre-back are problem areas (Craig Gordon is 43).",
+        "Experienced, highly motivated squad, many on a last World Cup chance.",
+        "The Tartan Army will travel in huge numbers."
+      ]
+    },
+    "USA": {
+      "narrative": "Hosts under Mauricio Pochettino, riding the home-soil belief they can reach the quarter-finals despite friction with their coach.",
+      "key_players": "Christian Pulisic, on fire in a recent friendly vs Senegal, in a poster-boy moment.",
+      "hinges_on": "Starting well and winning the group to open up the draw.",
+      "notes": [
+        "Players reportedly dislike the coach, and vice versa.",
+        "A strong start tends to carry host nations a long way."
+      ]
+    },
+    "AUS": {
+      "narrative": "Tony Popovic's Socceroos arrive with rare optimism on the back of a solid crop of young talent.",
+      "key_players": "Jordi Bos (Feyenoord, LWB), Alessandro Circati, Mohamed Toure and wildcard Nestory Irankunda.",
+      "hinges_on": "Squeezing into the knockouts from an open group.",
+      "notes": [
+        "Likely starter Riley McGree ruled out injured.",
+        "Christian Volpato switched allegiance from Italy and has never played for the Socceroos."
+      ]
+    },
+    "PAR": {
+      "narrative": "Gustavo Alfaro's counter-attacking side beat Brazil, Argentina and Uruguay in qualifying and fancy a knockout spot.",
+      "key_players": "Miguel Almiron (ex-Newcastle), Ramon Sosa (Nottingham Forest) and centre-back Omar Alderete.",
+      "hinges_on": "Finding goals; they don't score many.",
+      "notes": [
+        "Happy to cede possession and strike on the break.",
+        "Manager nicknamed 'the lettuce'."
+      ]
+    },
+    "TUR": {
+      "narrative": "Vincenzo Montella's perennial dark-horse pick, with a favourable draw and quarter-final pedigree from Euro 2024.",
+      "key_players": "Arda Guler and Kenan Yildiz, sparkling talent behind rugged defenders.",
+      "hinges_on": "A kind group and their system clicking to win the group.",
+      "notes": [
+        "Shipped six against Spain in qualifying, but otherwise in good form.",
+        "The eternal 'is it finally Turkey's year?' meme."
+      ]
+    },
+    "GER": {
+      "narrative": "Julian Nagelsmann's side will advance by format but again looks short of a true centre-forward.",
+      "key_players": "Florian Wirtz and Jamal Musiala (injury doubt); Kai Havertz likely as a false nine.",
+      "hinges_on": "Whether Havertz can lead the line and the big talents stay fit.",
+      "notes": [
+        "Recalled 40-year-old Manuel Neuer, risking friction with Oliver Baumann.",
+        "Grim qualifying despite a 6-0 win over Slovakia.",
+        "Possible quarter-final vs France."
+      ]
+    },
+    "CUW": {
+      "narrative": "The smallest nation ever to qualify, an almost entirely Netherlands-raised squad led back by 78-year-old Dick Advocaat.",
+      "key_players": "Tahith Chong (the only squad member born in Curacao) and the Bania brothers in midfield.",
+      "hinges_on": "Sitting deep and hitting on the break; survival, realistically.",
+      "notes": [
+        "Advocaat stepped down for family reasons, then was rehired weeks before the tournament.",
+        "Will be the oldest coach in World Cup history at 78.",
+        "Dramatic final-game qualification in Jamaica (a late penalty was VAR-overturned)."
+      ]
+    },
+    "CIV": {
+      "narrative": "Emerse Fae's Ivory Coast finally land a group they ought to escape, riding momentum from a dramatic 2023 AFCON title.",
+      "key_players": "Simon Adingra, Amad Diallo and Seko Fofana; Wilfried Zaha left out.",
+      "hinges_on": "Taking the chance of a kinder draw than the brutal groups of years past.",
+      "notes": [
+        "Beat France in a World Cup tune-up.",
+        "Fae took over mid-AFCON and won it; he infamously lost all 11 games he played for Reading."
+      ]
+    },
+    "ECU": {
+      "narrative": "Sebastian Beccacece's hard-to-beat side finished second in South American qualifying, behind only Argentina.",
+      "key_players": "Moises Caicedo and Enner Valencia, behind a formidable back four (Pacho, Hincapie, Estupinan).",
+      "hinges_on": "Their stout defense turning goalless grind into deep progress.",
+      "notes": [
+        "Only lost to Brazil and drew Argentina in qualifying.",
+        "A genuine sleeper / dark-horse pick.",
+        "Had six goalless draws in qualifying (14 scored, 5 conceded in 18 games)."
+      ]
+    },
+    "NED": {
+      "narrative": "Ronald Koeman's perennial nearly-men land in arguably the best-balanced group of all.",
+      "key_players": "Cody Gakpo, Virgil van Dijk and Tijjani Reijnders; Xavi Simons a notable loss.",
+      "hinges_on": "Settling on a first XI and rhythm despite many under-played squad players.",
+      "notes": [
+        "Best footballing nation never to win it.",
+        "Goalkeeper unsettled (Verbruggen likely but inexperienced).",
+        "Could go long-ball with Brobbey and Weghorst in desperation."
+      ]
+    },
+    "JPN": {
+      "narrative": "Hajime Moriyasu's side may be the best Asian team ever, cruising through qualifying, but carry a last-16 psychological hoodoo.",
+      "key_players": "Kaoru Mitoma (injured, a big blow), Takefusa Kubo, Daizen Maeda and Wataru Endo.",
+      "hinges_on": "Finally breaking the round-of-16 ceiling they have hit every time since 2002.",
+      "notes": [
+        "Beat Germany and Spain at the last World Cup.",
+        "Injuries (Mitoma, Minamino doubt) may cap their ceiling.",
+        "Coach openly says they should aim to win it."
+      ]
+    },
+    "SWE": {
+      "narrative": "Graham Potter, adored in Sweden, has taken over mid-cycle a side that scraped in via the Nations League back door.",
+      "key_players": "Alexander Isak and Viktor Gyokeres up front; missing Dejan Kulusevski (injury).",
+      "hinges_on": "Whether Potter can get Isak and Gyokeres firing together.",
+      "notes": [
+        "A genuine 'loose horse' with little reliable form to judge.",
+        "Gyokeres still not great at holding the ball up."
+      ]
+    },
+    "TUN": {
+      "narrative": "Sabri Lamouchi's Eagles of Carthage qualified without conceding, but from a weak group and with almost no attacking threat.",
+      "key_players": "Hannibal Mejbri is the creative hub; Khalil Yari (PSG) a Hail-Mary young forward.",
+      "hinges_on": "Finding goals from somewhere; striking options are dire.",
+      "notes": [
+        "Play with extreme caution bordering on paranoia.",
+        "Teenager Louis Ben Farhat reportedly withheld by his father.",
+        "Changed coach after a poor AFCON."
+      ]
+    },
+    "BEL": {
+      "narrative": "Rudy Garcia's post-golden-generation Belgium have a kind group but lingering questions.",
+      "key_players": "Kevin De Bruyne, an aging Romelu Lukaku, Jeremy Doku and Leandro Trossard; Courtois back after a feud.",
+      "hinges_on": "Finding a reliable goalscorer and not conceding soft goals.",
+      "notes": [
+        "Scored 29 in eight qualifiers, but mostly against weak sides.",
+        "Defense looks less authoritative than the old guard.",
+        "De Bruyne in the heat is a question."
+      ]
+    },
+    "EGY": {
+      "narrative": "Hossam Hassan's Egypt settled on a 3-4-1-2 to fit both stars, with this likely Salah's last real World Cup shot.",
+      "key_players": "Mohamed Salah and Omar Marmoush up front, knitted together by a creative number 10 in Emam Ashour.",
+      "hinges_on": "Whether the coach can make the right in-game calls; doubts persist.",
+      "notes": [
+        "Marmoush eases the load on Salah.",
+        "Their veteran keeper is among the oldest players at the tournament.",
+        "Coach seen as a motivator more than a tactician."
+      ]
+    },
+    "IRN": {
+      "narrative": "Amir Ghalenoei's experienced, aging Iran chase a first-ever exit from the group amid heavy political tension.",
+      "key_players": "Mehdi Taremi; notably without Sardar Azmoun, their best striker, who has criticised the regime.",
+      "hinges_on": "Focusing on football despite the geopolitical backdrop.",
+      "notes": [
+        "Staying in Mexico, playing in the US; a possible last-32 meeting with the USA.",
+        "Azmoun (57 goals in 91 caps) left out.",
+        "An old squad."
+      ]
+    },
+    "NZL": {
+      "narrative": "Cruised through a tiny Oceania qualifying path, barely tested, and arrive boosted by the return of Chris Wood.",
+      "key_players": "Chris Wood (talisman), Kosta Barbarouses, Elijah Just and cult hero Tim Payne.",
+      "hinges_on": "Scoring goals beyond Wood in a tough group.",
+      "notes": [
+        "Played just five qualifiers (vs ~21 for Iraq).",
+        "Tim Payne went from 4,000 to 4.3m Instagram followers after going viral as the 'least-known player'.",
+        "Beat Chile 4-1 in a friendly."
+      ]
+    },
+    "ESP": {
+      "narrative": "Euro 2024 winners and many people's favourites, with a stable, balanced squad and a rising teenage star.",
+      "key_players": "Lamine Yamal (fitness doubt), Pedri, Rodri, Nico Williams (fitness doubt) and Fabian Ruiz.",
+      "hinges_on": "Fitness of Yamal and Nico Williams to provide the direct, wide threat.",
+      "notes": [
+        "First-ever Spain squad with no Real Madrid players.",
+        "Lost leadership in Morata and Carvajal; Rodri the lone remaining elder.",
+        "Heat suits their possession game; the most 'club-like' team."
+      ]
+    },
+    "CPV": {
+      "narrative": "World Cup debutants and the third-smallest nation ever to qualify, built since 2023 into a tough, all-Europe-based unit.",
+      "key_players": "Ryan Mendes (top scorer, 36), keeper Vozinha (39) and Stopira (37), under coach Pedro 'Bubista' Brito.",
+      "hinges_on": "Beating Saudi Arabia, the game they will target, to maybe sneak through as a third-placed team.",
+      "notes": [
+        "An aging core getting its one shot.",
+        "Roberto 'Pico' Lopes was recruited via a LinkedIn message.",
+        "Bubista was 2025 African Coach of the Year."
+      ]
+    },
+    "KSA": {
+      "narrative": "Georgios Donis took over only in April; the squad is almost entirely Saudi Pro League-based.",
+      "key_players": "Saud Abdulhamid (on loan at Roma) is the lone overseas player; mostly SPL names.",
+      "hinges_on": "Getting out of the group for the first time since 1994.",
+      "notes": [
+        "Famously beat Argentina in 2022.",
+        "The foreign influx in the SPL means many players lack game time.",
+        "New coach has little time to imprint his ideas."
+      ]
+    },
+    "URU": {
+      "narrative": "Marcelo Bielsa's two-time champions started his reign brightly but have gone off the boil amid a thin generation.",
+      "key_players": "Darwin Nunez (out of form and rusty), Federico Valverde and Manuel Ugarte.",
+      "hinges_on": "Nunez rediscovering goals and the squad buying into Bielsa's intensity.",
+      "notes": [
+        "Bielsa's harsh team talks reportedly reduced Nunez to tears (he then scored).",
+        "Suarez criticised Bielsa, then offered himself for the World Cup and wasn't picked.",
+        "The U20 World Cup winners of 2023 have largely been ignored."
+      ]
+    },
+    "FRA": {
+      "narrative": "Didier Deschamps' final tournament with a frighteningly talented but unbalanced squad before Zidane takes over.",
+      "key_players": "Kylian Mbappe, Ousmane Dembele, Desire Doue and Michael Olise; William Saliba a game-one injury doubt.",
+      "hinges_on": "Whether a shaky defense and weakened midfield hold up against elite opposition.",
+      "notes": [
+        "An embarrassment of attacking riches and selection headaches.",
+        "Midfield leans on a 35-year-old Kante; the back line doesn't fully convince.",
+        "Their most fluent recent display was a B-team friendly vs Colombia."
+      ]
+    },
+    "SEN": {
+      "narrative": "Pape Thiaw's Senegal pair a rock-solid defense with experience and exciting youth, the African side most likely to go deep.",
+      "key_players": "Sadio Mane, Kalidou Koulibaly and Edouard Mendy, plus teens Lamine Camara and Pape Matar Sarr.",
+      "hinges_on": "Starting well against France to top a brutal group.",
+      "notes": [
+        "Conceded just two goals in seven games at AFCON.",
+        "Too good to really be called dark horses.",
+        "The opener vs France is a 'nice needle' match."
+      ]
+    },
+    "IRQ": {
+      "narrative": "Graham Arnold's side reach a first World Cup in 40 years after an intercontinental playoff win over Bolivia, to jubilation in Baghdad.",
+      "key_players": "Ali Al-Hamadi (ex-AFC Wimbledon) in a well-drilled Arnold team.",
+      "hinges_on": "Nicking a point, and maybe springing a shock in a group where third could fail to advance.",
+      "notes": [
+        "Brutal draw with France, Senegal and Norway.",
+        "A win 'would put the cat among the pigeons'."
+      ]
+    },
+    "NOR": {
+      "narrative": "Back at a World Cup after a long absence, top scorers in qualifying having torn Italy apart.",
+      "key_players": "Erling Haaland, Martin Odegaard, Alexander Sorloth, Antonio Nusa and Oscar Bobb.",
+      "hinges_on": "Whether a lack of tournament know-how derails an otherwise stacked, balanced team.",
+      "notes": [
+        "Beat Sweden in their farewell friendly, relaxed and impressive.",
+        "Few precedents for thriving after such a long layoff.",
+        "Risk of finishing as a third-placed team in a strong group."
+      ]
+    },
+    "ARG": {
+      "narrative": "Lionel Scaloni's defending champions go with continuity, basically the 2022 final XI four years older, in a pleasant group.",
+      "key_players": "Lionel Messi (minutes to be managed), Lautaro Martinez and Julian Alvarez; 38-year-old Otamendi may start.",
+      "hinges_on": "Using nous and stability to grind, while easing the load off Messi.",
+      "notes": [
+        "Lots of 'Springsteen-tour' US friendlies, so hard to gauge their true level.",
+        "End-of-an-era feel; not the runaway favourites of 2022.",
+        "10 of the 11 from the 2022 final remain."
+      ]
+    },
+    "ALG": {
+      "narrative": "Vladimir Petkovic's talented but unpredictable side return, captained by Riyad Mahrez.",
+      "key_players": "Riyad Mahrez and a clutch of genuinely strong players.",
+      "hinges_on": "Turning quality into results; a real unknown quantity.",
+      "notes": [
+        "Beat the Netherlands in a tune-up.",
+        "Must travel ~5,000km across two time zones in three group games, far more than anyone else."
+      ]
+    },
+    "AUT": {
+      "narrative": "Ralf Rangnick's pressing side could bloody a favourite's nose; their Argentina meeting in Dallas has epic potential.",
+      "key_players": "Marcel Sabitzer, Konrad Laimer and Marko Arnautovic, plus new declarees Paul Wanner and Carney Chukwuemeka.",
+      "hinges_on": "Adapting their high-energy press to the heat.",
+      "notes": [
+        "Wanner and Chukwuemeka switched from the German and English youth setups.",
+        "Heavily reliant on Arnautovic for goals."
+      ]
+    },
+    "JOR": {
+      "narrative": "A first-ever World Cup for Jamal Sellami's Jordan, who shone at the recent Arab Cup.",
+      "key_players": "Mousa Al-Tamari among the few names familiar to European audiences.",
+      "hinges_on": "Springing a surprise as an unknown quantity.",
+      "notes": [
+        "Beat Saudi Arabia and Egypt en route to the Arab Cup final, losing only to Morocco in extra time.",
+        "Could surprise people."
+      ]
+    },
+    "POR": {
+      "narrative": "Roberto Martinez's Portugal carry arguably the most complete, balanced squad in the tournament, overshadowed by the Ronaldo question.",
+      "key_players": "Bruno Fernandes, Vitinha, Joao Neves, Rafael Leao, Bernardo Silva and Nuno Mendes; plus Cristiano Ronaldo.",
+      "hinges_on": "Whether Ronaldo accepts a reduced role, and conflict-averse Martinez manages it.",
+      "notes": [
+        "Ronaldo scored in both Nations League finals wins (and even pressed).",
+        "Open question of who starts up top if not Ronaldo (Goncalo Ramos, Joao Felix).",
+        "An insanely deep midfield."
+      ]
+    },
+    "COD": {
+      "narrative": "Sebastien Desabre's side reach a first World Cup in 52 years, tactically disciplined and mostly European-born.",
+      "key_players": "Yoane Wissa (a poor season at Newcastle), Axel Tuanzebe and Arthur Masuaku.",
+      "hinges_on": "Getting a result against Colombia in game two.",
+      "notes": [
+        "A massive country living through constant conflict.",
+        "Could create chaos in an open group."
+      ]
+    },
+    "UZB": {
+      "narrative": "Fabio Cannavaro's Uzbekistan reach a maiden World Cup after a history of near-misses.",
+      "key_players": "Abdukodir Khusanov (Man City defender), their best-known player.",
+      "hinges_on": "Grinding out draws and nicking goals on the break.",
+      "notes": [
+        "Cannavaro was appointed after they had already qualified.",
+        "Tipped by the panel to finish bottom of the group."
+      ]
+    },
+    "COL": {
+      "narrative": "Nestor Lorenzo's Colombia were on a brilliant run to the 2024 Copa final but have lost their way since.",
+      "key_players": "James Rodriguez (34, may retire after) and Luis Diaz; Jhon Duran omitted.",
+      "hinges_on": "Rediscovering identity and form around an aging core.",
+      "notes": [
+        "Only two players under 25, a very old squad.",
+        "Were dismantled by a second-string France.",
+        "Could underperform expectations."
+      ]
+    },
+    "ENG": {
+      "narrative": "Thomas Tuchel's settled, tournament-calibrated side carry a real sense of purpose and arrive sharp and fresh.",
+      "key_players": "Harry Kane (astonishing form), Declan Rice, Jude Bellingham, Elliot Anderson and Morgan Rogers.",
+      "hinges_on": "Overcoming the neurosis and circus; they look to have all the other pieces.",
+      "notes": [
+        "Had the highest possession in European qualifying, crucial in the heat.",
+        "Tuchel ruthlessly cut Foden and Cole Palmer; Ivan Toney, Dan Burn and Henderson are squad options.",
+        "Coach unbothered by the English media sideshow."
+      ]
+    },
+    "CRO": {
+      "narrative": "2018 runners-up and 2022 third place, Zlatko Dalic's golden generation makes one last run.",
+      "key_players": "Luka Modric (closing on 200 caps), Mateo Kovacic and Ivan Perisic; youth in Luka Vuskovic and Martin Baturina.",
+      "hinges_on": "How long the aging core lasts in the heat.",
+      "notes": [
+        "Modric, Perisic and Kovacic have 462 caps between them.",
+        "Likely scrapping with Ghana for second."
+      ]
+    },
+    "GHA": {
+      "narrative": "Carlos Queiroz's Black Stars arrive in poor form, their reputation outstripping the current squad.",
+      "key_players": "Mohammed Kudus, Thomas Partey and Jordan Ayew.",
+      "hinges_on": "A lot more than the panel expects; they look unbalanced and out of sorts.",
+      "notes": [
+        "Hammered by Germany and Mexico recently.",
+        "Pundits skeptical Ghana are the 'superpower' their name implies."
+      ]
+    },
+    "PAN": {
+      "narrative": "Thomas Christiansen's Panama, at a second World Cup, shouldn't be the whipping boys people expect.",
+      "key_players": "Adalberto Carrasquilla and Ismael Diaz in an experienced CONCACAF core.",
+      "hinges_on": "Causing an upset, starting with Ghana in Toronto.",
+      "notes": [
+        "Escaped a Copa America group with Uruguay and the USA.",
+        "Reached the CONCACAF Nations League final."
+      ]
+    }
+  }
+}
