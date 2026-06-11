@@ -1,23 +1,90 @@
-* Info
+* Historical Note
+This project started as a fork of the org-mode 2018 project documented here.
+https://www.sastibe.de/2018/06/its-here-org-agenda-for-the-world-cup-2018/
 
-** 2026 schedule imported from https://raw.githubusercontent.com/mjwebmaster/world-cup-2026-schedule-data/refs/heads/main/world-cup-2026-schedule.json
-** Directly influenced by https://github.com/ruediger/org-world-cup2014
-** All times for US Eastern Time (=time_et= from the source data)
-** The 2018 schedule (=org-world-cup-2018.org=) is kept for reference.
+But now that we can vibe code -- I took it a a LOT further -- and with this package -- you can get tons of information about the world cup in your emacs.
 
-Use the following function to change the timezone.  E.g., set =n= to +6 hours for
-Central European Summer Time (UTC+2).  Copy code block to org-world-cup-2026.org and use =C-c= to eval it.
+* Vibecoded disclaimer
 
-#+HEADERS: :var n=-1
-#+begin_src emacs-lisp :results silent
-(save-excursion
- (goto-char (point-min))
-  (while (re-search-forward "[[<]" nil t)
-    (when (org-at-timestamp-p t)
-      (org-timestamp-change n 'hour))))
+I have not really looked at the code. This is something I just whipped up to make it fun to read about the upcoming games.
+
+* See it in action:
+
+#+BEGIN_HTML
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=7tURkbpdUmo" target="_blank">
+  <img src="http://img.youtube.com/vi/7tURkbpdUmo/0.jpg" alt="See it in action" />
+</a>
+#+END_HTML
+
+* Packages
+
+These are packages used that you probably need/want to have for this to work on your machine.
+
+- ~magit-section~ (collapsible buffers / sections)
+- ~transient~ (the ~?~ action menus; ships with Emacs / comes with magit)
+- GNU ~hyperbole~ (the implicit buttons on player names, fixtures and team names)
+- Built-ins: ~json~, ~url~, ~seq~, ~subr-x~
+
+Optional / soft:
+- ~consult~ -- if present, team/player/fixture pickers and the Wikipedia/YouTube
+  choosers use ~consult--read~; otherwise they fall back to plain ~completing-read~.
+- ~evil~ -- if present, all buffer keybindings are also bound in normal/motion
+  state (see [[*Keybindings][Keybindings]]).
+- Emacs built with ~xwidget~ support -- only needed for the "web search in
+  xwidget" actions; the browser action works everywhere.
+
+** External command-line tools
+- ~yt-dlp~ -- YouTube search (match previews, player highlights).
+- ~mpv~ -- streams the chosen video. (~mpv~ uses ~yt-dlp~ under the hood.)
+Paths are customizable via ~world-cup-yt-dlp-program~ and ~world-cup-mpv-program~.
+
+* Installation
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/path/to/org-world-cup-2026")
+(require 'world-cup)
+;; optional: a global key to open the dashboard
+(global-set-key (kbd "C-c w") #'world-cup-dashboard)
 #+end_src
-** =[[https://en.wikipedia.org/wiki/File:Soccer_ball.svg][football.svg]]= can be used as a category icon.
-It is a 16\times16 GFDL licensed SVG file.  Add =("Football"
-"PATH-TO-FOOTBALL.SVG" nil nil :ascent center)= to
-=org-agenda-category-icon-alist= to have org-mode display it in the
-Agenda next to the Football category.
+
+The JSON data lives in the =data/= directory next to =world-cup.el=; the path is
+customizable with =M-x customize-group RET world-cup= (see =world-cup-data-directory=).
+
+* Usage
+
+** Entry points (=M-x=)
+- =world-cup-dashboard= -- group-stage standings for all 12 groups; team names
+  are buttons to each team page.
+- =world-cup-consult-team= -- search the 48 teams; opens that team's page.
+- =world-cup-consult-player= -- search all ~1,248 players (by name or country);
+  opens that player's page.
+- =world-cup-consult-fixture= -- search all 104 games; opens that game's page.
+- =world-cup-reload-data= -- re-read the JSON data from disk.
+- =world-cup-wikipedia-uncache= -- clear a wrongly-cached Wikipedia article.
+
+** Buttons (GNU Hyperbole)
+Press the Hyperbole action key (=M-RET=, or shift/middle-click) on:
+- a *player name* in a squad -> opens that player's page
+- a *fixture row* in a team page -> opens that game's page
+- a *team name* in the dashboard -> opens that team's page
+
+** Keybindings
+Every buffer has a =?= transient menu; common keys also work directly (and under
+=evil= normal/motion state):
+- *Team page*: =t= find team, =p= find player, =f= find game, =g= reload, =q= quit
+- *Player page*: =y= YouTube highlights, =x= web (xwidget), =b= web (browser),
+  =TAB= toggle full article, =g= reload, =q= quit
+- *Game page*: =y= YouTube preview, =x= web (xwidget), =b= web (browser),
+  =1= / =2= jump to each team, =f= find game, =g= reload, =q= quit
+- *Dashboard*: =t= / =p= / =f= search, =g= reload, =q= quit
+- =TAB= / =S-TAB= fold and unfold sections everywhere (magit-section).
+
+** Times
+Match times display in =world-cup-display-time-zone= (default
+=America/Los_Angeles=); set it to =t= for your system zone. The =.org= agenda
+file keeps the schedule's US Eastern timestamps.
+
+* Some useful data sources:
+
+** 2026 Schedule Data: https://github.com/mjwebmaster/world-cup-2026-schedule-data
+** Historical Data: https://github.com/jfjelstul/worldcup/tree/master/data-json
