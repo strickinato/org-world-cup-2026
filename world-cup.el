@@ -1563,11 +1563,20 @@ implicit button on a roster name."
                              'face 'world-cup-meta) "\n")
     (goto-char (point-min))))
 
+(defun world-cup--match-finished-p (match)
+  "Return non-nil if MATCH has already been played (kickoff was over 2h ago)."
+  (when-let ((time (world-cup--match-time match)))
+    (time-less-p (time-add time (* 2 60 60)) (current-time))))
+
 (defun world-cup-game-youtube-preview ()
-  "Search YouTube for a preview of this game and stream the choice with mpv."
+  "Search YouTube for this game and stream the choice with mpv.
+Searches for \"highlights\" if the game has already been played, else \"preview\"."
   (interactive)
   (world-cup-game--guard)
-  (world-cup-youtube-watch (format "%s preview" (world-cup-game--teams))))
+  (world-cup-youtube-watch
+   (format "%s %s" (world-cup-game--teams)
+           (if (world-cup--match-finished-p world-cup-game--match)
+               "highlights" "preview"))))
 
 (defun world-cup-game-web-xwidget ()
   "Run a web search for this game in an xwidget-webkit buffer."
