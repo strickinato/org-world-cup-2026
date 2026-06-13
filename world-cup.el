@@ -24,6 +24,7 @@
 
 (require 'json)
 (require 'subr-x)
+(require 'cl-lib)
 (require 'seq)
 (require 'url)
 (require 'transient)
@@ -74,6 +75,12 @@
 
 (defcustom world-cup-history-file "world-cup-2026-history.json"
   "Name of the team World Cup history JSON inside `world-cup-data-directory'."
+  :type 'string
+  :group 'world-cup)
+
+(defcustom world-cup-results-file "world-cup-2026-results.json"
+  "Name of the live results JSON inside `world-cup-data-directory'.
+Written by `world-cup-refresh-results' from ESPN's public endpoints."
   :type 'string
   :group 'world-cup)
 
@@ -151,6 +158,7 @@
 (defvar world-cup--fox-rankings nil "Cached alist of CODE -> (NUMBER -> ranking alist).")
 (defvar world-cup--power-rankings nil "Cached alist of CODE -> list of power-ranking alists.")
 (defvar world-cup--history nil "Cached alist of CODE -> history alist.")
+(defvar world-cup--results nil "Cached results alist (matches + scorers + updated).")
 
 (defun world-cup--path (file)
   "Return the absolute path of FILE inside `world-cup-data-directory'."
@@ -207,6 +215,11 @@
       (setq world-cup--history
             (when (file-readable-p path)
               (alist-get 'history (world-cup--read-json path))))))
+  (when (or force (null world-cup--results))
+    (let ((path (world-cup--path world-cup-results-file)))
+      (setq world-cup--results
+            (when (file-readable-p path)
+              (world-cup--read-json path)))))
   (cons world-cup--teams world-cup--matches))
 
 ;;;###autoload
@@ -265,6 +278,35 @@
   (world-cup-load-data)
   (when-let ((code (world-cup-team-code team)))
     (alist-get (intern code) world-cup--history)))
+
+(defun world-cup-match-result (match)
+  "Return the live-result alist for MATCH (keyed by match number), or nil."
+  (world-cup-load-data)
+  (when-let ((n (alist-get 'match_number match)))
+    (alist-get (intern (number-to-string n))
+               (alist-get 'matches world-cup--results))))
+
+(defun world-cup-scorers ()
+  "Return the golden-boot list (alist entries with player, code, goals)."
+  (world-cup-load-data)
+  (alist-get 'scorers world-cup--results))
+
+(defun world-cup-player-stats (team player)
+  "Return PLAYER's aggregated tournament stats alist for TEAM, or nil."
+  (world-cup-load-data)
+  (when-let ((code (world-cup-team-code team))
+             (num (alist-get 'number player)))
+    (alist-get (intern (format "%s-%d" code num))
+               (alist-get 'players world-cup--results))))
+
+(defun world-cup-assist-leaders ()
+  "Return players with at least one assist, sorted by assists descending."
+  (world-cup-load-data)
+  (let (out)
+    (dolist (kv (alist-get 'players world-cup--results))
+      (let ((v (cdr kv)))
+        (when (> (or (alist-get 'assists v) 0) 0) (push v out))))
+    (sort out (lambda (x y) (> (alist-get 'assists x) (alist-get 'assists y))))))
 
 (defun world-cup--find-team-by-code (code)
   (seq-find (lambda (team) (equal (world-cup-team-code team) code))
@@ -1039,6 +1081,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                (grp (alist-get 'group match))
                (label (if grp (format "Grp %s" grp)
                         (or (alist-get 'stage match) "")))
+               (result (world-cup--fixture-result-tag team match))
                (line (format "  %s %5s  %-7s  %s %-24s  %s"
                              (world-cup--local-date match)
                              (world-cup--local-time match)
@@ -1053,7 +1096,7 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
                               'face 'world-cup-meta))))
     (magit-insert-section (world-cup-match match)
       (magit-insert-heading
-        (propertize line
+        (propertize (if result (concat line "  " result) line)
                     'world-cup-fixture match
                     'help-echo "Action key: open game page"))
       (when-let ((note (world-cup-match-note match)))
@@ -1061,6 +1104,22 @@ The row is a `world-cup-fixture' Hyperbole implicit button (opens the game)."
           (insert "       \u21b3 " (propertize note 'face 'world-cup-note) "\n")
           (let ((fill-column 84) (left-margin 9) (fill-prefix "         "))
             (fill-region start (point))))))))
+
+(defun world-cup--fixture-result-tag (team match)
+  "Return a propertized W/D/L score tag for TEAM in MATCH, or nil if unplayed."
+  (when-let ((r (world-cup-match-result match)))
+    (let* ((code (world-cup-team-code team))
+           (hs (alist-get 'home_score r)) (as (alist-get 'away_score r))
+           (home-p (equal (alist-get 'home r) code))
+           (gf (if home-p hs as)) (ga (if home-p as hs))
+           (live (not (equal (alist-get 'status r) "post")))
+           (outcome (cond ((null gf) "") ((> gf ga) "W") ((< gf ga) "L") (t "D")))
+           (face (cond (live 'world-cup-meta)
+                       ((equal outcome "W") 'world-cup-position-fw)
+                       ((equal outcome "L") 'error)
+                       (t 'warning))))
+      (propertize (format "%s %d-%d%s" outcome gf ga (if live " \u25cf" ""))
+                  'face face))))
 
 (defun world-cup--insert-fixtures (team)
   "Insert the Fixtures section for TEAM."
@@ -1297,11 +1356,57 @@ The buffer shows collapsible Fixtures and Squad sections."
 (defun world-cup-player--insert-help ()
   (insert (propertize " Press ? for actions" 'face 'world-cup-meta) "\n"))
 
+(defun world-cup-player--insert-tournament ()
+  "Insert this tournament's stats for the buffer's player, if they've played."
+  (when-let ((s (world-cup-player-stats world-cup-player--team
+                                        world-cup-player--player)))
+    (when (> (or (alist-get 'apps s) 0) 0)
+      (insert "\n " (propertize "\u2014 This World Cup \u2014" 'face 'world-cup-meta) "\n")
+      (dolist (row (list
+                    (cons "Matches" (format "%d  (%d start%s, %d off the bench)"
+                                            (alist-get 'apps s) (alist-get 'starts s)
+                                            (if (= (alist-get 'starts s) 1) "" "s")
+                                            (alist-get 'subs s)))
+                    (cons "Minutes" (number-to-string (alist-get 'minutes s)))
+                    (cons "Goals" (number-to-string (alist-get 'goals s)))
+                    (cons "Assists" (number-to-string (alist-get 'assists s)))
+                    (cons "Cards" (format "%d yellow, %d red"
+                                          (alist-get 'yellow s) (alist-get 'red s)))))
+        (insert " " (propertize (format "%-9s" (concat (car row) ":"))
+                                'face 'world-cup-label)
+                " " (cdr row) "\n"))
+      (when-let ((ms (alist-get 'matches s)))
+        (insert " " (propertize "Matches:" 'face 'world-cup-label) "\n")
+        (dolist (m (sort (copy-sequence ms)
+                         (lambda (a b) (< (or (alist-get 'num a) 999)
+                                          (or (alist-get 'num b) 999)))))
+          (let* ((opp (alist-get 'opp m))
+                 (oppname (or (and opp (world-cup--find-team-by-code opp)
+                                   (world-cup-team-name
+                                    (world-cup--find-team-by-code opp)))
+                              opp "?"))
+                 (res (alist-get 'res m))
+                 (face (cond ((equal res "W") 'world-cup-position-fw)
+                             ((equal res "L") 'error) (t 'warning)))
+                 (g (alist-get 'g m)) (a (alist-get 'a m)))
+            (insert "   "
+                    (propertize (format "%s %d-%d" res (alist-get 'gf m) (alist-get 'ga m))
+                                'face face)
+                    (format "  vs %-22s %-5s %3d'"
+                            (world-cup--pad oppname 22)
+                            (if (alist-get 'started m) "start" "sub")
+                            (alist-get 'min m))
+                    (concat (if (> g 0) (propertize (format "  %d\u26bd" g)
+                                                    'face 'world-cup-position-fw) "")
+                            (if (> a 0) (format "  %dA" a) ""))
+                    "\n")))))))
+
 (defun world-cup-player--render ()
   "Render the player buffer from its buffer-local state."
   (let ((inhibit-read-only t))
     (erase-buffer)
     (world-cup-player--insert-stats)
+    (world-cup-player--insert-tournament)
     (when-let ((fox (world-cup-player-fox-ranking
                      world-cup-player--team world-cup-player--player)))
       (insert "\n " (propertize (format "\u2014 FOX Sports Top 100: #%d \u2014"
@@ -1548,11 +1653,61 @@ implicit button on a roster name."
                                   'face 'world-cup-label)
                       (cdr row))))))
 
+(defun world-cup-game--insert-result ()
+  "Insert the live score, stats, goals and cards for the current game."
+  (when-let ((r (world-cup-match-result world-cup-game--match)))
+    (let* ((h (alist-get 'home r)) (a (alist-get 'away r))
+           (hs (alist-get 'home_score r)) (as (alist-get 'away_score r))
+           (stats (alist-get 'stats r)))
+      (insert "\n ")
+      (insert (propertize (format "%s %d \u2013 %d %s" h hs as a)
+                          'face 'world-cup-title)
+              "  "
+              (propertize (format "(%s)" (or (alist-get 'detail r) ""))
+                          'face 'world-cup-meta)
+              "\n")
+      ;; goals
+      (dolist (g (alist-get 'goals r))
+        (insert "   " (propertize "\u26bd " 'face 'world-cup-position-fw)
+                (propertize (format "%-4s" (alist-get 'min g)) 'face 'world-cup-meta)
+                (format "%s (%s)" (or (alist-get 'player g) "?") (alist-get 'code g))
+                (cond ((alist-get 'own g) (propertize " OG" 'face 'world-cup-rank))
+                      ((alist-get 'pen g) (propertize " pen" 'face 'world-cup-meta))
+                      (t ""))
+                "\n"))
+      ;; cards
+      (dolist (c (alist-get 'cards r))
+        (insert "   "
+                (propertize (if (equal (alist-get 'color c) "red") "\u25a0" "\u25a0")
+                            'face (if (equal (alist-get 'color c) "red")
+                                      'error 'warning))
+                " "
+                (propertize (format "%-4s" (alist-get 'min c)) 'face 'world-cup-meta)
+                (format "%s (%s)" (or (alist-get 'player c) "?") (alist-get 'code c))
+                "\n"))
+      ;; team stats table
+      (when stats
+        (let ((hst (alist-get (intern h) stats)) (ast (alist-get (intern a) stats)))
+          (insert "\n " (propertize (format "%-22s %8s   %-8s" "" h a)
+                                    'face 'world-cup-column-header) "\n")
+          (dolist (row '(("Possession" . "possessionPct") ("Shots" . "totalShots")
+                         ("Shots on target" . "shotsOnTarget") ("Corners" . "wonCorners")
+                         ("Fouls" . "foulsCommitted") ("Offsides" . "offsides")
+                         ("Yellow cards" . "yellowCards") ("Red cards" . "redCards")
+                         ("Saves" . "saves")))
+            (let ((k (intern (cdr row))))
+              (insert (format " %-22s %8s   %-8s\n"
+                              (car row)
+                              (or (alist-get k hst) "-")
+                              (or (alist-get k ast) "-")))))))
+      (insert "\n"))))
+
 (defun world-cup-game--render ()
   "Render the game buffer from its buffer-local state."
   (let ((inhibit-read-only t))
     (erase-buffer)
     (world-cup-game--insert-stats)
+    (world-cup-game--insert-result)
     (when-let ((note (world-cup-match-note world-cup-game--match)))
       (insert "\n")
       (let ((start (point)))
@@ -1721,32 +1876,64 @@ Groups are sorted A..L; teams within a group are sorted by name."
 (define-derived-mode world-cup-dashboard-mode magit-section-mode "WC-Dashboard"
   "Major mode for the World Cup dashboard / group standings.")
 
-(defun world-cup-dashboard--insert-team-row (team)
-  "Insert a standings row for TEAM (a team-name button + zeroed stats)."
-  (insert "  ")
-  (insert (propertize
-           (world-cup--pad (format "%s (%s)"
-                                   (world-cup-team-name team)
-                                   (world-cup-team-code team))
-                           28)
-           'world-cup-team-ref team
-           'face 'world-cup-player-link
-           'help-echo "Action key: open team page"))
-  ;; No games played yet, so every figure is zero.
-  (insert (format " %3d %3d %3d %3d %3d %3d %4d %4d\n" 0 0 0 0 0 0 0 0)))
+(defun world-cup-dashboard--insert-team-row (rank team v)
+  "Insert a standings row: RANK, TEAM (a button) and stat vector V.
+Top two of a group are highlighted as qualifying."
+  (let* ((gd (- (aref v 4) (aref v 5)))
+         (name (propertize
+                (world-cup--pad (format "%s (%s)"
+                                        (world-cup-team-name team)
+                                        (world-cup-team-code team))
+                                26)
+                'world-cup-team-ref team
+                'face (if (<= rank 2) 'world-cup-position-fw 'world-cup-player-link)
+                'help-echo "Action key: open team page")))
+    (insert (propertize (format " %d. " rank)
+                        'face (if (<= rank 2) 'world-cup-rank 'world-cup-meta))
+            name
+            (format " %3d %3d %3d %3d %3d %3d %+4d %4d\n"
+                    (aref v 0) (aref v 1) (aref v 2) (aref v 3)
+                    (aref v 4) (aref v 5) gd (aref v 6)))))
 
 (defun world-cup-dashboard--insert-group (letter teams)
   "Insert a foldable standings table for group LETTER with TEAMS."
   (magit-insert-section (world-cup-group letter)
     (world-cup--heading (format "Group %s" letter))
-    (insert "  "
-            (propertize (format "%-28s %3s %3s %3s %3s %3s %3s %4s %4s"
+    (insert "     "
+            (propertize (format "%-26s %3s %3s %3s %3s %3s %3s %4s %4s"
                                 "Team" "MP" "W" "D" "L" "GF" "GA" "GD" "Pts")
                         'face 'world-cup-column-header)
             "\n")
-    (dolist (team teams)
-      (world-cup-dashboard--insert-team-row team))
+    (let ((rank 0))
+      (dolist (entry (world-cup--group-standings teams))
+        (world-cup-dashboard--insert-team-row (cl-incf rank) (car entry) (cdr entry))))
     (insert "\n")))
+
+(defun world-cup--insert-leaderboard (title key entries)
+  "Insert a foldable leaderboard section TITLE ranking ENTRIES by KEY (desc)."
+  (magit-insert-section (world-cup-leaderboard title)
+    (world-cup--heading title)
+    (let ((rank 0) (prev nil))
+      (dolist (s entries)
+        (let ((n (alist-get key s)))
+          (setq rank (if (eq prev n) rank (1+ rank)) prev n)
+          (when (<= rank 15)
+            (insert (propertize (format "  %2d  " n) 'face 'world-cup-rank)
+                    (format "%-26s " (alist-get 'player s))
+                    (propertize (format "%s" (alist-get 'code s))
+                                'face 'world-cup-code)
+                    "\n")))))
+    (insert "\n")))
+
+(defun world-cup-dashboard--insert-golden-boot ()
+  "Insert a foldable Golden Boot leaderboard from `world-cup-scorers'."
+  (when-let ((scorers (world-cup-scorers)))
+    (world-cup--insert-leaderboard "Golden Boot" 'goals scorers)))
+
+(defun world-cup-dashboard--insert-assists ()
+  "Insert a foldable assists leaderboard from `world-cup-assist-leaders'."
+  (when-let ((leaders (world-cup-assist-leaders)))
+    (world-cup--insert-leaderboard "Assists" 'assists leaders)))
 
 (defun world-cup-dashboard--render ()
   "Render the dashboard buffer."
@@ -1759,7 +1946,9 @@ Groups are sorted A..L; teams within a group are sorted by name."
               (propertize " Press ? for actions" 'face 'world-cup-meta)
               "\n\n")
       (dolist (entry (world-cup--groups))
-        (world-cup-dashboard--insert-group (car entry) (cdr entry))))
+        (world-cup-dashboard--insert-group (car entry) (cdr entry)))
+      (world-cup-dashboard--insert-golden-boot)
+      (world-cup-dashboard--insert-assists))
     (goto-char (point-min))))
 
 (defun world-cup-dashboard-revert ()
@@ -1779,6 +1968,256 @@ Team names are buttons that open the corresponding team page."
       (world-cup-dashboard-mode)
       (world-cup-dashboard--render))
     (pop-to-buffer buf)))
+
+;;;; Live results (ESPN public endpoints)
+
+(defconst world-cup--espn-base
+  "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world"
+  "Base URL for ESPN's public (unofficial) men's World Cup endpoints.")
+
+(defun world-cup--http-json (url)
+  "GET URL and parse the JSON body into alists/lists, or nil on failure."
+  (when-let ((body (world-cup--http-get url)))
+    (ignore-errors
+      (json-parse-string body :object-type 'alist :array-type 'list
+                         :null-object nil :false-object nil))))
+
+(defun world-cup--pair-key (a b)
+  "Return an order-independent key for team codes A and B."
+  (mapconcat #'identity (sort (list a b) #'string<) "|"))
+
+(defun world-cup--espn-summary (event-id)
+  "Fetch and return the ESPN match summary for EVENT-ID, or nil."
+  (world-cup--http-json
+   (format "%s/summary?event=%s" world-cup--espn-base event-id)))
+
+(defun world-cup--summary-team-stats (summary idcode)
+  "Return alist CODE -> (statname . value) from SUMMARY's boxscore.
+IDCODE maps ESPN team id -> our code."
+  (let ((out nil))
+    (dolist (tm (alist-get 'teams (alist-get 'boxscore summary)))
+      (let ((code (gethash (alist-get 'id (alist-get 'team tm)) idcode))
+            (a nil))
+        (dolist (s (alist-get 'statistics tm))
+          (push (cons (alist-get 'name s) (alist-get 'displayValue s)) a))
+        (when code (push (cons (intern code) (nreverse a)) out))))
+    out))
+
+(defun world-cup--clock-minute (s)
+  "Parse an ESPN clock like \"56'\" or \"90'+2'\" into an integer minute."
+  (when (and s (string-match "\\`\\([0-9]+\\)\\(?:[^0-9]*\\+\\([0-9]+\\)\\)?" s))
+    (+ (string-to-number (match-string 1 s))
+       (if (match-string 2 s) (string-to-number (match-string 2 s)) 0))))
+
+(defun world-cup--summary-players (summary players ctx)
+  "Aggregate per-player appearances/minutes/goals/etc from SUMMARY into PLAYERS.
+PLAYERS is a hash keyed by \"CODE-JERSEY\" of accumulating stat alists.
+CTX is a plist (:num :home (CODE . SCORE) :away (CODE . SCORE)) used to record
+a per-match line for each player."
+  (let ((subin (make-hash-table :test 'equal))
+        (subout (make-hash-table :test 'equal))
+        (redmin (make-hash-table :test 'equal)))
+    (dolist (x (alist-get 'keyEvents summary))
+      (let ((typ (alist-get 'text (alist-get 'type x)))
+            (mn (world-cup--clock-minute (alist-get 'displayValue (alist-get 'clock x))))
+            (ps (alist-get 'participants x)))
+        (cond
+         ((equal typ "Substitution")
+          (when (and ps mn)
+            (when-let ((i (alist-get 'id (alist-get 'athlete (nth 0 ps))))) (puthash i mn subin))
+            (when-let ((o (alist-get 'id (alist-get 'athlete (nth 1 ps))))) (puthash o mn subout))))
+         ((and typ (string-prefix-p "Red" typ) ps mn)
+          (when-let ((i (alist-get 'id (alist-get 'athlete (car ps))))) (puthash i mn redmin))))))
+    (dolist (tm (alist-get 'rosters summary))
+      (let ((code (upcase (or (alist-get 'abbreviation (alist-get 'team tm)) ""))))
+        (dolist (p (alist-get 'roster tm))
+          (let* ((aid (alist-get 'id (alist-get 'athlete p)))
+                 (jersey (alist-get 'jersey p))
+                 (name (alist-get 'displayName (alist-get 'athlete p)))
+                 (starter (and (alist-get 'starter p) t))
+                 (subbed-in (and (alist-get 'subbedIn p) t))
+                 (played (or starter subbed-in))
+                 (st (let (h) (dolist (s (alist-get 'stats p))
+                                (push (cons (alist-get 'name s) (alist-get 'displayValue s)) h))
+                          h))
+                 (sval (lambda (k) (string-to-number (or (cdr (assoc k st)) "0"))))
+                 (end (let ((e 90))
+                        (when (gethash aid subout) (setq e (gethash aid subout)))
+                        (when (and (gethash aid redmin) (< (gethash aid redmin) e))
+                          (setq e (gethash aid redmin)))
+                        e))
+                 (start (or (gethash aid subin) 0))
+                 (minutes (if played (max 0 (- end start)) 0))
+                 (key (and jersey (intern (format "%s-%s" code jersey)))))
+            (when (and played key (not (string-empty-p code)))
+              (let ((cur (gethash key players)))
+                (unless cur
+                  (setq cur (list (cons 'player name) (cons 'code code)
+                                  (cons 'jersey jersey) (cons 'apps 0) (cons 'starts 0)
+                                  (cons 'subs 0) (cons 'minutes 0) (cons 'goals 0)
+                                  (cons 'assists 0) (cons 'yellow 0) (cons 'red 0)
+                                  (cons 'matches nil))))
+                (cl-incf (alist-get 'apps cur))
+                (when starter (cl-incf (alist-get 'starts cur)))
+                (when subbed-in (cl-incf (alist-get 'subs cur)))
+                (cl-incf (alist-get 'minutes cur) minutes)
+                (cl-incf (alist-get 'goals cur) (funcall sval "totalGoals"))
+                (cl-incf (alist-get 'assists cur) (funcall sval "goalAssists"))
+                (cl-incf (alist-get 'yellow cur) (funcall sval "yellowCards"))
+                (cl-incf (alist-get 'red cur) (funcall sval "redCards"))
+                (let* ((home (plist-get ctx :home)) (away (plist-get ctx :away))
+                       (mine (if (equal code (car home)) home away))
+                       (their (if (equal code (car home)) away home))
+                       (gf (cdr mine)) (ga (cdr their)))
+                  (setf (alist-get 'matches cur)
+                        (cons (list (cons 'num (plist-get ctx :num))
+                                    (cons 'opp (car their))
+                                    (cons 'gf gf) (cons 'ga ga)
+                                    (cons 'res (cond ((> gf ga) "W") ((< gf ga) "L") (t "D")))
+                                    (cons 'min minutes) (cons 'started starter)
+                                    (cons 'g (funcall sval "totalGoals"))
+                                    (cons 'a (funcall sval "goalAssists")))
+                              (alist-get 'matches cur))))
+                (puthash key cur players)))))))))
+
+(defun world-cup--ingest-event (e pair-index matches scorers players)
+  "Parse ESPN event E: fill MATCHES, SCORERS and PLAYERS.
+PAIR-INDEX maps a `world-cup--pair-key' to our match number.  For played
+games the summary is fetched once (team stats + per-player aggregation)."
+  (let* ((comp (car (alist-get 'competitions e)))
+         (status (alist-get 'status comp))
+         (state (alist-get 'state (alist-get 'type status)))
+         (detail (alist-get 'shortDetail (alist-get 'type status)))
+         (idcode (make-hash-table :test 'equal))
+         home away)
+    (dolist (c (alist-get 'competitors comp))
+      (let* ((team (alist-get 'team c))
+             (code (upcase (or (alist-get 'abbreviation team) "")))
+             (score (string-to-number (or (alist-get 'score c) "0"))))
+        (puthash (alist-get 'id team) code idcode)
+        (if (equal (alist-get 'homeAway c) "home")
+            (setq home (cons code score))
+          (setq away (cons code score)))))
+    (when (and home away)
+      (let (goals cards)
+        (dolist (d (alist-get 'details comp))
+          (let* ((code (gethash (alist-get 'id (alist-get 'team d)) idcode))
+                 (ath (car (alist-get 'athletesInvolved d)))
+                 (name (and ath (alist-get 'displayName ath)))
+                 (aid (and ath (alist-get 'id ath)))
+                 (mn (alist-get 'displayValue (alist-get 'clock d)))
+                 (own (and (alist-get 'ownGoal d) t))
+                 (pen (and (alist-get 'penaltyKick d) t)))
+            (cond
+             ((alist-get 'scoringPlay d)
+              (push (list (cons 'min mn) (cons 'code code) (cons 'player name)
+                          (cons 'pen pen) (cons 'own own))
+                    goals)
+              (when (and aid name (not own))
+                (let ((cur (gethash aid scorers)))
+                  (if cur
+                      (setf (alist-get 'goals cur) (1+ (alist-get 'goals cur)))
+                    (setq cur (list (cons 'player name) (cons 'code code)
+                                    (cons 'goals 1))))
+                  (puthash aid cur scorers))))
+             ((or (alist-get 'redCard d) (alist-get 'yellowCard d))
+              (push (list (cons 'min mn) (cons 'code code) (cons 'player name)
+                          (cons 'color (if (alist-get 'redCard d) "red" "yellow")))
+                    cards)))))
+        (let ((summary (and (member state '("in" "post"))
+                            (world-cup--espn-summary (alist-get 'id e))))
+              (num (gethash (world-cup--pair-key (car home) (car away)) pair-index)))
+          (when summary
+            (world-cup--summary-players
+             summary players (list :num num :home home :away away)))
+          (when num
+            (let ((res (list (cons 'status state) (cons 'detail detail)
+                             (cons 'home (car home)) (cons 'away (car away))
+                             (cons 'home_score (cdr home))
+                             (cons 'away_score (cdr away))
+                             (cons 'goals (nreverse goals))
+                             (cons 'cards (nreverse cards)))))
+              (when summary
+                (when-let ((st (world-cup--summary-team-stats summary idcode)))
+                  (setq res (append res (list (cons 'stats st))))))
+              (puthash (number-to-string num) res matches))))))))
+
+;;;###autoload
+(defun world-cup-refresh-results ()
+  "Fetch results for games played so far from ESPN; write `world-cup-results-file'.
+Updates scores, possession/shots, goals and cards per match, and a global
+golden-boot tally, then reloads the data."
+  (interactive)
+  (world-cup-load-data)
+  (let* ((today (format-time-string "%Y-%m-%d"))
+         (pair-index (make-hash-table :test 'equal))
+         (matches (make-hash-table :test 'equal))
+         (scorers (make-hash-table :test 'equal))
+         (players (make-hash-table :test 'equal))
+         (dates (sort (seq-filter (lambda (d) (and d (not (string-lessp today d))))
+                                  (delete-dups
+                                   (mapcar (lambda (m) (alist-get 'date m))
+                                           (world-cup-matches))))
+                      #'string<)))
+    (dolist (m (world-cup-matches))
+      (let ((a (alist-get 'team_a_code m)) (b (alist-get 'team_b_code m)))
+        (when (and a b)
+          (puthash (world-cup--pair-key a b) (alist-get 'match_number m) pair-index))))
+    (dolist (date dates)
+      (message "World Cup: fetching %s\u2026" date)
+      (let ((sb (world-cup--http-json
+                 (format "%s/scoreboard?dates=%s" world-cup--espn-base
+                         (replace-regexp-in-string "-" "" date)))))
+        (dolist (e (alist-get 'events sb))
+          (world-cup--ingest-event e pair-index matches scorers players))))
+    (let ((slist nil) (malist nil) (palist nil))
+      (maphash (lambda (_ v) (push v slist)) scorers)
+      (setq slist (sort slist (lambda (x y) (> (alist-get 'goals x)
+                                               (alist-get 'goals y)))))
+      (maphash (lambda (k v) (push (cons (intern k) v) malist)) matches)
+      (maphash (lambda (k v) (push (cons k v) palist)) players)
+      (with-temp-file (world-cup--path world-cup-results-file)
+        (insert (json-encode
+                 (list (cons 'updated (format-time-string "%Y-%m-%dT%H:%M:%S%z"))
+                       (cons 'matches malist)
+                       (cons 'scorers slist)
+                       (cons 'players palist)))))
+      (world-cup-load-data t)
+      (message "World Cup: updated %d matches, %d scorers, %d players"
+               (hash-table-count matches) (length slist)
+               (hash-table-count players)))))
+
+;;;; Standings + golden boot (computed from results)
+
+(defun world-cup--group-standings (teams)
+  "Return TEAMS as a list of (TEAM . STATS) sorted by points, GD, GF.
+STATS is a vector [gp w d l gf ga pts]; only finished (post) games count."
+  (let ((stat (make-hash-table :test 'equal))
+        (codes (mapcar #'world-cup-team-code teams)))
+    (dolist (c codes) (puthash c (vector 0 0 0 0 0 0 0) stat))
+    (cl-flet ((acc (v gf ga)
+                (aset v 0 (1+ (aref v 0)))
+                (aset v 4 (+ (aref v 4) gf))
+                (aset v 5 (+ (aref v 5) ga))
+                (cond ((> gf ga) (aset v 1 (1+ (aref v 1))) (aset v 6 (+ (aref v 6) 3)))
+                      ((= gf ga) (aset v 2 (1+ (aref v 2))) (aset v 6 (+ (aref v 6) 1)))
+                      (t (aset v 3 (1+ (aref v 3)))))))
+      (dolist (m (world-cup-matches))
+        (let ((a (alist-get 'team_a_code m)) (b (alist-get 'team_b_code m)))
+          (when (and (member a codes) (member b codes))
+            (let ((r (world-cup-match-result m)))
+              (when (and r (equal (alist-get 'status r) "post"))
+                (let ((hc (alist-get 'home r)) (ac (alist-get 'away r))
+                      (hs (alist-get 'home_score r)) (as (alist-get 'away_score r)))
+                  (acc (gethash hc stat) hs as)
+                  (acc (gethash ac stat) as hs))))))))
+    (sort (mapcar (lambda (tm) (cons tm (gethash (world-cup-team-code tm) stat))) teams)
+          (lambda (x y)
+            (let ((vx (cdr x)) (vy (cdr y)))
+              (cond ((/= (aref vx 6) (aref vy 6)) (> (aref vx 6) (aref vy 6)))
+                    ((/= (- (aref vx 4) (aref vx 5)) (- (aref vy 4) (aref vy 5)))
+                     (> (- (aref vx 4) (aref vx 5)) (- (aref vy 4) (aref vy 5))))
+                    (t (> (aref vx 4) (aref vy 4)))))))))
 
 ;;;; Transient menus (press ? in each buffer)
 
@@ -1809,7 +2248,9 @@ Team names are buttons that open the corresponding team page."
   [["Browse"
     ("t" "Find team\u2026"   world-cup-consult-team)
     ("p" "Find player\u2026" world-cup-consult-player)
-    ("f" "Find game\u2026"   world-cup-consult-fixture)
+    ("f" "Find game\u2026"   world-cup-consult-fixture)]
+   ["Data"
+    ("u" "Refresh results (ESPN)" world-cup-refresh-results)
     ("g" "Reload"           world-cup-dashboard-revert)]
    ["Buffer"
     ("q" "Quit" quit-window)]])
@@ -1883,6 +2324,7 @@ Team names are buttons that open the corresponding team page."
 
 (defconst world-cup--dashboard-keys
   '(("g" . world-cup-dashboard-revert)
+    ("u" . world-cup-refresh-results)
     ("t" . world-cup-consult-team)
     ("p" . world-cup-consult-player)
     ("f" . world-cup-consult-fixture)
