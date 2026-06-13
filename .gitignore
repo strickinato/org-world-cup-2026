@@ -1,2 +1,4 @@
 *~
 data/world-cup-wikipedia-cache.eld
+# live results fetched from ESPN (regenerate with world-cup-refresh-results)
+data/world-cup-2026-results.json
